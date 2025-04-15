@@ -1,3 +1,15 @@
+
+//  auth
+export const accessTokenKey = 'access_token'
+export const refreshTokenKey = 'refresh_token'
+export const REDIRECT_TO_KEY = 'redirectTo'
+export const jwtCookieProps = {
+  httpOnly: true,
+  secure: true,
+  maxAge: 100 * 24 * 60 * 60,
+}
+
+
 // image aspect ratios
 export const ASPECT_RATIO = Object.freeze({
     COMIC_COVER: { width: 900, height: 1000 },
