@@ -29,7 +29,7 @@ const SubmitButton: React.FC = () => {
 const Form: React.FC = () => {
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get(REDIRECT_TO_KEY)
-  const [state, action] = useActionState(registerAction.bind(null, redirectTo || ''), null)
+  const [state, action] = useActionState(registerAction.bind(null, redirectTo), null)
 
   useEffect(() => {
     if (state?.error) {
