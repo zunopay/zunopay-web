@@ -1,17 +1,15 @@
+import { fetchMe } from '@/api/user/queries'
 import { MerchantDashboardLayout } from '@/components/layout/MerchantDashboardLayout'
 import { RoutePath } from '@/enums/RoutePath'
 import React from 'react'
 
 export default async function DashboardPage() {
-  const me = {
-    displayName: "athar"
-  };
+  const me = await fetchMe();
 
   if (!me) return null
-  // const accessToken = await getAccessToken()
 
   return (
-    <MerchantDashboardLayout title={`Welcome back ${me.displayName}!`} activePath={RoutePath.Dashboard}>
+    <MerchantDashboardLayout title={`Welcome back ${me.username}!`} activePath={RoutePath.Dashboard}>
     </MerchantDashboardLayout>
   )
 }

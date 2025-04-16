@@ -15,16 +15,14 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/colla
 import { SidebarMenuLink } from './SidebarMenuLink'
 import { HomeIcon } from '@/components/icons/sidebar/HomeIcon'
 import { RoutePath } from '@/enums/RoutePath'
+import { fetchMe } from '@/api/user/queries'
 
 type Props = {
   activePath?: string
 }
 
 export async function CreatorDashboardSidebar({ activePath }: Props) {
-  const me = {
-    displayName: "Athar",
-    avatar: ""
-  };
+  const me = await fetchMe();
 
   if (!me) return null
 
@@ -128,7 +126,7 @@ export async function CreatorDashboardSidebar({ activePath }: Props) {
                   <AvatarImage src={me.avatar} />
                   <AvatarFallback>JS</AvatarFallback>
                 </Avatar>
-                {me.displayName}
+                {me.username}
               </div>
             </Button>
           </CollapsibleTrigger>

@@ -226,7 +226,7 @@ const SidebarTrigger = React.forwardRef<React.ComponentRef<typeof Button>, React
         ref={ref}
         Icon={LayoutIcon}
         iconOnly
-        iconClassName='size-6'
+        iconClassName='size-6 text-white'
         variant='ghost'
         onClick={(event) => {
           onClick?.(event)
