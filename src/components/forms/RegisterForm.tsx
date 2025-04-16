@@ -4,12 +4,13 @@ import { Button, Input, Label } from '@/components/ui'
 import React, { Suspense, useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
-import { REDIRECT_TO_KEY } from '@/constants/general'
+import { REDIRECT_TO_KEY, ROLE_KEY } from '@/constants/general'
 import { registerAction } from '@/lib/actions/login'
 import { FormErrorMessage } from '@/components/forms/FormErrorMessage'
 import { onSubmitPreventFormListener } from '@/lib/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
 import { Select, SelectItem } from '../ui/Select'
+import { Role } from '@/lib/types'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
@@ -29,6 +30,13 @@ const SubmitButton: React.FC = () => {
 const Form: React.FC = () => {
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get(REDIRECT_TO_KEY)
+  let role = searchParams.get(ROLE_KEY);
+
+  if(role != Role.Individual && role != Role.Merchant){
+    role = Role.Individual;
+  }
+
+  const defaultRole = role ?? Role.Merchant;
   const [state, action] = useActionState(registerAction.bind(null, redirectTo), null)
 
   useEffect(() => {
@@ -65,6 +73,13 @@ const Form: React.FC = () => {
             <SelectItem value='IN'>India</SelectItem>
             <SelectItem value='BR'>Brazil</SelectItem>
             <SelectItem value='SG'>Singapore</SelectItem>
+          </Select>
+        </div>
+        <div className='flex flex-col w-full space-y-2'>
+          <Label>Select your account type: </Label>
+          <Select defaultValue={defaultRole} name='role'>
+            <SelectItem value={Role.Individual}>Individual</SelectItem>
+            <SelectItem value={Role.Merchant}>Merchant</SelectItem>
           </Select>
         </div>
         {!state?.success && <FormErrorMessage message={state?.error} />}

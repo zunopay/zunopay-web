@@ -6,11 +6,14 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 import { accessTokenKey, jwtCookieProps } from '@/constants/general'
-import { loginSchema, registerSchema } from '@/constants/schema'
+import { createMerchantProfileSchema, loginSchema, registerSchema } from '@/constants/schema'
 import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 import { apiClient } from '../axios'
+import { Role } from '../types'
+import { Merchant } from '@/models/merchant'
+import http from '@/api/http'
 
-const { AUTH, LOGIN, REGISTER } = AUTH_QUERY_KEYS
+const { AUTH, LOGIN, REGISTER, USER, MERCHANT } = AUTH_QUERY_KEYS
 
 export const loginAction = async (
   redirectTo: string | null,
@@ -79,11 +82,14 @@ export const registerAction = async (
   _: AuthFormState | null,
   formData: FormData
 ): Promise<AuthFormState | null> => {
+  let redirectPath = redirectTo;
+
   const parsed = registerSchema.safeParse({
     username: formData.get('username'),
     email: formData.get('email'),
     password: formData.get('password'),
-    region: formData.get('region')
+    region: formData.get('region'),
+    role: formData.get('role')
   });
 
   if (!parsed.success) {
@@ -94,7 +100,7 @@ export const registerAction = async (
   }
 
   try {
-    const response = await apiClient.post<Authorization>(`/${AUTH}/${REGISTER}`, parsed.data)
+    const response = await apiClient.post<Authorization>(`/${AUTH}/${USER}/${REGISTER}`, parsed.data)
     if (response.status !== 201) {
       return {
         error: "Failed to register",
@@ -110,7 +116,10 @@ export const registerAction = async (
     }
 
     await parseAndSetCookieAfterAuth(response.data)
-    revalidatePath(RoutePath.Merchant)
+    const role = parsed.data.role;
+    //TODO: Redirect individuals and verifiers to respective path.
+    redirectPath = role == Role.Merchant ? RoutePath.CreateMerchantProfile : RoutePath.Home;
+    revalidatePath(redirectPath)
   } catch (_) {
     return {
       error: `Failed to register user`,
@@ -118,5 +127,39 @@ export const registerAction = async (
     }
   }
 
-  redirect(redirectTo ?? RoutePath.Home, RedirectType.replace)
+  redirect(redirectPath ?? RoutePath.Home, RedirectType.replace)
+}
+
+export async function createMerchantProfileAction(_: AuthFormState | null, formData: FormData) {
+  const parsed = createMerchantProfileSchema.safeParse({
+    displayName: formData.get("displayName") ?? '',
+    vpa: formData.get('vpa') ?? ''
+  });
+
+
+ if (!parsed.success) {
+    return {
+      error: `Please provide valid data`,
+      success: false,
+    }
+  }
+
+  try {
+    const response = await http.post<Merchant>(`/${AUTH}/${MERCHANT}/${REGISTER}`, parsed.data)
+    if (!response.data) {
+      return {
+        error: 'Missing data',
+        success: false,
+      }
+    }
+
+    revalidatePath(RoutePath.Merchant)
+  } catch (_) {
+    return {
+      error: `Failed to create merchant profile`,
+      success: false,
+    }
+  }
+
+  redirect(RoutePath.Merchant, RedirectType.replace)
 }

@@ -13,9 +13,21 @@ const zUsername = z
   .max(20, generateMaxLengthErrorMessage('Username', 20))
   .regex(USERNAME_REGEX, 'Only A-Z, 0-9, underscore, and hypen are allowed')
 
+const zDisplayName = z
+.string()
+.min(2, generateMinLengthErrorMessage('Display name', 2))
+.max(40, generateMaxLengthErrorMessage('Display name', 40))
+
+// TODO: add more checks
+const zVpa = z
+  .string();
+
   //TODO: Use only supported regions
 const zRegion = z
   .string();
+
+const zRole = z
+  .enum(['Individual', 'Merchant']);
 
 const zEmail = z.string().email()
 const zPassword = z
@@ -34,5 +46,11 @@ export const registerSchema = z.object({
     username: zUsername,
     email: zEmail,
     password: zPassword,
-    region: zRegion
+    region: zRegion,
+    role: zRole,
+})
+
+export const createMerchantProfileSchema = z.object({
+  displayName: zDisplayName,
+  vpa: zVpa
 })

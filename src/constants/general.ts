@@ -3,6 +3,8 @@
 export const accessTokenKey = 'access_token'
 export const refreshTokenKey = 'refresh_token'
 export const REDIRECT_TO_KEY = 'redirectTo'
+export const ROLE_KEY = 'role'
+
 export const jwtCookieProps = {
   httpOnly: true,
   secure: true,

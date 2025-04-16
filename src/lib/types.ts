@@ -21,3 +21,8 @@ export enum Currency {
   EUR = "EUR",
   INR = "INR",
 }
+
+export enum Role {
+  Individual = 'Individulal',
+  Merchant = 'Merchant'
+}
