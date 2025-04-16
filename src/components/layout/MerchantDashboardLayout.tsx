@@ -4,9 +4,9 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 import MerchantDashboardSidebar from './MerchantDashboardSidebar'
 import { cookies } from 'next/headers'
 import { Text } from '@/components/ui/Text'
+import { fetchMe } from '@/api/user/queries'
 
 type Props = React.PropsWithChildren & {
-  title?: string
   mainClassName?: string
   showFooter?: boolean
   activePath?: string
@@ -14,23 +14,18 @@ type Props = React.PropsWithChildren & {
 
 export const MerchantDashboardLayout: React.FC<Props> = async ({
   children,
-  title,
   mainClassName,
   activePath,
 }) => {
   const cookieStore = await cookies()
   const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true'
 
-  const me = {
-    displayName: "Athar",
-    avatar: ""
-  };
-
+  const me = await fetchMe()
   if (!me) return null
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <MerchantDashboardSidebar activePath={activePath} />
+      <MerchantDashboardSidebar activePath={activePath} me={me} />
       <main
         className={cn(
           'flex flex-col min-h-screen h-full w-full gap-8 p-4 md:p-6 lg:p-8 flex-1 relative',
@@ -38,7 +33,7 @@ export const MerchantDashboardLayout: React.FC<Props> = async ({
         )}
       >
         <Text as='h4' styleVariant='secondary-heading' className='w-full'>
-          {title}
+          Welcome {me.username}
         </Text>
 
         {children}

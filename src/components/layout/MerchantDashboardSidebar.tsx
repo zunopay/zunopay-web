@@ -15,21 +15,21 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/colla
 import { SidebarMenuLink } from './SidebarMenuLink'
 import { HomeIcon } from '@/components/icons/sidebar/HomeIcon'
 import { RoutePath } from '@/enums/RoutePath'
-import { fetchMe } from '@/api/user/queries'
+import { User } from '@/models/user'
+import Image from 'next/image'
+import { LogoWithText } from '../shared/logo/LogoWithText'
 
 type Props = {
+  me: User,
   activePath?: string
 }
 
-export async function CreatorDashboardSidebar({ activePath }: Props) {
-  const me = await fetchMe();
-
-  if (!me) return null
+export async function MerchantDashboardSidebar({ me, activePath }: Props) {
 
   return (
     <Sidebar variant='inset' className='bg-grey-500 p-3'>
       <SidebarHeader className='w-full max-w-[180px] h-auto'>
-        ICOM
+        <LogoWithText />
       </SidebarHeader>
 
       <SidebarContent className='py-6'>
@@ -136,4 +136,4 @@ export async function CreatorDashboardSidebar({ activePath }: Props) {
   )
 }
 
-export default CreatorDashboardSidebar
+export default MerchantDashboardSidebar
