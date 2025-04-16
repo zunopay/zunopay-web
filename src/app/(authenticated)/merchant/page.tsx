@@ -9,7 +9,7 @@ export default async function DashboardPage() {
   if (!me) return null
 
   return (
-    <MerchantDashboardLayout title={`Welcome back ${me.username}!`} activePath={RoutePath.Dashboard}>
+    <MerchantDashboardLayout title={`Welcome back ${me.username}!`} activePath={RoutePath.Merchant}>
     </MerchantDashboardLayout>
   )
 }

@@ -1,10 +1,26 @@
+import { Metadata } from "next";
 import "./globals.css";
+import { obviouslyNarrow, satoshi } from "./fonts";
 
-
-export const metadata = {
-  title: 'Zunopay',
-  description: 'Pay with stablecoins',
-  themeColor: '#6B46C1',
+export const metadata: Metadata = {
+  title: 'ZunoPay',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
+  openGraph: {
+    type: 'website',
+    title: 'ZunoPay',
+    url: process.env.NEXT_PUBLIC_SITE_URL,
+    siteName: 'ZunoPay',
+  },
+  appleWebApp: {
+    title: 'ZunoPay',
+    startupImage: '/assets/apple-touch-icon.png',
+  },
+  twitter: {
+    title: 'ZunoPay',
+    site: '@ZunoPay',
+    images: '/assets/images/metadata/metadata-logo.png',
+  },
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({
@@ -14,12 +30,9 @@ export default function RootLayout({
 }>){
   return (
     <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        <meta name="theme-color" content="#6B46C1" />
-      </head>
-      <body>{children}</body>
+      <body className={`${satoshi.className} ${obviouslyNarrow.variable}`}>
+        {children}
+      </body>
     </html>
   )
 }
