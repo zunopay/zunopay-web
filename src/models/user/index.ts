@@ -3,9 +3,4 @@ export interface User {
     username: string,
     email: string,
     avatar: string,
-    merchant?: Merchant
-}
-
-export interface Merchant {
-    displayName: string
 }

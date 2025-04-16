@@ -15,12 +15,11 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/colla
 import { SidebarMenuLink } from './SidebarMenuLink'
 import { HomeIcon } from '@/components/icons/sidebar/HomeIcon'
 import { RoutePath } from '@/enums/RoutePath'
-import { User } from '@/models/user'
-import Image from 'next/image'
 import { LogoWithText } from '../shared/logo/LogoWithText'
+import { Merchant } from '@/models/merchant'
 
 type Props = {
-  me: User,
+  me: Merchant,
   activePath?: string
 }
 
@@ -123,10 +122,10 @@ export async function MerchantDashboardSidebar({ me, activePath }: Props) {
             >
               <div className='flex flex-row items-center gap-2'>
                 <Avatar className='size-8'>
-                  <AvatarImage src={me.avatar} />
+                  <AvatarImage src={me.user.avatar} />
                   <AvatarFallback>JS</AvatarFallback>
                 </Avatar>
-                {me.username}
+                {me.displayName}
               </div>
             </Button>
           </CollapsibleTrigger>
