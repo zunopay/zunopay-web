@@ -117,7 +117,6 @@ export async function MerchantDashboardSidebar({ me, activePath }: Props) {
               Icon={HomeIcon}
               iconPosition='right'
               size='lg'
-              variant='outline'
               className='w-full flex flex-row justify-between gap-2 rounded-lg h-12 hover:bg-grey-700'
             >
               <div className='flex flex-row items-center gap-2'>
