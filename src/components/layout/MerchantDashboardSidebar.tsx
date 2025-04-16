@@ -38,8 +38,8 @@ export async function CreatorDashboardSidebar({ activePath }: Props) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuLink
-              isActive={activePath === RoutePath.Dashboard}
-              href={RoutePath.Dashboard}
+              isActive={activePath === RoutePath.Merchant}
+              href={RoutePath.Merchant}
               title='Home'
               Icon={HomeIcon}
             />
