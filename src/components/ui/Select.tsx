@@ -32,6 +32,8 @@ export const Select = React.forwardRef<
   );
 });
 
+Select.displayName = SelectPrimitive.Root.displayName;
+
 export const SelectItem = React.forwardRef<
   React.ComponentRef<typeof SelectPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
@@ -45,3 +47,5 @@ export const SelectItem = React.forwardRef<
     </SelectPrimitive.Item>
   );
 });
+
+SelectItem.displayName = "SelectItem"

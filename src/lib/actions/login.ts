@@ -9,7 +9,6 @@ import { accessTokenKey, jwtCookieProps } from '@/constants/general'
 import { loginSchema, registerSchema } from '@/constants/schema'
 import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 import { apiClient } from '../axios'
-import http from '@/api/http'
 
 const { AUTH, LOGIN, REGISTER } = AUTH_QUERY_KEYS
 
@@ -95,9 +94,8 @@ export const registerAction = async (
   }
 
   try {
-    const response = await http.patch<Authorization>(`/${AUTH}/${REGISTER}`, parsed.data)
-    
-    if (response.status !== 200) {
+    const response = await apiClient.post<Authorization>(`/${AUTH}/${REGISTER}`, parsed.data)
+    if (response.status !== 201) {
       return {
         error: "Failed to register",
         success: false,

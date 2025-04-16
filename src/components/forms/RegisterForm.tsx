@@ -5,7 +5,7 @@ import React, { Suspense, useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { useSearchParams } from 'next/navigation'
 import { REDIRECT_TO_KEY } from '@/constants/general'
-import { loginAction } from '@/lib/actions/login'
+import { registerAction } from '@/lib/actions/login'
 import { FormErrorMessage } from '@/components/forms/FormErrorMessage'
 import { onSubmitPreventFormListener } from '@/lib/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
@@ -29,7 +29,7 @@ const SubmitButton: React.FC = () => {
 const Form: React.FC = () => {
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get(REDIRECT_TO_KEY)
-  const [state, action] = useActionState(loginAction.bind(null, redirectTo), null)
+  const [state, action] = useActionState(registerAction.bind(null, redirectTo || ''), null)
 
   useEffect(() => {
     if (state?.error) {
@@ -60,11 +60,11 @@ const Form: React.FC = () => {
         </div>
         <div className='flex flex-col w-full space-y-2'>
           <Label>Region</Label>
-          <Select defaultValue='2' name='region'>
-            <SelectItem value='1'>Europe</SelectItem>
-            <SelectItem value='2'>India</SelectItem>
-            <SelectItem value='3'>Brazil</SelectItem>
-            <SelectItem value='4'>Singapore</SelectItem>
+          <Select defaultValue='EU' name='region'>
+            <SelectItem value='EU'>Europe</SelectItem>
+            <SelectItem value='IN'>India</SelectItem>
+            <SelectItem value='BR'>Brazil</SelectItem>
+            <SelectItem value='SG'>Singapore</SelectItem>
           </Select>
         </div>
         {!state?.success && <FormErrorMessage message={state?.error} />}
