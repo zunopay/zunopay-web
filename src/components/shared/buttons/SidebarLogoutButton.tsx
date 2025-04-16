@@ -1,11 +1,11 @@
 'use client'
 
-// import { logoutAction } from '@/app/lib/actions/auth/logout'
 import { Text } from '@/components/ui/Text'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { SidebarMenuButton } from '@/components/ui/sidebar'
 import { HomeIcon } from '@/components/icons/sidebar/HomeIcon'
+import { logoutAction } from '@/lib/actions/logout'
 
 export const SidebarLogoutButton: React.FC = () => {
   const { refresh } = useRouter()
@@ -14,7 +14,7 @@ export const SidebarLogoutButton: React.FC = () => {
     <SidebarMenuButton asChild className='text-grey-100 hover:bg-grey-600 hover:text-white'>
       <button
         onClick={() => {
-          // logoutAction()
+          logoutAction()
           refresh()
         }}
       >
