@@ -115,11 +115,12 @@ const config = {
           '500': '#e3635b',
         },
         blue: {
-          '100': '#87C7E4',
+          '100': '#425CF9',
           '200': '#727CAC',
           '300': '#3D3E60',
           '500': '#3926b4',
-          zunopay : '#3aa4ed'
+          '600': '#2A3DBF',
+          '700': '#0A0B24'
         },
         purple: {
           '100': '#FFABC4',
@@ -185,7 +186,16 @@ const config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: { addUtilities: (utilities: Record<string, any>) => void }) {
+      addUtilities({
+        '.text-outline': {
+          color: 'transparent',
+          '-webkit-text-stroke': '4px white',
+        },
+      });
+    },
+  ],
 } satisfies Config
 
 export default config
