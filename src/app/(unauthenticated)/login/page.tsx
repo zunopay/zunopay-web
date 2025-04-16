@@ -2,8 +2,8 @@ import { LoginForm } from "@/components/forms/LoginForm";
 
 export default async function LoginPage() {
   return (
-    <div>
+    <main className="container flex flex-col max-w-sm mb-8">
       <LoginForm />
-    </div>
+    </main>
   )
 }
