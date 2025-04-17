@@ -23,7 +23,7 @@ export interface ButtonLinkProps
  * @component
  * @param {Object} props - The properties that define the link's behavior and appearance
  * @param {React.ReactNode} props.children - The content of the link
- * @param {'primary' | 'secondary' | 'outline' | 'white'} [props.variant='primary'] - The main style variant of the link
+ * @param {'primary'} [props.variant='primary'] - The main style variant of the link
  * @param {1 | 2 | 3} [props.subVariant=1] - The sub-variant of the chosen main variant
  * @param {'sm' | 'md' | 'lg'} [props.size='md'] - The size of the link
  * @param {'left' | 'right'} [props.iconPosition='left'] - The position of the icon relative to the text
@@ -48,8 +48,7 @@ const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
     {
       href,
       className,
-      variant = 'secondary',
-      subVariant,
+      variant = 'primary',
       size = 'md',
       Icon,
       iconPosition = 'left',
@@ -67,8 +66,7 @@ const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
     return (
       <Link
         className={cn(
-          buttonVariants({ variant, subVariant, size }),
-          variant === 'ghost' || iconOnly ? 'px-0 sm:px-0 py-0 sm:py-0' : '',
+          buttonVariants({ variant, size }),
           className
         )}
         target={blank ? '_blank' : undefined}

@@ -191,7 +191,6 @@ const config = {
       addUtilities({
         '.text-outline': {
           color: 'transparent',
-          '-webkit-text-stroke': '4px white',
         },
       });
     },

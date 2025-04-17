@@ -1,32 +1,53 @@
-import React from 'react'
-import { cn } from '@/lib/utils'
-import { Text } from '../ui';
-import Image from 'next/image';
-import SHORT_LOGO from '../../../public/Images/short-logo.png';
-import { XIcon } from 'components/icons/platform/XIcon'
+import React from "react";
+import { addTwitter, cn } from "@/lib/utils";
+import { Text } from "../ui";
+import Image from "next/image";
+import SHORT_LOGO from "../../../public/Images/short-logo.png";
+import { XIcon } from "components/icons/platform/XIcon";
+import Link from "next/link";
 
-type Props = React.PropsWithChildren & { mainClassName?: string; showFooter?: boolean; backgroundImageSrc?: string }
+type Props = React.PropsWithChildren & {
+  mainClassName?: string;
+  showFooter?: boolean;
+  backgroundImageSrc?: string;
+};
 
 export const HomePageLayout: React.FC<Props> = ({
   children,
   mainClassName,
 }) => {
-
   return (
-      <main
-        className={cn(
-          'flex flex-col min-w-screen min-h-screen p-10 justify-between bg-gradient-to-tl from-blue-600 to-blue-700',
-          mainClassName
-        )}
-      >
-        <div className='flex justify-center w-full'>
-        <Image src={SHORT_LOGO} alt='zunopay' />
-      </div>
+    <main
+      className={cn(
+        "flex flex-col min-w-screen min-h-screen p-10 xs:p-6 justify-between bg-gradient-to-br from-blue-700 via-blue-600/30 to-blue-600",
+        mainClassName
+      )}
+    >
+      <div className="flex flex-col md:gap-28 xs:gap-40">
+        <Logo/>
         {children}
-        <div className='flex gap-2 justify-center items-center'>
-            <XIcon className='size-8' />
-            <Text as='h5' styleVariant='body-small'>@ZunoPay</Text>
-        </div>
-      </main>
+      </div>
+
+      <Footer/>
+    </main>
+  );
+};
+
+const Logo: React.FC = () => {
+  return(
+    <div className="flex justify-center w-full">
+    <Image src={SHORT_LOGO} alt="zunopay" />
+  </div>
+  )
+}
+
+export const Footer: React.FC = () => {
+  return (
+    <Link className="flex gap-3 justify-center items-center" href={addTwitter("ZunoPay")}>
+        <XIcon className="size-8" />
+        <Text as="h5" styleVariant="body-small">
+          @ZunoPay
+        </Text>
+      </Link>
   )
 }

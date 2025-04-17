@@ -70,16 +70,18 @@ export const Text = React.forwardRef<TextRef, TextProps>(
   ({ as, styleVariant, children, fontWeight, italic = false, className, ...props }, ref) => {
     const Component = variantToElement[as] as React.ElementType
 
+    const combinedClassName = cn(
+      variantStyles[as],
+      styleVariants[styleVariant],
+      fontWeight && fontWeightVariants[fontWeight],
+      italic && 'italic',
+      className
+    )
+
     return (
       <Component
         ref={ref}
-        className={cn(
-          variantStyles[as],
-          styleVariants[styleVariant],
-          fontWeight && fontWeightVariants[fontWeight],
-          italic && 'italic',
-          className
-        )}
+        className={combinedClassName}
         {...props}
       >
         {children}

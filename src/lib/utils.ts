@@ -28,3 +28,7 @@ export function isTokenValid(token: string): boolean {
     return false
   }
 }
+
+export const addTwitter = (twitterHandle: string) => {
+  return `https://x.com/${twitterHandle}`
+}
