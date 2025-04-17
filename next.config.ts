@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
     dirs: ['src'],
   },
   env: {
+    PRIVY_APPLICATION_ID: process.env.PRIVY_APPLICATION_ID,
+    PRIVY_CLIENT_ID: process.env.PRIVY_CLIENT_ID
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   reactStrictMode: true,
@@ -43,6 +45,7 @@ const nextConfig: NextConfig = {
   webpack(config) {
     config.resolve.fallback = { fs: false, net: false, tls: false }
     config.externals.push('pino-pretty', 'encoding')
+    config.externals['@solana/web3.js'] = 'commonjs @solana/web3.js'
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
