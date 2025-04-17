@@ -14,7 +14,7 @@ const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>
     <input
       {...props}
       className={cn(
-        'flex items-center w-full max-h-[42px] rounded-md backdrop-blur-[2px] gap-2 p-4 font-medium placeholder:text-grey-200 placeholder:text-sm placeholder:font-medium bg-dark-200 border-dark-200',
+        'flex items-center w-full max-h-[42px] rounded-md backdrop-blur-[2px] gap-2 p-4 font-medium placeholder:text-grey-200 placeholder:text-sm placeholder:font-medium bg-grey-100 border border-grey-100',
         props.type === 'password' && 'placeholder:translate-y-1',
         props.prefix && 'rounded-l-none',
         className

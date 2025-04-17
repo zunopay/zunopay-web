@@ -11,6 +11,7 @@ import { onSubmitPreventFormListener } from '@/lib/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
 import { Select, SelectItem } from '../ui/Select'
 import { Role } from '@/lib/types'
+import { ToggleGroup, ToggleGroupItem } from '../ui/ToggleGroup'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
@@ -30,31 +31,28 @@ const SubmitButton: React.FC = () => {
 const Form: React.FC = () => {
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get(REDIRECT_TO_KEY)
-  let role = searchParams.get(ROLE_KEY);
+  let initialRole = searchParams.get(ROLE_KEY) as Role | null
 
-  if(role != Role.Individual && role != Role.Merchant){
-    role = Role.Individual;
+  if (initialRole !== Role.Individual && initialRole !== Role.Merchant) {
+    initialRole = Role.Individual
   }
 
-  const defaultRole = role ?? Role.Merchant;
   const [state, action] = useActionState(registerAction.bind(null, redirectTo), null)
+
+  const defaultRole = initialRole ?? Role.Individual
+  const [role, setRole] = React.useState<Role>(defaultRole)
 
   useEffect(() => {
     if (state?.error) {
-      console.log(state.error);
-      //TODO:
-      // toast({
-      //   title: 'Error',
-      //   description: state.error,
-      //   variant: 'error',
-      // })
+      console.log(state.error)
+      // TODO: Add toast here
     }
   }, [state?.error])
 
   return (
     <form action={action} className='space-y-4' onSubmit={onSubmitPreventFormListener(action)}>
       <div className='space-y-6'>
-      <div className='flex flex-col w-full space-y-2'>
+        <div className='flex flex-col w-full space-y-2'>
           <Label>Username</Label>
           <Input placeholder='john.doe' name='username' />
         </div>
@@ -76,11 +74,15 @@ const Form: React.FC = () => {
           </Select>
         </div>
         <div className='flex flex-col w-full space-y-2'>
-          <Label>Select your account type: </Label>
-          <Select defaultValue={defaultRole} name='role'>
-            <SelectItem value={Role.Individual}>Individual</SelectItem>
-            <SelectItem value={Role.Merchant}>Merchant</SelectItem>
-          </Select>
+          <ToggleGroup
+            value={role}
+            onValueChange={(value) => {
+              if (value) setRole(value as Role)
+            }}
+          >
+            <ToggleGroupItem label='Merchant' value={Role.Merchant} />
+            <ToggleGroupItem label='Individual' value={Role.Individual} />
+          </ToggleGroup>
         </div>
         {!state?.success && <FormErrorMessage message={state?.error} />}
       </div>
@@ -88,7 +90,6 @@ const Form: React.FC = () => {
     </form>
   )
 }
-
 export const RegisterForm: React.FC = () => (
   <Suspense>
     <Form />

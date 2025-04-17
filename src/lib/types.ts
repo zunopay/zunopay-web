@@ -23,6 +23,6 @@ export enum Currency {
 }
 
 export enum Role {
-  Individual = 'Individulal',
+  Individual = 'Individual',
   Merchant = 'Merchant'
 }

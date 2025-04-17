@@ -12,14 +12,19 @@ export const Select = React.forwardRef<
 >(({ children, ...props }, forwardedRef) => {
   return (
     <SelectPrimitive.Root {...props}>
-      <SelectPrimitive.Trigger ref={forwardedRef} className="flex p-1 justify-between bg-white text-black rounded-lg">
+      <SelectPrimitive.Trigger ref={forwardedRef} className="flex p-2 justify-between bg-grey-100 border border-grey-100 rounded-lg">
         <SelectPrimitive.Value />
         <SelectPrimitive.Icon>
           <ArrowDownIcon />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
-        <SelectPrimitive.Content className="p-1 overflow-hidden text-black rounded-md bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
+        <SelectPrimitive.Content 
+          className="overflow-hidden rounded-md border border-dark-200"
+          style={{
+            background: 'linear-gradient(180deg, rgba(236, 236, 240, 0.04) 0%, rgba(236, 236, 240, 0.00) 100%), linear-gradient(0deg, rgba(236, 236, 240, 0.02) 0%, rgba(236, 236, 240, 0.02) 100%), var(--dark-100, #0A0B24)'
+          }}
+        >
           <SelectPrimitive.ScrollUpButton>
             <ArrowUpIcon />
           </SelectPrimitive.ScrollUpButton>
@@ -40,7 +45,11 @@ export const SelectItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
 >(({ children, ...props }, forwardedRef) => {
   return (
-    <SelectPrimitive.Item {...props} ref={forwardedRef} className="flex justify-between px-4 py-1 cursor-pointer">
+    <SelectPrimitive.Item 
+      {...props} 
+      ref={forwardedRef} 
+      className="flex justify-between m-1 p-2 rounded-md cursor-pointer hover:bg-[#25263C]"
+    >
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator>
         <CheckCircleIcon />
