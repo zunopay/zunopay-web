@@ -20,7 +20,7 @@ export default function HomePage() {
             <Text as='p' styleVariant='body-large' className="md:text-24">Reach out to learn more.</Text>
           </div>
           <ButtonLink 
-            className="max-w-fit md:text-16" 
+            className="w-full md:max-w-fit md:text-16 self-start" 
             href={'mailto:contact@zunopay.com'}
           >
             Contact Us
