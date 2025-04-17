@@ -5,9 +5,9 @@ import { Text } from "@/components/ui";
 
 export const LogoWithText: React.FC<unknown> = () => {
     return (
-        <div className="flex gap-5 items-center">
-         <Image src={ZUNOPAY_SHORT_LOGO} alt='ZunoPay' height={40} />
-         <Text as='h2' styleVariant='primary-heading'>ZunoPay</Text>
+        <div className="flex gap-2 items-center justify-center">
+         <Image src={ZUNOPAY_SHORT_LOGO} alt='ZunoPay' height={64} />
+         <Text as='h2' styleVariant='secondary-heading'>Zuno<span className='font-extrabold'>Pay</span></Text>
         </div>
     )
 }

@@ -9,6 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'text-white bg-gradient-to-b from-blue-100/50 to-blue-700/5 backdrop-blur-[2px]',
+        active: 'text-white bg-blue-600 rounded-md backdrop-blur-[2px] border-dark-200'
       },
       size: {
         sm: 'h-9 text-xs py-0.5 px-2 sm:py-1 sm:px-4 gap-1',
@@ -30,7 +31,7 @@ export interface ButtonProps
   iconOnly?: boolean
   iconClassName?: string
   iconPosition?: 'left' | 'right'
-  solid?: boolean
+  solid?: boolean,
 }
 
 /**

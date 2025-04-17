@@ -19,8 +19,9 @@ const SubmitButton: React.FC = () => {
       className='w-full max-sm:h-[42px]'
       type='submit'
       aria-disabled={pending}
+      variant='active'
     >
-      {pending ? '' : 'Login'}
+      {pending ? '' : 'Log in'}
     </Button>
   )
 }
@@ -46,8 +47,8 @@ const Form: React.FC = () => {
     <form action={action} className='space-y-4' onSubmit={onSubmitPreventFormListener(action)}>
       <div className='space-y-6'>
         <div className='flex flex-col w-full space-y-2'>
-          <Label>Email or username</Label>
-          <Input placeholder='john.doe@dreader.io' name='usernameOrEmail' />
+          <Label>Email or Username</Label>
+          <Input placeholder='john.doe@zunopay.io' name='usernameOrEmail' />
         </div>
         <div className='flex flex-col w-full space-y-2'>
           <Label>Password</Label>

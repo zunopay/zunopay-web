@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scrollbar-color: #c2c5ce #1f222a;
-  }
-
   @layer base {
     :root {
       --chart-1: 173 58% 39%;

@@ -1,10 +1,9 @@
 import React from "react";
 import { addTwitter, cn } from "@/lib/utils";
 import { Text } from "../ui";
-import Image from "next/image";
-import SHORT_LOGO from "../../../public/Images/short-logo.png";
 import { XIcon } from "components/icons/platform/XIcon";
 import Link from "next/link";
+import { BackgroundWithName } from "../shared/BackgroundWithName";
 
 type Props = React.PropsWithChildren & {
   mainClassName?: string;
@@ -12,9 +11,10 @@ type Props = React.PropsWithChildren & {
   backgroundImageSrc?: string;
 };
 
-export const HomePageLayout: React.FC<Props> = ({
+export const BackgroundWithNameLayout: React.FC<Props> = ({
   children,
   mainClassName,
+  showFooter
 }) => {
   return (
     <main
@@ -23,23 +23,13 @@ export const HomePageLayout: React.FC<Props> = ({
         mainClassName
       )}
     >
-      <div className="flex flex-col md:gap-28 xs:gap-60">
-        <Logo/>
+        <BackgroundWithName />
         {children}
-      </div>
-
-      <Footer/>
+      {showFooter && <Footer/>}
     </main>
   );
 };
 
-const Logo: React.FC = () => {
-  return(
-    <div className="flex justify-center w-full">
-    <Image src={SHORT_LOGO} alt="zunopay" />
-  </div>
-  )
-}
 
 export const Footer: React.FC = () => {
   return (
