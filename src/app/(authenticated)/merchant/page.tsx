@@ -5,7 +5,12 @@ import { RoutePath } from '@/enums/RoutePath'
 import React from 'react'
 
 export default async function DashboardPage() {
-  const merchantProfile = await fetchMyMerchantProfile();
+  const {data: merchantProfile, errorMessage} = await fetchMyMerchantProfile();
+  
+  if(errorMessage){
+    return <h1>{errorMessage}</h1>
+  }
+
   if(!merchantProfile)return null;
 
   return (
