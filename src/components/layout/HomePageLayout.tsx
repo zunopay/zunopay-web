@@ -23,7 +23,7 @@ export const HomePageLayout: React.FC<Props> = ({
         mainClassName
       )}
     >
-      <div className="flex flex-col md:gap-28 xs:gap-40">
+      <div className="flex flex-col md:gap-28 xs:gap-60">
         <Logo/>
         {children}
       </div>
