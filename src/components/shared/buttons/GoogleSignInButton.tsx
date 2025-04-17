@@ -38,7 +38,6 @@ export const GoogleSignInButton: React.FC<Props> = ({ buttonText = 'Sign in with
       type='button'
       size='lg'
       className={className}
-      variant='outline'
     >
       {buttonText}
     </Button>

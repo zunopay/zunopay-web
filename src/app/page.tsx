@@ -1,5 +1,5 @@
 import { HomePageLayout } from "@/components/layout/HomePageLayout"
-import { BackgroundWithName } from "@/components/shared/BackgroundImageWithGradient";
+import { BackgroundWithName } from "@/components/shared/BackgroundWithName";
 import { Text } from "@/components/ui";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 

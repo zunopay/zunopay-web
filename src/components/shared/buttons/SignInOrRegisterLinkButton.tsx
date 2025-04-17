@@ -8,7 +8,7 @@ type Props = {
 } & ButtonLinkProps
 
 export const SignInOrRegisterLinkButton: React.FC<Props> = ({ href, ...props }) => (
-  <ButtonLink className='w-full' variant='white' subVariant={1} size='lg' href={href} {...props}>
+  <ButtonLink className='w-full' size='lg' href={href} {...props}>
     Sign In / Register
   </ButtonLink>
 )

@@ -95,7 +95,7 @@ DialogDescription.displayName = DialogPrimitive.Description.displayName
 
 const DialogButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'white', type = 'button', ...props }, ref) => (
-    <Button ref={ref} variant={variant} type={type} className={cn('w-full', className)} {...props} />
+    <Button ref={ref} type={type} className={cn('w-full', className)} {...props} />
   )
 )
 

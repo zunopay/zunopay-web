@@ -227,7 +227,6 @@ const SidebarTrigger = React.forwardRef<React.ComponentRef<typeof Button>, React
         Icon={LayoutIcon}
         iconOnly
         iconClassName='size-6 text-white'
-        variant='ghost'
         onClick={(event) => {
           onClick?.(event)
           toggleSidebar()
