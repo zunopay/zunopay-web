@@ -22,7 +22,7 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = ({
   className 
 }) => {
   return (
-    <div className={`flex gap-2 ${className}`}>
+    <div className={`flex ${className}`}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement<ToggleGroupItemProps>(child)) {
           return React.cloneElement(child, {
@@ -41,8 +41,7 @@ export const ToggleGroupItem: React.FC<ToggleGroupItemProps & {
   onSelect?: () => void
 }> = ({ label, value, isSelected, onSelect }) => {
   return (
-    //TODO: Fix styles
-    <div className={`flex-1 ${isSelected ? 'bg-[#151629]' : ''}`}>
+    <div className={`flex-1 p-2 rounded-md bg-grey-100  ${isSelected ? 'bg-gradient-to-b from-grey-200 to-grey-500' : ''}`}>
       <input
         type="radio"
         id={value}
@@ -54,7 +53,7 @@ export const ToggleGroupItem: React.FC<ToggleGroupItemProps & {
       />
       <Label 
         htmlFor={value} 
-        className="flex w-full items-center justify-center rounded-md border px-4 py-2 text-sm font-medium text-muted-foreground peer-checked:text-foreground cursor-pointer"
+        className="flex w-full justify-center cursor-pointer"
       >
         {label}
       </Label>

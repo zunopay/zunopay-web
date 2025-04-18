@@ -22,6 +22,7 @@ const SubmitButton: React.FC = () => {
       className='w-full max-sm:h-[42px]'
       type='submit'
       aria-disabled={pending}
+      variant='active'
     >
       {pending ? '' : 'Register'}
     </Button>
@@ -73,7 +74,6 @@ const Form: React.FC = () => {
             <SelectItem value='SG'>Singapore</SelectItem>
           </Select>
         </div>
-        <div className='flex flex-col w-full space-y-2'>
           <ToggleGroup
             value={role}
             onValueChange={(value) => {
@@ -83,7 +83,6 @@ const Form: React.FC = () => {
             <ToggleGroupItem label='Merchant' value={Role.Merchant} />
             <ToggleGroupItem label='Individual' value={Role.Individual} />
           </ToggleGroup>
-        </div>
         {!state?.success && <FormErrorMessage message={state?.error} />}
       </div>
       <SubmitButton />
