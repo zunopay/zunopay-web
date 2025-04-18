@@ -21,13 +21,12 @@ export const SidebarMenuLink: React.FC<NavigationLinkProps> = ({ href, isActive,
     <SidebarMenuButton asChild>
       <Link
         className={cn(
-          'flex flex-row text-grey-100 hover:bg-grey-600 hover:text-white',
-          isActive && 'bg-grey-600 text-white',
-          disabled ? 'text-grey-300' : 'hover:text-white'
+          'flex flex-row text-white',
+          isActive && 'bg-blue-100',
         )}
         href={disabled ? '#' : href}
       >
-        <Icon solid={isActive} className='size-5' />
+        <Icon />
         <Text styleVariant='body-normal' fontWeight='medium' as='span'>
           {title}
         </Text>
