@@ -17,6 +17,7 @@ const SubmitButton: React.FC = () => {
       className='w-full max-sm:h-[42px]'
       type='submit'
       aria-disabled={pending}
+      variant='active'
     >
       {pending ? '' : 'Create'}
     </Button>
