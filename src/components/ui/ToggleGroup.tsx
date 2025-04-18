@@ -41,7 +41,7 @@ export const ToggleGroupItem: React.FC<ToggleGroupItemProps & {
   onSelect?: () => void
 }> = ({ label, value, isSelected, onSelect }) => {
   return (
-    <div className={`flex-1 p-2 rounded-md bg-grey-100  ${isSelected ? 'bg-gradient-to-b from-grey-200 to-grey-500' : ''}`}>
+    <div className={`flex-1 p-2 rounded-md bg-grey-200  ${isSelected ? 'bg-gradient-to-b from-grey-200 to-grey-500' : ''}`}>
       <input
         type="radio"
         id={value}

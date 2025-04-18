@@ -21,6 +21,9 @@ const config = {
       xl: '1536px',
     },
     extend: {
+      backgroundImage: {
+        'active-gradient': "linear-gradient(180deg, rgba(236, 236, 240, 0.04) 0%, rgba(236, 236, 240, 0.00) 100%, rgba(236, 236, 240, 0.02))",
+      },
       size: {
         '3.5': '0.875rem',
         '4.5': '1.125rem',
@@ -84,7 +87,7 @@ const config = {
           '500': '#1f222a',
           '600': '#15171c',
           '700': '#12141c',
-          '900': '#212121',
+          '900': '#ECECF005',
         },
         green: {
           '100': '#88C169',

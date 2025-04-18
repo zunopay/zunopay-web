@@ -15,7 +15,7 @@ export const Select = React.forwardRef<
 
   return (
     <SelectPrimitive.Root {...props} open={open} onOpenChange={setOpen}>
-      <SelectPrimitive.Trigger ref={forwardedRef} className="flex p-2 justify-between bg-grey-100 border-2 border-grey-100 rounded-lg outline-none focus:outline-none focus:ring-0 focus-visible:ring-0"
+      <SelectPrimitive.Trigger ref={forwardedRef} className="flex p-2 justify-between bg-grey-900 border-2 border-grey-900 rounded-lg outline-none focus:outline-none focus:ring-0 focus-visible:ring-0"
       >
         <SelectPrimitive.Value />
         <SelectPrimitive.Icon>
@@ -28,7 +28,7 @@ export const Select = React.forwardRef<
          align="start"
          position="popper"
          avoidCollisions={false}
-          className="min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-grey-100"
+          className="min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-grey-900"
           style={{
             background: 'linear-gradient(180deg, rgba(236, 236, 240, 0.04) 0%, rgba(236, 236, 240, 0.00) 100%), linear-gradient(0deg, rgba(236, 236, 240, 0.02) 0%, rgba(236, 236, 240, 0.02) 100%), var(--dark-100, #0A0B24)'
           }}
@@ -50,7 +50,7 @@ export const SelectItem = React.forwardRef<
     <SelectPrimitive.Item 
       {...props} 
       ref={forwardedRef} 
-      className="flex justify-between m-1 p-2 rounded-md cursor-pointer hover:bg-grey-100 hover:bg-opacity-20 data-[state=checked]:bg-grey-100 data-[state=checked]:bg-opacity-20"
+      className="flex justify-between m-1 p-2 rounded-md cursor-pointer hover:bg-grey-200 hover:bg-opacity-20 data-[state=checked]:bg-grey-200 data-[state=checked]:bg-opacity-20"
     >
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>

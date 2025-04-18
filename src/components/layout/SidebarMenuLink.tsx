@@ -24,7 +24,7 @@ export const SidebarMenuLink: React.FC<NavigationLinkProps> = ({ href, isActive,
         className={cn(
           'flex flex-row text-white',
           className,
-          isActive && 'bg-[linear-gradient(180deg,rgba(236,236,240,0.08)_0%,rgba(236,236,240,0.04)_100%)]',
+          isActive && 'bg-active-gradient',
         )}
         href={disabled ? '#' : href}
       >
