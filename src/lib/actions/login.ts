@@ -153,7 +153,7 @@ export async function createMerchantProfileAction(_: AuthFormState | null, formD
       }
     }
 
-    revalidatePath(RoutePath.Merchant)
+    revalidatePath(RoutePath.Dashboard)
   } catch (_) {
     return {
       error: `Failed to create merchant profile`,
@@ -161,5 +161,5 @@ export async function createMerchantProfileAction(_: AuthFormState | null, formD
     }
   }
 
-  redirect(RoutePath.Merchant, RedirectType.replace)
+  redirect(RoutePath.Dashboard, RedirectType.replace)
 }

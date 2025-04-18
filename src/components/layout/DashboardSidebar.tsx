@@ -25,14 +25,18 @@ import { WithdrawIcon } from "@/components/icons/sidebar/WithdrawIcon";
 import { SettingIcon } from "@/components/icons/sidebar/SettingIcon";
 import { RoutePath } from "@/enums/RoutePath";
 import { LogoWithText } from "../shared/logo/LogoWithText";
-import { Merchant } from "@/models/merchant";
+import Link from "next/link";
+import { addTwitter } from "@/lib/utils";
+import { XIcon } from "@/components/icons/platform/XIcon";
+import { Text } from "../ui";
+import { User } from "@/models/user";
 
 type Props = {
-  me: Merchant;
+  me: User;
   activePath?: string;
 };
 
-export async function MerchantDashboardSidebar({ me, activePath }: Props) {
+export async function DashboardSidebar({ me, activePath }: Props) {
   return (
     <Sidebar
       variant="inset"
@@ -43,37 +47,37 @@ export async function MerchantDashboardSidebar({ me, activePath }: Props) {
       </SidebarHeader>
 
       <SidebarContent className="py-6">
-        <SidebarTrigger className="absolute top-0 -right-6 shadow-none bg-grey-500 rounded-l-none" />
+        {/* <SidebarTrigger className="absolute top-0 -right-6 shadow-none bg-grey-500 rounded-l-none" /> */}
 
         <SidebarMenu>
-          <SidebarMenuItem>
+          <SidebarMenuItem  className={ activePath === RoutePath.Dashboard ? "" : "opacity-50"}>
             <SidebarMenuLink
-              isActive={activePath === RoutePath.Merchant}
-              href={RoutePath.Merchant}
+              isActive={activePath === RoutePath.Dashboard}
+              href={RoutePath.Dashboard}
               title="Home"
               Icon={HomeIcon}
-            />
+              />
           </SidebarMenuItem>
-          <SidebarMenuItem>
+          <SidebarMenuItem className={ activePath === RoutePath.TransactionHistory ? "" : "opacity-50"}>
             <SidebarMenuLink
-              isActive={activePath === RoutePath.Home}
-              href={RoutePath.Home}
+              isActive={activePath === RoutePath.TransactionHistory}
+              href={RoutePath.TransactionHistory}
               title="Transaction History"
               Icon={TransactionIcon}
-            />
+              />
           </SidebarMenuItem>
-          <SidebarMenuItem>
+          <SidebarMenuItem  className={ activePath === RoutePath.MyProducts ? "" : "opacity-50"}>
             <SidebarMenuLink
-              isActive={activePath === RoutePath.Home}
-              href={RoutePath.Home}
+              isActive={activePath === RoutePath.MyProducts}
+              href={RoutePath.MyProducts}
               title="My Products"
               Icon={ProductIcon}
             />
           </SidebarMenuItem>
-          <SidebarMenuItem>
+          <SidebarMenuItem  className={ activePath === RoutePath.WithdrawFund ? "" : "opacity-50"}>
             <SidebarMenuLink
-              isActive={activePath === RoutePath.Home}
-              href={RoutePath.Home}
+              isActive={activePath === RoutePath.WithdrawFund}
+              href={RoutePath.WithdrawFund}
               title="Withdraw Funds"
               Icon={WithdrawIcon}
             />
@@ -83,18 +87,18 @@ export async function MerchantDashboardSidebar({ me, activePath }: Props) {
 
       <SidebarFooter className="mt-auto">
         <SidebarMenu>
-        <SidebarMenuItem>
+        <SidebarMenuItem className={ false ? "" : "opacity-50"}>
           <SidebarMenuLink
-            isActive={activePath === RoutePath.Home}
+            isActive={false}
             href={RoutePath.Home}
             title="Help Center"
             Icon={HelpCenterIcon}
           />
         </SidebarMenuItem>
 
-        <SidebarMenuItem>
+        <SidebarMenuItem className={ false ? "" : "opacity-50"}>
           <SidebarMenuLink
-            isActive={activePath === RoutePath.Home}
+            isActive={false}
             href={RoutePath.Home}
             title="Settings"
             Icon={SettingIcon}
@@ -102,9 +106,9 @@ export async function MerchantDashboardSidebar({ me, activePath }: Props) {
         </SidebarMenuItem>
         </SidebarMenu>
 
-        <Divider className="my-6" />
+        <Divider className="my-4" />
 
-        <Collapsible>
+        {/* <Collapsible>
           <CollapsibleContent animate={false}>
             <SidebarMenu className="border-1 border-grey-300 rounded-lg mb-2">
               <SidebarMenuItem>
@@ -137,10 +141,16 @@ export async function MerchantDashboardSidebar({ me, activePath }: Props) {
               </div>
             </Button>
           </CollapsibleTrigger>
-        </Collapsible>
+        </Collapsible> */}
+        <Link className="flex gap-3 text-grey-100 opacity-50" href={addTwitter("ZunoPay")}>
+          <XIcon className="size-6"/>
+          <Text as='p' styleVariant='body-normal'>
+            @ZunoPay
+          </Text>
+        </Link>
       </SidebarFooter>
     </Sidebar>
   );
 }
 
-export default MerchantDashboardSidebar;
+export default DashboardSidebar;

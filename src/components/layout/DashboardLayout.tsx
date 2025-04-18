@@ -1,31 +1,28 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { SidebarProvider } from '@/components/ui/sidebar'
-import MerchantDashboardSidebar from './MerchantDashboardSidebar'
+import DashboardSidebar from './DashboardSidebar'
 import { cookies } from 'next/headers'
 import { Text } from '@/components/ui/Text'
 import { Merchant } from '@/models/merchant'
+import { User } from '@/models/user'
 
 type Props = React.PropsWithChildren & {
-  merchantProfile: Merchant,
+  user: User,
   mainClassName?: string
   showFooter?: boolean
   activePath?: string
 }
 
-export const MerchantDashboardLayout: React.FC<Props> = async ({
-  merchantProfile,
+export const DashboardLayout: React.FC<Props> = async ({
+  user,
   children,
   mainClassName,
   activePath,
 }) => {
-  const cookieStore = await cookies()
-  const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true'
-
-
   return (
-    <SidebarProvider defaultOpen={defaultOpen}>
-      <MerchantDashboardSidebar activePath={activePath} me={merchantProfile} />
+    <SidebarProvider defaultOpen={true}>
+      <DashboardSidebar activePath={activePath} me={user} />
       <main
         className={cn(
           'flex flex-col min-h-screen h-full w-full gap-8 p-4 md:p-6 lg:p-8 flex-1 relative',
@@ -33,7 +30,7 @@ export const MerchantDashboardLayout: React.FC<Props> = async ({
         )}
       >
         <Text as='h4' styleVariant='secondary-heading' className='w-full'>
-          Welcome {merchantProfile.displayName}
+          Welcome {user.merchant?.displayName || user.username}
         </Text>
 
         {children}

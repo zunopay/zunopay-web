@@ -25,13 +25,13 @@ export const BackgroundWithNameLayout: React.FC<Props> = ({
     >
         <BackgroundWithName />
         {children}
-      {showFooter && <Footer/>}
+      {showFooter && <FooterWithTwitter/>}
     </main>
   );
 };
 
 
-export const Footer: React.FC = () => {
+export const FooterWithTwitter: React.FC = () => {
   return (
     <Link className="flex gap-3 justify-center items-center" href={addTwitter("ZunoPay")}>
         <XIcon className="size-8" />

@@ -14,14 +14,16 @@ export type NavigationLinkProps = {
   title: string
   isActive: boolean
   Icon: React.FC<VariantSvgIconProps>
+  className?: string
 }
 
-export const SidebarMenuLink: React.FC<NavigationLinkProps> = ({ href, isActive, title, disabled = false, Icon }) => {
+export const SidebarMenuLink: React.FC<NavigationLinkProps> = ({ href, isActive, title, disabled = false, Icon, className }) => {
   return (
     <SidebarMenuButton asChild>
       <Link
         className={cn(
           'flex flex-row text-white',
+          className,
           isActive && 'bg-blue-100',
         )}
         href={disabled ? '#' : href}

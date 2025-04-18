@@ -46,13 +46,13 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/merchant/:path*',
+    '/dashboard/:path*',
     '/api/:path*',
     '/login/:path*',
   ],
 }
 
-const authRoutesRegex = /^\/(merchant)(\/.*)?$/
+const authRoutesRegex = /^\/(dashboard)(\/.*)?$/
 
 const handleUnauthorized = async ({ path, url }: { path: string; url: string }) => {
   const updatedUrl = new URL(RoutePath.Login, url)

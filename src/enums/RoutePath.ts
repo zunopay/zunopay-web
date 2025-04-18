@@ -3,8 +3,11 @@ export const RoutePath = Object.freeze({
     Welcome: '/welcome',
     FAQ: '/faq',
     Login: '/login',
-    CreateMerchantProfile: '/merchant/create-merchant-profile',
-    Merchant: '/merchant',
+    CreateMerchantProfile: '/register/create-merchant-profile',
+    TransactionHistory: '/dashboard/transaction-history',
+    MyProducts: '/dashboard/my-products',
+    WithdrawFund: '/dashboard/withdraw-fund',
+    Dashboard: '/dashboard',
     TermsOfService: '/terms-of-service',
     PrivacyPolicy: '/privacy-policy',
   })
