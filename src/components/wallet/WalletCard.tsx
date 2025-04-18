@@ -21,7 +21,7 @@ function WalletCard() {
     return (
         <div>
         {!authenticated && (
-          <button onClick={login}>Log in to access your wallet</button>
+          <button onClick={login}>Verify your email to start using your account !</button>
         )}
         {authenticated && user?.wallet && (
           <div>

@@ -2,10 +2,13 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import DashboardSidebar from './DashboardSidebar'
-import { cookies } from 'next/headers'
 import { Text } from '@/components/ui/Text'
-import { Merchant } from '@/models/merchant'
 import { User } from '@/models/user'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible'
+import { Button } from '../ui'
+import { Avatar, AvatarFallback } from '../ui/avatar'
+import { AvatarImage } from '../shared/AvatarImage'
+import { AvatarLogoutButton } from '../shared/buttons/AvatarLogoutButton'
 
 type Props = React.PropsWithChildren & {
   user: User,
@@ -25,16 +28,45 @@ export const DashboardLayout: React.FC<Props> = async ({
       <DashboardSidebar activePath={activePath} me={user} />
       <main
         className={cn(
-          'flex flex-col min-h-screen h-full w-full gap-8 p-4 md:p-6 lg:p-8 flex-1 relative',
+          'flex flex-col min-h-screen h-full w-full gap-8 p-4 md:p-6 lg:p-8 flex-1 relative bg-dark-100',
           mainClassName
         )}
       >
-        <Text as='h4' styleVariant='secondary-heading' className='w-full'>
-          Welcome {user.merchant?.displayName || user.username}
+        <div className='flex justify-between'>
+        <Text as='h1' styleVariant='secondary-heading' className='w-full'>
+          Welcome, {user.merchant?.displayName || user.username}
         </Text>
+          <AvatarWithLogout avatar={user.avatar}/>
+        </div>
+
 
         {children}
       </main>
     </SidebarProvider>
+  )
+}
+
+const AvatarWithLogout : React.FC<{avatar:string}> = ({avatar}) => {
+  return (
+
+        <Collapsible>
+          <CollapsibleTrigger asChild>
+            <Button
+              variant='ghost'
+              className="max-w-fit max-h-fit flex flex-row justify-between gap-2 rounded-lg"
+            >
+              <div className="flex flex-row items-center gap-2">
+                <Avatar className="size-8">
+                  <AvatarImage src={avatar} />
+                  <AvatarFallback>JS</AvatarFallback>
+                </Avatar>
+              </div>
+            </Button>
+          </CollapsibleTrigger>
+
+          <CollapsibleContent animate={false}>
+                <AvatarLogoutButton />
+          </CollapsibleContent>
+        </Collapsible>
   )
 }

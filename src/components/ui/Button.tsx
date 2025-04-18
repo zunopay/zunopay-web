@@ -4,12 +4,13 @@ import { cn } from '@/lib/utils'
 import { VariantSvgIconProps } from '@/lib/types'
 
 const buttonVariants = cva(
-  'min-w-[42px] inline-flex items-center justify-center font-bold rounded-lg transition-colors hover:brightness-105 disabled:opacity-50 disabled:pointer-events-none backdrop-blur-[2px]',
+  'inline-flex items-center justify-center font-bold rounded-lg transition-colors hover:brightness-105 disabled:opacity-50 disabled:pointer-events-none backdrop-blur-[2px]',
   {
     variants: {
       variant: {
-        primary: 'text-white bg-gradient-to-b from-blue-100/50 to-blue-700/5 backdrop-blur-[2px]',
-        active: 'text-white bg-blue-600 rounded-md backdrop-blur-[2px] border-dark-200'
+        primary: 'text-white bg-gradient-to-b from-blue-100/50 to-blue-700/5',
+        active: 'text-white bg-blue-600 rounded-md border-dark-200',
+        ghost: 'bg-transparent text-inherit p-0 h-auto w-auto backdrop-blur-none',
       },
       size: {
         sm: 'h-9 text-xs py-0.5 px-2 sm:py-1 sm:px-4 gap-1',
@@ -21,8 +22,26 @@ const buttonVariants = cva(
       variant: 'primary',
       size: 'md',
     },
+    compoundVariants: [
+      {
+        variant: 'ghost',
+        size: 'sm',
+        class: 'text-xs gap-0',
+      },
+      {
+        variant: 'ghost',
+        size: 'md',
+        class: 'text-sm gap-0',
+      },
+      {
+        variant: 'ghost',
+        size: 'lg',
+        class: 'text-base gap-0',
+      },
+    ],
   }
 )
+
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
