@@ -3,6 +3,7 @@ import { PrivyContextProvider } from '@/providers/PrivyContextProvider';
 import { usePrivy } from '@privy-io/react-auth';
 import { BalanceCard } from '../shared/cards/BalanceCard';
 import { RevenueCard } from '../shared/cards/RevenueCard';
+import { TransferCard } from '../shared/cards/TransferCard';
 
 export function WalletContext() {
  
@@ -14,11 +15,18 @@ export function WalletContext() {
   );
 }
 
+
+/*
+  1. transfer usdc
+  2. generate qr
+
+*/
 function PrivyWalletWrapper() {
     const { user, ready, authenticated, login } = usePrivy();
     if (!ready) {
       return <div>Loading...</div>;
     }
+    console.log("USER", user)
   
     return (
         <>
@@ -26,11 +34,15 @@ function PrivyWalletWrapper() {
           <button onClick={login}>Verify your email to start using your account !</button>
         )}
         {authenticated && user?.wallet && (
-          <div className='flex gap-6'>
-            <BalanceCard />
-            <RevenueCard title='Total Revenue' />
-            <RevenueCard title='Daily Revenue' />
+          <div className='flex flex-col gap-4'>
+            <div className='flex gap-6'>
+              <BalanceCard />
+              <RevenueCard title='Total Revenue' />
+              <RevenueCard title='Daily Revenue' />
+            </div>
+            <TransferCard /> 
           </div>
+
         )}
       </>
     )

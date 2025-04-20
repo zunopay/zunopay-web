@@ -3,5 +3,5 @@ export const AUTH_QUERY_KEYS = Object.freeze({
     LOGIN: 'login',
     REGISTER: 'register',
     USER: 'user',
-    MERCHANT: 'merchant'
+    START_KYC: 'start-kyc'
 })

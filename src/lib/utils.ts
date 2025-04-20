@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { startTransition } from 'react'
 import { jwtDecode } from "jwt-decode";
-
+import { Transaction, VersionedTransaction } from '@solana/web3.js'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -31,4 +31,13 @@ export function isTokenValid(token: string): boolean {
 
 export const addTwitter = (twitterHandle: string) => {
   return `https://x.com/${twitterHandle}`
+}
+
+
+export function decodeBs64(encodedString: string) {
+  return Buffer.from(encodedString, 'base64')
+}
+
+export function versionedTransactionFromBs64(encodedString: string) {
+  return VersionedTransaction.deserialize(decodeBs64(encodedString))
 }

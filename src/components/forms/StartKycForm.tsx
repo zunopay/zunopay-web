@@ -3,7 +3,7 @@
 import { Button, Input, Label } from '@/components/ui'
 import React, { Suspense, useActionState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
-import { createMerchantProfileAction } from '@/lib/actions/login'
+import { startKycAction } from '@/lib/actions/login'
 import { FormErrorMessage } from '@/components/forms/FormErrorMessage'
 import { onSubmitPreventFormListener } from '@/lib/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
@@ -36,7 +36,7 @@ const Form: React.FC<Props> = ({ vpaType }) => {
     vpaPlaceholder = 'nubank@thalesog.com'
   };
   
-  const [state, action] = useActionState(createMerchantProfileAction, null)
+  const [state, action] = useActionState(startKycAction, null)
   useEffect(() => {
     if (state?.error) {
       console.log(state.error);
@@ -52,10 +52,6 @@ const Form: React.FC<Props> = ({ vpaType }) => {
   return (
     <form action={action} className='space-y-4' onSubmit={onSubmitPreventFormListener(action)}>
       <div className='space-y-6'>
-      <div className='flex flex-col w-full space-y-2'>
-          <Label>Display Name</Label>
-          <Input placeholder="Toly's Tikken Chikka" name='displayName' />
-      </div>
       <div className='flex flex-col w-full space-y-2'>
           <Label>{vpaType}</Label>
           <Input placeholder={vpaPlaceholder} name='vpa' />

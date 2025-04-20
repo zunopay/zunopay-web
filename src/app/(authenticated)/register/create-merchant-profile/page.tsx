@@ -1,10 +1,10 @@
 import { fetchMe } from "@/api/user/queries";
-import { CreateMerchantProfileForm } from "@/components/forms/CreateMerchantProfileForm";
+import { CreateMerchantProfileForm } from "@/components/forms/StartKycForm";
 import { BackgroundWithNameLayout } from "@/components/layout/BackgroundWithNameLayout";
 import { LogoWithText } from "@/components/shared/logo/LogoWithText";
 
 export default async function LoginPage() {
-    const me = await fetchMe();
+    const {data: me} = await fetchMe();
     if(!me)return null;
 
   return (

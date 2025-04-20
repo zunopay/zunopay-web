@@ -50,7 +50,6 @@ export const registerSchema = z.object({
     role: zRole,
 })
 
-export const createMerchantProfileSchema = z.object({
-  displayName: zDisplayName,
+export const startKycSchema = z.object({
   vpa: zVpa
 })

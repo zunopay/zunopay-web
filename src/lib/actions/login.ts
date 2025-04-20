@@ -6,14 +6,13 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 import { accessTokenKey, jwtCookieProps } from '@/constants/general'
-import { createMerchantProfileSchema, loginSchema, registerSchema } from '@/constants/schema'
+import { loginSchema, registerSchema, startKycSchema } from '@/constants/schema'
 import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 import { apiClient } from '../axios'
 import { Role } from '../types'
-import { Merchant } from '@/models/merchant'
 import http from '@/api/http'
 
-const { AUTH, LOGIN, REGISTER, USER, MERCHANT } = AUTH_QUERY_KEYS
+const { AUTH, LOGIN, REGISTER, USER, START_KYC } = AUTH_QUERY_KEYS
 
 export const loginAction = async (
   redirectTo: string | null,
@@ -130,9 +129,9 @@ export const registerAction = async (
   redirect(redirectPath ?? RoutePath.Home, RedirectType.replace)
 }
 
-export async function createMerchantProfileAction(_: AuthFormState | null, formData: FormData) {
-  const parsed = createMerchantProfileSchema.safeParse({
-    displayName: formData.get("displayName") ?? '',
+
+export async function startKycAction(_: AuthFormState | null, formData: FormData) {
+  const parsed = startKycSchema.safeParse({
     vpa: formData.get('vpa') ?? ''
   });
 
@@ -145,7 +144,7 @@ export async function createMerchantProfileAction(_: AuthFormState | null, formD
   }
 
   try {
-    const response = await http.post<Merchant>(`/${AUTH}/${MERCHANT}/${REGISTER}`, parsed.data)
+    const response = await http.post(`/${AUTH}/${USER}/${START_KYC}`, parsed.data)
     if (!response.data) {
       return {
         error: 'Missing data',
@@ -156,7 +155,7 @@ export async function createMerchantProfileAction(_: AuthFormState | null, formD
     revalidatePath(RoutePath.Dashboard)
   } catch (_) {
     return {
-      error: `Failed to create merchant profile`,
+      error: `Failed to kyc process`,
       success: false,
     }
   }

@@ -34,7 +34,7 @@ export const DashboardLayout: React.FC<Props> = async ({
       >
         <div className='flex justify-between'>
         <Text as='h1' styleVariant='secondary-heading' className='w-full'>
-          Welcome, {user.merchant?.displayName || user.username}
+          Welcome, {user.username}
         </Text>
           <AvatarWithLogout avatar={user.avatar}/>
         </div>
