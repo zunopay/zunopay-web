@@ -20,7 +20,8 @@ const nextConfig: NextConfig = {
   },
   env: {
     PRIVY_APPLICATION_ID: process.env.PRIVY_APPLICATION_ID,
-    PRIVY_CLIENT_ID: process.env.PRIVY_CLIENT_ID
+    PRIVY_CLIENT_ID: process.env.PRIVY_CLIENT_ID,
+    RPC_ENDPOINT: process.env.RPC_ENDPOINT
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   reactStrictMode: true,

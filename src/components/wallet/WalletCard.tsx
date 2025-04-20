@@ -17,16 +17,13 @@ export function WalletContext() {
 
 
 /*
-  1. transfer usdc
-  2. generate qr
-
+  1. generate qr
 */
 function PrivyWalletWrapper() {
     const { user, ready, authenticated, login } = usePrivy();
     if (!ready) {
       return <div>Loading...</div>;
     }
-    console.log("USER", user)
   
     return (
         <>
@@ -40,6 +37,7 @@ function PrivyWalletWrapper() {
               <RevenueCard title='Total Revenue' />
               <RevenueCard title='Daily Revenue' />
             </div>
+            <h1>{user.wallet.address}</h1>
             <TransferCard /> 
           </div>
 

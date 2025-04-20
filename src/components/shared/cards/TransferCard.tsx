@@ -11,16 +11,16 @@ export const TransferCard: React.FC = () => {
   const [amount, setAmount] = useState<number>();
   const [vpa, setVpa] = useState<string>();
   const connection = getConnection();
-  const {sendTransaction} = useSendTransaction();
+  const { sendTransaction } = useSendTransaction();
 
   const handleTransferTransaction = async() => {
     if(!vpa || !amount){
         return
     }
 
-    const encodedTransaction = await fetchDigitalTransferTransaction({ vpa, amount });
+    const encodedTransaction = await fetchDigitalTransferTransaction({ vpa, amount: amount*1000000 });
     const transaction = versionedTransactionFromBs64(encodedTransaction);
-    await sendTransaction({ transaction: transaction, connection: connection });
+    const receipt = await sendTransaction({ transaction, connection });
   }
 
   return (

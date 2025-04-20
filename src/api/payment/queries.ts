@@ -1,3 +1,5 @@
+'use server'
+
 import http from 'api/http'
 import { Receiver } from '@/models/payment'
 import { GetReceiverParams, TransferDigitalParams } from '@/models/payment/params'
