@@ -83,6 +83,10 @@ const Form: React.FC = () => {
             <ToggleGroupItem label='Merchant' value={Role.Merchant} />
             <ToggleGroupItem label='Individual' value={Role.Individual} />
           </ToggleGroup>
+        <div className='flex flex-col w-full space-y-2'>
+          <Label>Referral Code</Label>
+          <Input placeholder='XBVF' name='referralCode' />
+        </div>
         {!state?.success && <FormErrorMessage message={state?.error} />}
       </div>
       <SubmitButton />

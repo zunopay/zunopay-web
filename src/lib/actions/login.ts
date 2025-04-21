@@ -88,7 +88,8 @@ export const registerAction = async (
     email: formData.get('email'),
     password: formData.get('password'),
     region: formData.get('region'),
-    role: formData.get('role')
+    role: formData.get('role'),
+    referralCode: formData.get('referralCode')
   });
 
   if (!parsed.success) {

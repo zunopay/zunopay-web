@@ -26,6 +26,8 @@ const zVpa = z
 const zRegion = z
   .string();
 
+const zString = z.string();
+
 const zRole = z
   .enum(['Individual', 'Merchant']);
 
@@ -48,6 +50,7 @@ export const registerSchema = z.object({
     password: zPassword,
     region: zRegion,
     role: zRole,
+    referralCode: zString
 })
 
 export const startKycSchema = z.object({
