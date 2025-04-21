@@ -10,7 +10,7 @@ import { loginSchema, registerSchema, startKycSchema } from '@/constants/schema'
 import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
 import { apiClient } from '../axios'
 import { Role } from '../types'
-import http from '@/api/http'
+import { getServerHttp } from '@/api/http'
 
 const { AUTH, LOGIN, REGISTER, USER, START_KYC } = AUTH_QUERY_KEYS
 
@@ -81,7 +81,7 @@ export const registerAction = async (
   _: AuthFormState | null,
   formData: FormData
 ): Promise<AuthFormState | null> => {
-  let redirectPath = redirectTo;
+  const redirectPath = redirectTo || RoutePath.VerifyEmail;
 
   const parsed = registerSchema.safeParse({
     username: formData.get('username'),
@@ -115,9 +115,6 @@ export const registerAction = async (
     }
 
     await parseAndSetCookieAfterAuth(response.data)
-    const role = parsed.data.role;
-    //TODO: Redirect individuals and verifiers to respective path.
-    redirectPath = role == Role.Merchant ? RoutePath.CreateMerchantProfile : RoutePath.Home;
     revalidatePath(redirectPath)
   } catch (_) {
     return {
@@ -144,6 +141,7 @@ export async function startKycAction(_: AuthFormState | null, formData: FormData
   }
 
   try {
+    const http = await getServerHttp();
     const response = await http.post(`/${AUTH}/${USER}/${START_KYC}`, parsed.data)
     if (!response.data) {
       return {

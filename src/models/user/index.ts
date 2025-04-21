@@ -9,4 +9,5 @@ export interface User {
     role: Role, 
     region: 'EU' | 'IN' | 'BR' | 'SG',
     isKycVerified: boolean;
+    isEmailVerified: boolean;
 }

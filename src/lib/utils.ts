@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { startTransition } from 'react'
 import { jwtDecode } from "jwt-decode";
-import { Transaction, VersionedTransaction } from '@solana/web3.js'
+import { VersionedTransaction } from '@solana/web3.js'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
