@@ -160,3 +160,7 @@ export async function startKycAction(_: AuthFormState | null, formData: FormData
 
   redirect(RoutePath.Dashboard, RedirectType.replace)
 }
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

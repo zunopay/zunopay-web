@@ -9,7 +9,6 @@ import { loginAction } from '@/lib/actions/login'
 import { FormErrorMessage } from '@/components/forms/FormErrorMessage'
 import { onSubmitPreventFormListener } from '@/lib/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()

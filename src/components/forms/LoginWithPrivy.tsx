@@ -38,15 +38,16 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
     await loginWithCode({ code });
   };
   const FIVE_MINUTES_MS = 5 * 60 * 1000;
-  const isWithinTenMinutes =
+  const isWithinFiveMinutes =
     new Date().getTime() - currentTime.getTime() <= FIVE_MINUTES_MS;
 
+  
   useEffect(() => {
-    if (ready && isWithinTenMinutes) {
+    if (ready && isWithinFiveMinutes) {
       sendCode({ email: me.email });
       setCodeSendTime(new Date());
     }
-  }, [ready, isWithinTenMinutes, sendCode, setCodeSendTime, me.email]);
+  }, [ready]);
 
   useEffect(() => {
     if (!authenticated) return;
@@ -61,7 +62,7 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
     };
   
     processAuthFlow();
-  }, [authenticated, me.isEmailVerified, router ]);
+  }, [authenticated, me.isEmailVerified ]);
   
   return (
     <div>
