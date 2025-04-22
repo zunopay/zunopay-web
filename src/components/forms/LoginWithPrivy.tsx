@@ -31,7 +31,7 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
   );
 
   const { sendCode, loginWithCode } = useLoginWithEmail();
-  const { ready, authenticated } = usePrivy();
+  const { ready, authenticated, user } = usePrivy();
   const { USER, VERIFY_EMAIL } = USER_QUERY_KEYS;
 
   const submitOtp = async () => {
@@ -43,14 +43,14 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
 
   
   useEffect(() => {
-    if (ready && isWithinFiveMinutes) {
+    if (ready && !isWithinFiveMinutes) {
       sendCode({ email: me.email });
       setCodeSendTime(new Date());
     }
   }, [ready]);
 
   useEffect(() => {
-    if (!authenticated) return;
+    if (!user) return;
   
     setClientAuthToken(accessToken)
     const processAuthFlow = async () => {
@@ -62,7 +62,7 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
     };
   
     processAuthFlow();
-  }, [authenticated, me.isEmailVerified ]);
+  }, [user, me.isEmailVerified ]);
   
   return (
     <div>
