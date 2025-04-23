@@ -37,7 +37,6 @@ function PrivyWalletWrapper() {
               <RevenueCard title='Total Revenue' />
               <RevenueCard title='Daily Revenue' />
             </div>
-            <h1>{user.wallet.address}</h1>
             <TransferCard /> 
           </div>
 

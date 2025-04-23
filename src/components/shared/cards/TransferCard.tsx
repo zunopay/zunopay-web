@@ -1,6 +1,7 @@
 'use client'
 import { fetchDigitalTransferTransaction } from "@/api/payment/queries";
-import { Button, Input } from "@/components/ui";
+import { Button, Input, Text } from "@/components/ui";
+import { Card } from "@/components/ui/card";
 import { getConnection } from "@/lib/connection";
 import { versionedTransactionFromBs64 } from "@/lib/utils";
 import { useSendTransaction } from "@privy-io/react-auth/solana";
@@ -24,12 +25,12 @@ export const TransferCard: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 max-w-60">
-      <div>
+    <Card className='w-80 p-6 bg-active-gradient flex flex-col gap-4'>
+      <div className='flex flex-col gap-2'>
           <Input placeholder="input address to transfer funds" onChange={e => setVpa(e.target.value)}/>
           <Input placeholder="amount" type='number' onChange={e => setAmount(+e.target.value)}/>
       </div>
       <Button onClick={handleTransferTransaction}>Transfer Funds</Button>
-    </div>
+    </Card>
   );
 };
