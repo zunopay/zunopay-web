@@ -4,11 +4,10 @@ import { useLoginWithEmail, usePrivy } from "@privy-io/react-auth";
 import React, { useEffect, useState } from "react";
 import { PrivyContextProvider } from "@/providers/PrivyContextProvider";
 import { useRouter } from "next/navigation";
-import { Button, Input } from "../ui";
+import { Button, Input, Text } from "../ui";
 import { RoutePath } from "@/enums/RoutePath";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { User } from "@/models/user";
-import { verifyEmail } from "@/api/user/queries";
 import { clientHttp, setClientAuthToken } from "@/lib/clientHttp";
 import { USER_QUERY_KEYS } from "@/api/user/keys";
 
@@ -37,15 +36,16 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
   const submitOtp = async () => {
     await loginWithCode({ code });
   };
-  const FIVE_MINUTES_MS = 5 * 60 * 1000;
-  const isWithinFiveMinutes =
-    new Date().getTime() - currentTime.getTime() <= FIVE_MINUTES_MS;
 
-  
+  const isFiveMinutesElapesed = currentTime < new Date();
   useEffect(() => {
-    if (ready && !isWithinFiveMinutes) {
+    if (ready && isFiveMinutesElapesed) {
+      console.log("SENT")
+      const FIVE_MINUTES_MS = 5 * 60 * 1000;
+      const fiveMinutesLater = new Date(Date.now() + FIVE_MINUTES_MS);
+
       sendCode({ email: me.email });
-      setCodeSendTime(new Date());
+      setCodeSendTime(fiveMinutesLater);
     }
   }, [ready]);
 
@@ -65,11 +65,12 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
   }, [user, me.isEmailVerified ]);
   
   return (
-    <div>
-      <Input onChange={(e) => setCode(e.currentTarget.value)} value={code} />
+    <div className='flex flex-col gap-4'>
+      <Input onChange={(e) => setCode(e.currentTarget.value)} value={code} placeholder="Input OTP" />
       <Button variant="active" onClick={submitOtp}>
         Submit
       </Button>
+      <Text as='p' styleVariant='body-small' className='text-nowrap'>OTP has been send to email: <b>{me.email}</b></Text>
     </div>
   );
 };

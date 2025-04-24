@@ -36,6 +36,7 @@ export async function middleware(request: NextRequest) {
 
   // Handle simple requests
   const response = NextResponse.next()
+  response.headers.set("x-pathname", request.nextUrl.pathname);
 
   Object.entries(corsOptions).forEach(([key, value]) => {
     response.headers.set(key, value)
@@ -46,13 +47,15 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/register',
+    '/register/:path*',
     '/dashboard/:path*',
     '/api/:path*',
     '/login/:path*',
   ],
 }
 
-const authRoutesRegex = /^\/(dashboard)(\/.*)?$/
+const authRoutesRegex = /^(\/(dashboard|profile|settings)(\/.*)?|\/register\/verify-email)$/
 
 const handleUnauthorized = async ({ path, url }: { path: string; url: string }) => {
   const updatedUrl = new URL(RoutePath.Login, url)

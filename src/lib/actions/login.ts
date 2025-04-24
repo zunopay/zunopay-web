@@ -81,8 +81,6 @@ export const registerAction = async (
   _: AuthFormState | null,
   formData: FormData
 ): Promise<AuthFormState | null> => {
-  const redirectPath = redirectTo || RoutePath.VerifyEmail;
-
   const parsed = registerSchema.safeParse({
     username: formData.get('username'),
     email: formData.get('email'),
@@ -116,15 +114,16 @@ export const registerAction = async (
     }
 
     await parseAndSetCookieAfterAuth(response.data)
-    revalidatePath(redirectPath)
-  } catch (_) {
+    revalidatePath(RoutePath.VerifyEmail)
+  } catch (e) {
+    console.log(e)
     return {
       error: `Failed to register user`,
       success: false,
     }
   }
 
-  redirect(redirectPath ?? RoutePath.Home, RedirectType.replace)
+  redirect(RoutePath.VerifyEmail, RedirectType.replace)
 }
 
 
