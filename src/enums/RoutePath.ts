@@ -11,5 +11,6 @@ export const RoutePath = Object.freeze({
     Dashboard: '/dashboard',
     TermsOfService: '/terms-of-service',
     PrivacyPolicy: '/privacy-policy',
+    StartKyc: '/dashboard/start-kyc'
   })
   

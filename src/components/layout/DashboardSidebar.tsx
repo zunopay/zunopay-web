@@ -80,6 +80,14 @@ export async function DashboardSidebar({ me, activePath }: Props) {
             />
             <SoonChip />
           </SidebarMenuItem>
+          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.StartKyc ? '' : 'opacity-50'}`}>
+            <SidebarMenuLink
+              isActive={activePath === RoutePath.StartKyc}
+              href={RoutePath.StartKyc}
+              title="Start Kyc"
+              Icon={WithdrawIcon}
+            />
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
 

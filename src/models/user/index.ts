@@ -1,4 +1,4 @@
-import { Role } from "@/lib/types";
+import { Role, SupportedRegion } from "@/lib/types";
 
 // TODO: Fix region types
 export interface User {
@@ -7,7 +7,7 @@ export interface User {
     email: string,
     avatar: string,
     role: Role, 
-    region: 'EU' | 'IN' | 'BR' | 'SG',
+    region: SupportedRegion,
     isKycVerified: boolean;
     isEmailVerified: boolean;
 }

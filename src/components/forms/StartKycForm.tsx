@@ -25,16 +25,11 @@ const SubmitButton: React.FC = () => {
 }
 
 type Props = {
-    vpaType: 'Upi id' | 'Pix key' | 'Iban'
+  vpa: {type: string, placeholder: string}
 }
 
-const Form: React.FC<Props> = ({ vpaType }) => {
-  let vpaPlaceholder = 'john@ibl';
-  if(vpaType == 'Iban'){
-    vpaPlaceholder = 'HB809******08'
-  }else if(vpaType == 'Pix key'){
-    vpaPlaceholder = 'nubank@thalesog.com'
-  };
+const Form: React.FC<Props> = ({ vpa }) => {
+
   
   const [state, action] = useActionState(startKycAction, null)
   useEffect(() => {
@@ -53,8 +48,8 @@ const Form: React.FC<Props> = ({ vpaType }) => {
     <form action={action} className='space-y-4' onSubmit={onSubmitPreventFormListener(action)}>
       <div className='space-y-6'>
       <div className='flex flex-col w-full space-y-2'>
-          <Label>{vpaType}</Label>
-          <Input placeholder={vpaPlaceholder} name='vpa' />
+          <Label>{vpa.type}</Label>
+          <Input placeholder={vpa.placeholder} name='vpa' />
         </div>
         {!state?.success && <FormErrorMessage message={state?.error} />}
       </div>
@@ -63,8 +58,8 @@ const Form: React.FC<Props> = ({ vpaType }) => {
   )
 }
 
-export const CreateMerchantProfileForm: React.FC<Props> = ({vpaType}) => (
+export const StartKycForm: React.FC<Props> = ({vpa}) => (
   <Suspense>
-    <Form vpaType={vpaType} />
+    <Form vpa={vpa} />
   </Suspense>
 )
