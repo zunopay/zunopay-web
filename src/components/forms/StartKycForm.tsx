@@ -19,7 +19,7 @@ const SubmitButton: React.FC = () => {
       aria-disabled={pending}
       variant='active'
     >
-      {pending ? '' : 'Create'}
+      {pending ? '' : 'Start kyc'}
     </Button>
   )
 }

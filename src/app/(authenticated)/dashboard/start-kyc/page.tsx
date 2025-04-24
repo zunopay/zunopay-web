@@ -11,8 +11,7 @@ export default async function StartKycPage() {
 
   return (
     <DashboardLayout activePath={RoutePath.StartKyc} user={me}>
-    <div className="container flex flex-col gap-5 max-w-[400px] p-10 bg-dark-100 rounded-2xl self-center m-auto opacity-1">
-      <LogoWithText />
+    <div className="flex flex-col gap-5 max-w-[400px] p-10 bg-dark-100 rounded-2xl opacity-1">
       <StartKycForm vpa={getVpaTypeFromRegion(me.region)}/>
     </div>
   </DashboardLayout>
