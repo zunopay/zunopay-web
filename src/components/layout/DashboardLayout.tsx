@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import DashboardSidebar from './DashboardSidebar'
@@ -23,6 +23,7 @@ export const DashboardLayout: React.FC<Props> = async ({
   mainClassName,
   activePath,
 }) => {
+
   return (
     <SidebarProvider defaultOpen={true}>
       <DashboardSidebar activePath={activePath} me={user} />

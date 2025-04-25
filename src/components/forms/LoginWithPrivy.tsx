@@ -2,7 +2,6 @@
 
 import { useLoginWithEmail, usePrivy } from "@privy-io/react-auth";
 import React, { useEffect, useState } from "react";
-import { PrivyContextProvider } from "@/providers/PrivyContextProvider";
 import { useRouter } from "next/navigation";
 import { Button, Input, Text } from "../ui";
 import { RoutePath } from "@/enums/RoutePath";
@@ -15,9 +14,7 @@ type Props = { me: User, accessToken: string };
 
 export const VerifyEmailWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
   return (
-    <PrivyContextProvider appId={process.env.PRIVY_APPLICATION_ID ?? ""}>
       <LoginWithPrivy me={me} accessToken={accessToken}/>
-    </PrivyContextProvider>
   );
 };
 
@@ -30,7 +27,7 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
   );
 
   const { sendCode, loginWithCode } = useLoginWithEmail();
-  const { ready, authenticated, user } = usePrivy();
+  const { ready, user } = usePrivy();
   const { USER, VERIFY_EMAIL } = USER_QUERY_KEYS;
 
   const submitOtp = async () => {

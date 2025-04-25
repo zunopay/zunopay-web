@@ -1,9 +1,8 @@
 import { fetchMe } from "@/lib/api/user/queries";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { Text } from "@/components/ui";
-import { WalletContext } from "@/components/wallet/WalletCard";
 import { RoutePath } from "@/enums/RoutePath";
 import React from "react";
+import WalletCard from "@/components/wallet/WalletCard";
 
 export default async function DashboardPage() {
   const {data: user} = await fetchMe();
@@ -12,12 +11,7 @@ export default async function DashboardPage() {
 
   return (
     <DashboardLayout activePath={RoutePath.Dashboard} user={user}>
-      {/* {!user?.isKycVerified ? (
-        <Text as="h2" styleVariant="secondary-heading">
-          Verification pending contact us!
-        </Text>
-      ) : null} */}
-      <WalletContext />
+      <WalletCard/>
     </DashboardLayout>
   );
 }

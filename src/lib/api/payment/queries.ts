@@ -11,16 +11,14 @@ const { PAYMENT, GET, RECEIVER, TRANSFER } = PAYMENT_QUERY_KEYS
 
 export const fetchReceiver = async (params: GetReceiverParams): Promise<ReturnResponse<Receiver>> => {
 	const accessToken = await getAccessToken();
-    if(!accessToken) return { data: null, errorMessage: "Please login", status: 400 };
 
-	const response = await fetchWrapper<Receiver>({method: 'GET', path: `${PAYMENT}/${GET}/${RECEIVER}`, params})
+	const response = await fetchWrapper<Receiver>({method: 'GET', path: `${PAYMENT}/${GET}/${RECEIVER}`, params, accessToken})
 	return response
 }
 
 export const fetchDigitalTransferTransaction = async (params: TransferDigitalParams) : Promise<ReturnResponse<string>> => {
 	const accessToken = await getAccessToken();
-    if(!accessToken) return { data: null, errorMessage: "Please login", status: 400 };
 
-	const response = await fetchWrapper<string>({method: 'GET', path: `${PAYMENT}/${GET}/${TRANSFER}`, params})
+	const response = await fetchWrapper<string>({method: 'GET', path: `${PAYMENT}/${GET}/${TRANSFER}`, params, accessToken})
 	return response
 }
