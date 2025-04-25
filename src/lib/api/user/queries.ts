@@ -3,21 +3,17 @@
 import { User } from "@/models/user";
 import { getAccessToken, getServerHttp } from "../http";
 import { USER_QUERY_KEYS } from "./keys";
+import { fetchWrapper } from "@/lib/fetchWrapper";
+import { ReturnResponse } from "@/lib/types";
 
 const { USER, ME, GET, VERIFY_EMAIL, BALANCE } = USER_QUERY_KEYS;
 
-export async function fetchMe() : Promise<{ data: User | null, errorMessage?: string }> {
+export async function fetchMe() : Promise<ReturnResponse<User>> {
     const accessToken = await getAccessToken();
-    if(!accessToken) return { data: null, errorMessage: "Please login" };
-    
-    try{
-        const http = await getServerHttp();
-        const response = await http.get<User>(`/${USER}/${GET}/${ME}`);
-        return {data: response.data}
-    }catch(e){
-        return { data: null, errorMessage: "Something went wrong" }
-        
-    }
+    if(!accessToken) return { data: null, errorMessage: "Please login", status: 400 };
+
+    const response = await fetchWrapper<User>({method: 'GET', path:`${USER}/${GET}/${ME}`, accessToken});
+    return response;
 }
 
 export async function verifyEmail() {

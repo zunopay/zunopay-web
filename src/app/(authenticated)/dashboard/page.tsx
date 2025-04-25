@@ -21,3 +21,14 @@ export default async function DashboardPage() {
     </DashboardLayout>
   );
 }
+
+
+/**
+ * 
+ * 1. Generate QR
+ * 2. Transaction history
+ * 3. Offramps
+ * 4. Onramps
+ * 5. Point system
+ * 
+ */

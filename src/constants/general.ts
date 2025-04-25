@@ -10,7 +10,7 @@ export const jwtCookieProps = {
   secure: true,
   maxAge: 100 * 24 * 60 * 60,
 }
-
+export const baseApiUrl = `${process.env.NEXT_PUBLIC_API_ENDPOINT}`
 
 // image aspect ratios
 export const ASPECT_RATIO = Object.freeze({

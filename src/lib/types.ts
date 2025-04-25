@@ -12,8 +12,9 @@ export type SvgIconProps = { className?: React.SVGProps<SVGSVGElement>['classNam
 export type VariantSvgIconProps = { solid?: boolean } & SvgIconProps
 
 export type ReturnResponse<T> = {
-  data: T
+  data: T | null
   errorMessage?: string
+  status: number
 }
 
 export enum Currency {

@@ -1,9 +1,9 @@
 
-export interface GetReceiverParams {
+export type GetReceiverParams = {
     encodedQr: string;
 }
 
-export interface TransferDigitalParams {
+export type TransferDigitalParams = {
     vpa: string;
     amount: number;
 }
