@@ -1,4 +1,4 @@
-import { fetchMe } from "@/api/user/queries";
+import { fetchMe } from "@/lib/api/user/queries";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Text } from "@/components/ui";
 import { WalletContext } from "@/components/wallet/WalletCard";

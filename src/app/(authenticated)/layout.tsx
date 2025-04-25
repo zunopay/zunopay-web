@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { RoutePath } from "@/enums/RoutePath";
-import { fetchMe } from "@/api/user/queries";
+import { fetchMe } from "@/lib/api/user/queries";
 
 export default async function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   const {data: user} = await fetchMe ();

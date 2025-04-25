@@ -1,6 +1,6 @@
 'use server'
 
-import { getServerHttp } from 'api/http'
+import { getServerHttp } from '@/lib/api/http'
 import { Receiver } from '@/models/payment'
 import { GetReceiverParams, TransferDigitalParams } from '@/models/payment/params'
 import { PAYMENT_QUERY_KEYS } from './keys'

@@ -4,7 +4,7 @@ import { Html5QrcodeScanner } from 'html5-qrcode'
 import { useEffect, useState } from 'react'
 import Scanner from '../../public/Icons/Scanner.svg'
 import { cn } from '@/lib/utils'
-import { fetchReceiver } from '@/api/payment/queries'
+import { fetchReceiver } from '@/lib/api/payment/queries'
 
 export default function QrScanner({ onScan }: { onScan: (text: string) => void }) {
   useEffect(() => {

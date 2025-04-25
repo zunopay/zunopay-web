@@ -9,7 +9,7 @@ import { RoutePath } from "@/enums/RoutePath";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { User } from "@/models/user";
 import { clientHttp, setClientAuthToken } from "@/lib/clientHttp";
-import { USER_QUERY_KEYS } from "@/api/user/keys";
+import { USER_QUERY_KEYS } from "@/lib/api/user/keys";
 
 type Props = { me: User, accessToken: string };
 

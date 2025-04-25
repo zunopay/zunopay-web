@@ -7,10 +7,10 @@ import { cookies } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 import { accessTokenKey, jwtCookieProps } from '@/constants/general'
 import { loginSchema, registerSchema, startKycSchema } from '@/constants/schema'
-import { AUTH_QUERY_KEYS } from '@/api/auth/authKeys'
+import { AUTH_QUERY_KEYS } from '@/lib/api/auth/authKeys'
 import { apiClient } from '../axios'
 import { Role } from '../types'
-import { getServerHttp } from '@/api/http'
+import { getServerHttp } from '@/lib/api/http'
 
 const { AUTH, LOGIN, REGISTER, USER, START_KYC } = AUTH_QUERY_KEYS
 

@@ -1,5 +1,5 @@
-import { getAccessToken } from "@/api/http";
-import { fetchMe } from "@/api/user/queries";
+import { getAccessToken } from "@/lib/api/http";
+import { fetchMe } from "@/lib/api/user/queries";
 import { VerifyEmailWithPrivy } from "@/components/forms/LoginWithPrivy";
 import { BackgroundWithNameLayout } from "@/components/layout/BackgroundWithNameLayout";
 import { LogoWithText } from "@/components/shared/logo/LogoWithText";

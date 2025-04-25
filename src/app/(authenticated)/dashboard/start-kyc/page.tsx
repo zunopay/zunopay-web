@@ -1,4 +1,4 @@
-import { fetchMe } from "@/api/user/queries";
+import { fetchMe } from "@/lib/api/user/queries";
 import { StartKycForm } from "@/components/forms/StartKycForm";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { LogoWithText } from "@/components/shared/logo/LogoWithText";

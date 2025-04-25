@@ -1,5 +1,5 @@
 'use client'
-import { fetchDigitalTransferTransaction } from "@/api/payment/queries";
+import { fetchDigitalTransferTransaction } from "@/lib/api/payment/queries";
 import { Button, Input, Text } from "@/components/ui";
 import { Card } from "@/components/ui/card";
 import { getConnection } from "@/lib/connection";

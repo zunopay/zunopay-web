@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
 import { obviouslyNarrow, satoshi } from "./fonts";
-import { PrivyProvider } from "@privy-io/react-auth";
+import { ReactQueryClientProvider } from "@/providers/ReactQueryClientProvider";
 
 export const metadata: Metadata = {
   title: "ZunoPay",
@@ -24,16 +24,19 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
+    <ReactQueryClientProvider>
     <html lang="en">
       <body className={`${satoshi.className} ${obviouslyNarrow.variable}`}>
           {children}
       </body>
     </html>
+    </ReactQueryClientProvider>
   );
 }
