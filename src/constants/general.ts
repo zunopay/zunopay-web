@@ -20,3 +20,6 @@ export const ASPECT_RATIO = Object.freeze({
     CREATOR_BANNER: { width: 1920, height: 900 },
     CREATOR_AVATAR: { width: 500, height: 500 },
   })
+
+// Transfer
+export const MIN_TRANSFER_AMOUNT_LIMIT = 0.001;

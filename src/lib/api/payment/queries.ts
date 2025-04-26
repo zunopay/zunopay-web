@@ -19,6 +19,6 @@ export const fetchReceiver = async (params: GetReceiverParams): Promise<ReturnRe
 export const fetchDigitalTransferTransaction = async (params: TransferDigitalParams) : Promise<ReturnResponse<string>> => {
 	const accessToken = await getAccessToken();
 
-	const response = await fetchWrapper<string>({method: 'GET', path: `${PAYMENT}/${GET}/${TRANSFER}`, params, accessToken})
+	const response = await fetchWrapper<string>({method: 'GET', path: `${PAYMENT}/${GET}/${TRANSFER}`, params, accessToken, isTextResponse:true})
 	return response
 }

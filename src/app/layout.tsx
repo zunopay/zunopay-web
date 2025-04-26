@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { obviouslyNarrow, satoshi } from "./fonts";
 import { ReactQueryClientProvider } from "@/providers/ReactQueryClientProvider";
+import { Toaster, ToastProvider } from "@/components/ui/toast";
 
 export const metadata: Metadata = {
   title: "ZunoPay",
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${satoshi.className} ${obviouslyNarrow.variable}`}>
           {children}
+          <Toaster/>
       </body>
     </html>
     </ReactQueryClientProvider>
