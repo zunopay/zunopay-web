@@ -3,5 +3,6 @@ export const USER_QUERY_KEYS = Object.freeze({
     GET: 'get',
     ME: 'me',
     VERIFY_EMAIL:'verify-email',
-    BALANCE: 'balance'
+    BALANCE: 'balance',
+    REWARD_POINTS: 'reward-points'
 })
