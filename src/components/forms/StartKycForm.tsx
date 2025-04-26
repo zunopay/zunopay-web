@@ -7,6 +7,7 @@ import { startKycAction } from '@/lib/actions/login'
 import { FormErrorMessage } from '@/components/forms/FormErrorMessage'
 import { onSubmitPreventFormListener } from '@/lib/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
+import { toast } from '../ui/toast'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
@@ -29,18 +30,16 @@ type Props = {
 }
 
 const Form: React.FC<Props> = ({ vpa }) => {
-
-  
   const [state, action] = useActionState(startKycAction, null)
+  
   useEffect(() => {
     if (state?.error) {
       console.log(state.error);
-      //TODO:
-      // toast({
-      //   title: 'Error',
-      //   description: state.error,
-      //   variant: 'error',
-      // })
+      toast({
+        title: 'Error',
+        description: state.error,
+        variant: 'error',
+      })
     }
   }, [state?.error])
 
@@ -48,7 +47,7 @@ const Form: React.FC<Props> = ({ vpa }) => {
     <form action={action} className='space-y-4' onSubmit={onSubmitPreventFormListener(action)}>
       <div className='space-y-6'>
       <div className='flex flex-col w-full space-y-2'>
-          <Label>{vpa.type}</Label>
+          <Label>{vpa.type} :</Label>
           <Input placeholder={vpa.placeholder} name='vpa' />
         </div>
         {!state?.success && <FormErrorMessage message={state?.error} />}

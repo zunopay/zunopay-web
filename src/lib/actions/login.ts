@@ -11,6 +11,7 @@ import { AUTH_QUERY_KEYS } from '@/lib/api/auth/authKeys'
 import { apiClient } from '../axios'
 import { Role } from '../types'
 import { getServerHttp } from '@/lib/api/http'
+import { toast } from '@/components/ui/toast'
 
 const { AUTH, LOGIN, REGISTER, USER, START_KYC } = AUTH_QUERY_KEYS
 
@@ -158,6 +159,7 @@ export async function startKycAction(_: AuthFormState | null, formData: FormData
     }
   }
 
+  toast({ description:'Successfully Submitted the request for kyc verification', variant:'success' })
   redirect(RoutePath.Dashboard, RedirectType.replace)
 }
 

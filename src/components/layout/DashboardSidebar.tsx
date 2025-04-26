@@ -52,7 +52,7 @@ export async function DashboardSidebar({ me, activePath }: Props) {
               Icon={HomeIcon}
               />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.WithdrawFund ? '' : 'opacity-50'}`}>
+          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.TransactionHistory ? '' : 'opacity-50'}`}>
             <SidebarMenuLink
               isActive={activePath === RoutePath.TransactionHistory}
               href={RoutePath.TransactionHistory}
@@ -60,7 +60,7 @@ export async function DashboardSidebar({ me, activePath }: Props) {
               Icon={TransactionIcon}
               />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.WithdrawFund ? '' : 'opacity-50'}`}>
+          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.MyProducts ? '' : 'opacity-50'}`}>
             <SidebarMenuLink
               isActive={activePath === RoutePath.MyProducts}
               href={RoutePath.MyProducts}
@@ -80,7 +80,7 @@ export async function DashboardSidebar({ me, activePath }: Props) {
             />
             <SoonChip />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.StartKyc ? '' : 'opacity-50'}`}>
+          <SidebarMenuItem className={ `flex  ${activePath === RoutePath.StartKyc ? '' : 'opacity-50'} ${me.isKycVerified ? 'hidden' : ''}`}>
             <SidebarMenuLink
               isActive={activePath === RoutePath.StartKyc}
               href={RoutePath.StartKyc}
