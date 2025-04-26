@@ -38,6 +38,7 @@ export const TransferCard: React.FC = () => {
   
       const transaction = versionedTransactionFromBs64(encodedTransaction);
       const receipt = await sendTransaction({ transaction, connection });
+      
       setLoading(false)
       queryClient.invalidateQueries({ queryKey: userKeys.getBalance() })
       toast({ description: `Successfully transferred ${amount} $`, variant:'success' })

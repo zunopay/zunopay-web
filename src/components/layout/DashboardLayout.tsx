@@ -5,6 +5,7 @@ import DashboardSidebar from './DashboardSidebar'
 import { Text } from '@/components/ui/Text'
 import { User } from '@/models/user'
 import { LogoutButton } from '../shared/buttons/LogoutButton'
+import { RewardPointSection } from '../shared/RewardPointSection'
 
 type Props = React.PropsWithChildren & {
   user: User,
@@ -33,10 +34,11 @@ export const DashboardLayout: React.FC<Props> = async ({
         <Text as='h1' styleVariant='secondary-heading' className='w-full'>
           Welcome, {user.username}
         </Text>
+        <div className='flex gap-2'>
+          <RewardPointSection/>
           <LogoutButton/>
         </div>
-
-
+        </div>
         {children}
       </main>
     </SidebarProvider>
