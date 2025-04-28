@@ -19,7 +19,8 @@ export default async function DashboardPage() {
 
 /**
  * 
- * 1. Generate QR
+ * 1. Integerate and Generate Solana PayQR for checkouts 
+ * 2. Transfor your QR -> Generate upi qr with writtern supports usdc with ZunoPay
  * 2. Transaction history
  * 3. Offramps
  * 4. Onramps

@@ -13,7 +13,7 @@ export const useFetchBalance = () => {
 export const useFetchRewardPoints = () => {
   return useQuery({
     queryFn: () => fetchRewardPoints(),
-    queryKey: userKeys.getBalance(),
+    queryKey: userKeys.getRewardPoints(),
     staleTime: 1000 * 60 * 24
   })
 }

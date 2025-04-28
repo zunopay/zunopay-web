@@ -12,7 +12,7 @@ export default function WalletCard() {
   
     return (
         <>
-        {authenticated && user?.wallet && (
+        {authenticated && user?.wallet && (          
           <div className='flex flex-col gap-4'>
             <div className='flex gap-6'>
               <BalanceCard />

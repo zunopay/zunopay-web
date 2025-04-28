@@ -1,13 +1,13 @@
 'use server'
 
-import { Receiver } from '@/models/payment'
+import { Receiver, TransferHistory } from '@/models/payment'
 import { GetReceiverParams, TransferDigitalParams } from '@/models/payment/params'
 import { PAYMENT_QUERY_KEYS } from './keys'
 import { fetchWrapper } from '@/lib/fetchWrapper'
 import { ReturnResponse } from '@/lib/types'
 import { getAccessToken } from '../http'
 
-const { PAYMENT, GET, RECEIVER, TRANSFER } = PAYMENT_QUERY_KEYS
+const { PAYMENT, GET, RECEIVER, TRANSFER, TRANSFER_HISTORY } = PAYMENT_QUERY_KEYS
 
 export const fetchReceiver = async (params: GetReceiverParams): Promise<ReturnResponse<Receiver>> => {
 	const accessToken = await getAccessToken();
@@ -20,5 +20,12 @@ export const fetchDigitalTransferTransaction = async (params: TransferDigitalPar
 	const accessToken = await getAccessToken();
 
 	const response = await fetchWrapper<string>({method: 'GET', path: `${PAYMENT}/${GET}/${TRANSFER}`, params, accessToken, isTextResponse:true})
+	return response
+}
+
+export const fetchTransferHistory = async() : Promise<ReturnResponse<TransferHistory[]>> => {
+	const accessToken = await getAccessToken();
+
+	const response = await fetchWrapper<TransferHistory[]>({method: 'GET', path: `${PAYMENT}/${GET}/${TRANSFER_HISTORY}`, accessToken })
 	return response
 }
