@@ -58,15 +58,17 @@ export const TransferHistoryTable: React.FC<Props> = ({ transfers }) => {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center font-medium gap-2">
-                    <span className="w-20">
-                      {shortenString(transfer.walletAddress)}
-                    </span>
-                    <CopyButton
-                      variant="active"
-                      clipboard={transfer.walletAddress}
-                    />
-                  </div>
+                  {transfer.walletAddress ? (
+                    <div className="flex items-center font-medium gap-2">
+                      <span className="w-20">
+                        {shortenString(transfer.walletAddress)}
+                      </span>
+                      <CopyButton
+                        variant="active"
+                        clipboard={transfer.walletAddress}
+                      />
+                    </div>
+                  ) : null}
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
