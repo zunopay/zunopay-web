@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { Button, ButtonProps } from '@/components/ui/Button'
 import { CopyIcon } from 'lucide-react'
+import { toast } from '../ui/toast'
 
 type CopyButtonProps = {
   clipboard: string
@@ -13,6 +14,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ clipboard, text, variant
   const handleClick = useCallback(() => {
     if (clipboard) {
       navigator.clipboard.writeText(clipboard)
+      toast({ description:'Copied successfully', variant:'default' })
     }
   }, [clipboard])
 
