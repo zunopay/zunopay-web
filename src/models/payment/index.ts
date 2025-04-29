@@ -24,6 +24,7 @@ export type TransferHistory = {
     id: number;
     amount: number;
     status: TransferStatus;
+    walletAddress: string;
     signature: string;
     createdAt: Date;
     tokenType: TokenType

@@ -7,7 +7,7 @@ import { fetchWrapper } from '@/lib/fetchWrapper'
 import { ReturnResponse } from '@/lib/types'
 import { getAccessToken } from '../http'
 
-const { PAYMENT, GET, RECEIVER, TRANSFER, TRANSFER_HISTORY } = PAYMENT_QUERY_KEYS
+const { PAYMENT, GET, RECEIVER, TRANSFER, TRANSFER_HISTORY, RECEIVE_REQUEST } = PAYMENT_QUERY_KEYS
 
 export const fetchReceiver = async (params: GetReceiverParams): Promise<ReturnResponse<Receiver>> => {
 	const accessToken = await getAccessToken();
@@ -28,4 +28,11 @@ export const fetchTransferHistory = async() : Promise<ReturnResponse<TransferHis
 
 	const response = await fetchWrapper<TransferHistory[]>({method: 'GET', path: `${PAYMENT}/${GET}/${TRANSFER_HISTORY}`, accessToken })
 	return response
+}
+
+export const fetchReceivePaymentRequest = async() : Promise<ReturnResponse<string>> => {
+	const accessToken = await getAccessToken();
+
+	const response = await fetchWrapper<string>({method:'GET', path:`${PAYMENT}/${GET}/${RECEIVE_REQUEST}`, isTextResponse: true, accessToken});
+	return response;
 }

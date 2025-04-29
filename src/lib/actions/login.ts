@@ -162,7 +162,3 @@ export async function startKycAction(_: AuthFormState | null, formData: FormData
   toast({ description:'Successfully Submitted the request for kyc verification', variant:'success' })
   redirect(RoutePath.Dashboard, RedirectType.replace)
 }
-
-function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}

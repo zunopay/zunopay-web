@@ -52,11 +52,11 @@ export async function DashboardSidebar({ me, activePath }: Props) {
               Icon={HomeIcon}
               />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.TransactionHistory ? '' : 'opacity-50'}`}>
+          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.TransferHistory ? '' : 'opacity-50'}`}>
             <SidebarMenuLink
-              isActive={activePath === RoutePath.TransactionHistory}
-              href={RoutePath.TransactionHistory}
-              title="Transaction History"
+              isActive={activePath === RoutePath.TransferHistory}
+              href={RoutePath.TransferHistory}
+              title="Transfer History"
               Icon={TransactionIcon}
               />
           </SidebarMenuItem>
