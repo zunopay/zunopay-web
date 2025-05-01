@@ -1,6 +1,6 @@
 "use server";
 
-import { User } from "@/models/user";
+import { User, WalletBalance } from "@/models/user";
 import { getAccessToken } from "../http";
 import { USER_QUERY_KEYS } from "./keys";
 import { fetchWrapper } from "@/lib/fetchWrapper";
@@ -30,14 +30,13 @@ export async function verifyEmail() {
   return response;
 }
 
-export async function fetchBalance(): Promise<ReturnResponse<string>> {
+export async function fetchBalance(): Promise<ReturnResponse<WalletBalance>> {
   const accessToken = await getAccessToken();
 
-  const response = await fetchWrapper<string>({
+  const response = await fetchWrapper<WalletBalance>({
     method: "GET",
     path: `${USER}/${GET}/${BALANCE}`,
     accessToken,
-    isTextResponse: true
   });
 
   return response;

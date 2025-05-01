@@ -1,4 +1,4 @@
-import { Role, SupportedRegion } from "@/lib/types";
+import { Currency, Role, SupportedRegion } from "@/lib/types";
 
 // TODO: Fix region types
 export interface User {
@@ -10,4 +10,9 @@ export interface User {
     region: SupportedRegion,
     isKycVerified: boolean;
     isEmailVerified: boolean;
+}
+
+export interface WalletBalance {
+    balance: string,
+    currency: Currency
 }

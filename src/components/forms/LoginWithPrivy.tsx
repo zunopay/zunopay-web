@@ -67,7 +67,7 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
       <Button variant="active" onClick={submitOtp}>
         Submit
       </Button>
-      <Text as='p' styleVariant='body-small' className='text-nowrap'>OTP has been send to email: <b>{me.email}</b></Text>
+      <Text as='p' styleVariant='body-small' className='text-wrap'>OTP has been send to email: <b>{me.email}</b></Text>
     </div>
   );
 };
