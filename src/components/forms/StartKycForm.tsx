@@ -41,6 +41,9 @@ const Form: React.FC<Props> = ({ vpa }) => {
         variant: 'error',
       })
     }
+    if(state?.success){
+      toast({ description:'Successfully Submitted the request for kyc verification', variant:'success' })
+    }
   }, [state?.error])
 
   return (

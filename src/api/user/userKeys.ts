@@ -11,5 +11,10 @@ export const userKeys = Object.freeze({
       USER_QUERY_KEYS.GET,
       USER_QUERY_KEYS.REWARD_POINTS,
     ],
+    getMe: () => [
+      USER_QUERY_KEYS.USER,
+      USER_QUERY_KEYS.GET,
+      USER_QUERY_KEYS.ME,
+    ],
   })
   

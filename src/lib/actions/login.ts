@@ -12,6 +12,7 @@ import { apiClient } from '../axios'
 import { Role } from '../types'
 import { getServerHttp } from '@/lib/api/http'
 import { toast } from '@/components/ui/toast'
+import { debugApiClient } from '../utils'
 
 const { AUTH, LOGIN, REGISTER, USER, START_KYC } = AUTH_QUERY_KEYS
 
@@ -50,7 +51,7 @@ export const loginAction = async (
     }
 
     await parseAndSetCookieAfterAuth(response.data)
-    revalidatePath(RoutePath.Login)
+    revalidatePath(redirectTo ?? RoutePath.Dashboard)
   } catch (_) {
     return {
       error: `Failed to login user`,
@@ -58,7 +59,7 @@ export const loginAction = async (
     }
   }
 
-  redirect(redirectTo ?? RoutePath.Home, RedirectType.replace)
+  redirect(redirectTo ?? RoutePath.Dashboard, RedirectType.replace)
 }
 
 export const parseAndSetCookieAfterAuth = async (data: Authorization): Promise<void> => {
@@ -143,8 +144,8 @@ export async function startKycAction(_: AuthFormState | null, formData: FormData
 
   try {
     const http = await getServerHttp();
-    const response = await http.post(`/${AUTH}/${USER}/${START_KYC}`, parsed.data)
-    if (!response.data) {
+    const response = await http.post(`/${USER}/${START_KYC}`, parsed.data)
+    if (!response) {
       return {
         error: 'Missing data',
         success: false,
@@ -152,13 +153,13 @@ export async function startKycAction(_: AuthFormState | null, formData: FormData
     }
 
     revalidatePath(RoutePath.Dashboard)
-  } catch (_) {
+  } catch (e) {
+    debugApiClient(e)
     return {
       error: `Failed to kyc process`,
       success: false,
     }
   }
 
-  toast({ description:'Successfully Submitted the request for kyc verification', variant:'success' })
   redirect(RoutePath.Dashboard, RedirectType.replace)
 }

@@ -1,4 +1,4 @@
-import { fetchBalance, fetchRewardPoints } from '@/lib/api/user/queries'
+import { fetchBalance, fetchMe, fetchRewardPoints } from '@/lib/api/user/queries'
 import { useQuery } from '@tanstack/react-query'
 import { userKeys } from './userKeys'
 
@@ -15,5 +15,13 @@ export const useFetchRewardPoints = () => {
     queryFn: () => fetchRewardPoints(),
     queryKey: userKeys.getRewardPoints(),
     staleTime: 1000 * 60 * 24
+  })
+}
+
+export const useFetchMe = () => {
+  return useQuery({
+    queryFn: () => fetchMe(),
+    queryKey: userKeys.getMe(),
+    staleTime: 1000 * 5
   })
 }

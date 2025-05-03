@@ -4,6 +4,7 @@ import { startTransition } from 'react'
 import { jwtDecode } from "jwt-decode";
 import { VersionedTransaction } from '@solana/web3.js'
 import { SupportedRegion } from './types';
+import axios from 'axios';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -65,4 +66,26 @@ export const shortenString = (string: string, slice = 4): string => {
 
 export function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function cleanWalletAddress(walletAddress?: string) {
+  if(!walletAddress)return "";
+  
+  const start = walletAddress.slice(0,4);
+  const end = walletAddress.slice(-4);
+  return `${start}...${end}`;
+}
+
+export function debugApiClient(error: unknown) {
+  if (axios.isAxiosError(error)) {
+    console.log("❌ Axios Error");
+    console.log("Message:", error.message);
+    console.log("Config:", error.config);
+    console.log("Code:", error.code);
+    console.log("Response:", error.response?.data);
+    console.log("Status:", error.response?.status);
+    console.log("Headers:", error.response?.headers);
+  } else {
+    console.log("❌ Unknown Error:", error);
+  }
 }

@@ -34,3 +34,5 @@ export enum SupportedRegion {
   BR = 'BR',
   SG = 'SG'
 }
+
+export type CommonDialogProps = { open: boolean; toggleDialog: () => void }
