@@ -34,7 +34,7 @@ export async function DashboardSidebar({ me, activePath }: Props) {
       variant="inset"
       className="bg-[linear-gradient(151deg,_#0A0B24_-20%,_#2A3DBF_205%)] px-8 py-10"
     >
-      <SidebarHeader className="w-full max-w-[180px] h-auto self-center">
+      <SidebarHeader className="w-full h-auto self-center">
         <LogoWithText />
       </SidebarHeader>
 
