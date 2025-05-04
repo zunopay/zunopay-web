@@ -6,11 +6,27 @@ import { Text } from "@/components/ui/Text";
 import { cn } from "@/lib/utils";
 import { useFetchBalance, useFetchMe } from "@/api/user/queries";
 import { AddFundsDialog } from "@/components/dialogs/AddFundsDialog";
+import { WithdrawDialog } from "@/components/dialogs/WithdrawDialog";
+import { EnhancedQrScanner } from "@/components/dialogs/EnchanceQrScanner";
+import { TransferFormDialog } from "@/components/dialogs/CustomTransferDialog";
 
 export const BalanceCard = () => {
   const { data: fetchedBalance } = useFetchBalance();
   const [showAddFundsDialog, setShowAddFundsDialog] = useState(false);
   const { data: fetchedUser } = useFetchMe();
+  const [showWithdrawDialog, setShowWithdrawDialog] = useState(false);
+  const [showTransferFormDialog, setShowTransferFormDialog] = useState(false);
+  const [showQrScanner, setShowQrScanner] = useState(false);
+
+  const handleWithdrawOptionSelect = (option: "scan" | "transfer") => {
+    setShowWithdrawDialog(false);
+
+    if (option === "scan") {
+      setShowQrScanner(true);
+    } else if (option === "transfer") {
+      setShowTransferFormDialog(true);
+    }
+  };
 
   return (
     <>
@@ -64,7 +80,10 @@ export const BalanceCard = () => {
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-4">
-            <Button variant="active" onClick={() => setShowAddFundsDialog(!showAddFundsDialog)}>
+            <Button
+              variant="active"
+              onClick={() => setShowAddFundsDialog(!showAddFundsDialog)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4 mr-2"
@@ -79,7 +98,11 @@ export const BalanceCard = () => {
               </svg>
               Add Funds
             </Button>
-            <Button variant="ghost" className="border border-black text-black">
+            <Button
+              variant="ghost"
+              className="border border-black text-black"
+              onClick={() => setShowWithdrawDialog(true)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4 mr-2"
@@ -105,6 +128,28 @@ export const BalanceCard = () => {
           walletAddress={fetchedUser?.data?.walletAddress}
         />
       )}
+
+      <WithdrawDialog
+        open={showWithdrawDialog}
+        toggleDialog={() => setShowWithdrawDialog(!showWithdrawDialog)}
+        onSelectOption={handleWithdrawOptionSelect}
+      />
+      {showQrScanner && (
+        <EnhancedQrScanner
+          open={showQrScanner}
+          onClose={() => setShowQrScanner(false)}
+          title="Withdraw via QR"
+          description="Scan a merchant or friend's QR code to make a payment"
+          onScanSuccess={(result) => {
+            console.log("QR Scan result:", result);
+          }}
+        />
+      )}
+      <TransferFormDialog
+        open={showTransferFormDialog}
+        toggleDialog={() => setShowTransferFormDialog(!showTransferFormDialog)}
+        balance={fetchedBalance?.data?.balance}
+      />
     </>
   );
 };

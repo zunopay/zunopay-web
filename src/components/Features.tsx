@@ -1,5 +1,5 @@
 import { AppWalkthrough } from "./AppWalkthrough"
-import { ScanToPaySection } from "./QrScanner"
+import { ScanToPaySection } from "./WithdrawScanner"
 
 export const Features : React.FC<unknown> = () => {
     return (

@@ -199,6 +199,16 @@ const config = {
             height: 'var(--radix-accordion-content-height)',
           },
         },
+        "scanner-pulse": {
+          "0%, 100%": {
+            opacity: "0.1",
+            transform: "translateY(-100%)",
+          },
+          "50%": {
+            opacity: "0.3",
+            transform: "translateY(100%)",
+          },
+        },
         'accordion-up': {
           from: {
             height: 'var(--radix-accordion-content-height)',
@@ -221,6 +231,7 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'collapsible-down': 'collapsible-down 0.2s ease-out',
         'collapsible-up': 'collapsible-up 0.2s ease-out',
+        "scanner-pulse": "scanner-pulse 2s ease-in-out infinite"
       },
       boxShadow: {
         '3': '3px 3px 3px #15171c',
