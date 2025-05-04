@@ -1,46 +1,82 @@
-import React, { useEffect } from 'react'
-import { cn } from '@/lib/utils'
-import { SidebarProvider } from '@/components/ui/sidebar'
-import DashboardSidebar from './DashboardSidebar'
-import { Text } from '@/components/ui/Text'
-import { User } from '@/models/user'
-import { LogoutButton } from '../shared/buttons/LogoutButton'
-import { RewardPointSection } from '../shared/RewardPointSection'
+"use client";
+
+import React, { useState } from "react";
+import { cn } from "@/lib/utils";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import DashboardSidebar from "./DashboardSidebar";
+import { Text } from "@/components/ui/Text";
+import { User } from "@/models/user";
+import { LogoutButton } from "../shared/buttons/LogoutButton";
+import { RewardPointSection } from "../shared/RewardPointSection";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { MobileNav } from "../nav/MobileNav";
+import { CustomisableLogo } from "../icons/platform/CustomisableLogo";
 
 type Props = React.PropsWithChildren & {
-  user: User,
-  mainClassName?: string
-  showFooter?: boolean
-  activePath?: string
-}
+  user: User;
+  mainClassName?: string;
+  showFooter?: boolean;
+  activePath?: string;
+};
 
-export const DashboardLayout: React.FC<Props> = async ({
+export const DashboardLayout: React.FC<Props> = ({
   user,
   children,
   mainClassName,
   activePath,
 }) => {
+  const isMobile = useIsMobile();
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
 
   return (
-    <SidebarProvider defaultOpen={true}>
-      <DashboardSidebar activePath={activePath} me={user} />
-      <main
-        className={cn(
-          'flex flex-col min-h-screen h-full w-full gap-8 p-4 md:p-6 lg:p-8 flex-1 relative bg-dark-100',
-          mainClassName
-        )}
-      >
-        <div className='flex justify-between'>
-        <Text as='h1' styleVariant='secondary-heading' className='w-full'>
-          Welcome, {user.username}
-        </Text>
-        <div className='flex gap-2'>
-          <RewardPointSection/>
-          <LogoutButton/>
+    <SidebarProvider defaultOpen={!isMobile}>
+      <div className="flex min-h-screen h-full w-full">
+        <div
+          className={cn(
+            "transition-all duration-300 ease-in-out",
+            isMobile && !sidebarOpen ? "w-0 opacity-0" : "opacity-100"
+          )}
+        >
+          <DashboardSidebar activePath={activePath} me={user} />
         </div>
-        </div>
-        {children}
-      </main>
+
+        <main
+          className={cn(
+            "flex-1 flex flex-col min-h-screen h-full w-full bg-gradient-to-b from-zinc-950 to-zinc-900 text-white",
+            mainClassName
+          )}
+        >
+          <header
+            className={cn(
+              "flex items-center justify-between p-4",
+              isMobile &&
+                "sticky top-0 z-10 opacity-90 bg-zinc-950"
+            )}
+          >
+            {isMobile ? (
+              <CustomisableLogo className="text-white w-10 h-10" />
+            ) : (
+              <Text as="h1" styleVariant="secondary-heading">
+                Welcome, {user.username}
+              </Text>
+            )}
+            <div className="flex gap-3 items-center">
+              <RewardPointSection />
+              <LogoutButton />
+            </div>
+          </header>
+
+          <div
+            className={`flex-1 ${
+              isMobile ? "p-3 gap-4" : "gap-8 p-4 md:p-6 lg:p-8"
+            },`}
+          >
+            {children}
+          </div>
+
+          {isMobile && <MobileNav />}
+        </main>
+      </div>
     </SidebarProvider>
-  )
-}
+  );
+};

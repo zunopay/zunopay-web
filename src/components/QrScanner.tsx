@@ -8,6 +8,7 @@ import { fetchReceiver } from "@/lib/api/payment/queries";
 import { TransferDialog } from "./TransferDialog";
 import { Receiver } from "@/models/payment";
 import { toast } from "./ui/toast";
+import { Text } from "./ui";
 
 export default function QrScanner({
   onScan,
@@ -40,38 +41,32 @@ export default function QrScanner({
 }
 
 
-export const ScanToPaySection: React.FC<{ className?: string }> = ({
-  className,
-}) => {
-  const [isScanOpen, toggleScanner] = useState<boolean>(false);
-  const [, setScannedQr] = useState<string | null>(null);
+export const ScanToPaySection: React.FC<{ className?: string }> = ({ className }) => {
+  const [isScanOpen, toggleScanner] = useState(false);
   const [receiver, setReceiver] = useState<Receiver | null>();
-  const [showDialog, toggleDialog] = useState<boolean>(false);
+  const [showDialog, toggleDialog] = useState(false);
 
   const handleScannedData = async (data: string) => {
-    setScannedQr(data);
-    const {data: receiver, errorMessage} = await fetchReceiver({ encodedQr: data });
+    const { data: receiver, errorMessage } = await fetchReceiver({ encodedQr: data });
+    if (errorMessage) {
+      toast({ description: errorMessage, variant: "default" });
+      return;
+    }
     setReceiver(receiver);
     toggleDialog(true);
-
-   if(errorMessage){
-      toast({ description: errorMessage, variant: 'default' })
-      setScannedQr(null)
-   }
   };
 
   return (
     <>
-      <div className={cn("flex flex-col items-center gap-2", className)}>
-        <h2 className="text-blue-zunopay text-[20px] font-bold">
-          Scan QR and Pay
-        </h2>
+      <div className={cn("flex flex-col items-center gap-4 p-6 bg-zinc-900 rounded-2xl shadow-md", className)}>
+        <Text as="h2" styleVariant='body-large' className="text-blue-zunopay">
+          📷 Scan QR to Pay
+        </Text>
         {isScanOpen ? (
-          <QrScanner onScan={(text) => handleScannedData(text)} />
+          <QrScanner onScan={handleScannedData} />
         ) : (
           <ScannerWithCircle onClick={() => toggleScanner(true)} />
         )}
-        {/* <h4 className='text-grey-200 text-sm'>Beta version, available only in EU</h4> */}
       </div>
       {receiver && (
         <TransferDialog
@@ -83,6 +78,7 @@ export const ScanToPaySection: React.FC<{ className?: string }> = ({
     </>
   );
 };
+
 
 interface ScannerWithCircleProps {
   onClick: () => void;

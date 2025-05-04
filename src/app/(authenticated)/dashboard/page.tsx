@@ -3,7 +3,6 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { RoutePath } from "@/enums/RoutePath";
 import React from "react";
 import WalletCard from "@/components/wallet/WalletCard";
-import { ScanToPaySection } from "@/components/QrScanner";
 import { PrivyAuthWrapper } from "@/components/PrivyAuthWrapper";
 import ScanToPayCard from "@/components/wallet/ScanToPayCard";
 

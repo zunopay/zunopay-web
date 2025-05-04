@@ -28,7 +28,7 @@ type Props = {
   activePath?: string;
 };
 
-export async function DashboardSidebar({ me, activePath }: Props) {
+export function DashboardSidebar({ me, activePath }: Props) {
   return (
     <Sidebar
       variant="inset"
@@ -74,7 +74,7 @@ export async function DashboardSidebar({ me, activePath }: Props) {
             <SidebarMenuLink
               isActive={activePath === RoutePath.WithdrawFund}
               href={RoutePath.WithdrawFund}
-              title="Withdraw Funds"
+              title="Withdraw To Bank"
               Icon={WithdrawIcon}
               disabled={true}
             />
@@ -84,8 +84,17 @@ export async function DashboardSidebar({ me, activePath }: Props) {
             <SidebarMenuLink
               isActive={activePath === RoutePath.StartKyc}
               href={RoutePath.StartKyc}
-              title="Start Kyc"
+              title="Connect Account"
               Icon={WithdrawIcon}
+            />
+          </SidebarMenuItem>
+          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.Merchants ? '' : 'opacity-50'}`}>
+            <SidebarMenuLink
+              isActive={activePath === RoutePath.Merchants}
+              href={RoutePath.Merchants}
+              title="Merchants"
+              Icon={HomeIcon}
+              disabled={true}
             />
           </SidebarMenuItem>
         </SidebarMenu>
