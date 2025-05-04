@@ -1,9 +1,9 @@
 import { useFetchReceiver } from "@/api/user/queries";
 import React, { useState } from "react";
-import { toast } from "./ui/toast";
+import { toast } from "../ui/toast";
 import { Receiver } from "@/models/payment";
 import { TransferDialog } from "./TransferDialog";
-import QrScanner from "./QrScanner";
+import QrScanner from "../QrScanner";
 import { fetchReceiver } from "@/lib/api/payment/queries";
 
 type Props = {

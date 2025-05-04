@@ -4,7 +4,6 @@ import { RoutePath } from "@/enums/RoutePath";
 import React from "react";
 import WalletCard from "@/components/wallet/WalletCard";
 import { PrivyAuthWrapper } from "@/components/PrivyAuthWrapper";
-import ScanToPayCard from "@/components/wallet/ScanToPayCard";
 
 export default async function DashboardPage() {
   const {data: user} = await fetchMe();
@@ -15,7 +14,6 @@ export default async function DashboardPage() {
     <DashboardLayout activePath={RoutePath.Dashboard} user={user}>
       <PrivyAuthWrapper>
           <WalletCard/>
-          <ScanToPayCard />
       </PrivyAuthWrapper>
     </DashboardLayout>
   );

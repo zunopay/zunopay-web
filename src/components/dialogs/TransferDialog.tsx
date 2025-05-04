@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/Dialog';
 import { Text, Input, Button } from '@/components/ui';
-import { LoaderIcon } from './icons/theme/LoaderIcon';
+import { LoaderIcon } from '../icons/theme/LoaderIcon';
 import { CommonDialogProps } from '@/lib/types';
 import { usePrivy } from '@privy-io/react-auth';
 import { transfer } from '@/lib/transactions/transfer';

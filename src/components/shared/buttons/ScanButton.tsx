@@ -1,6 +1,6 @@
 'use client'
 
-import { ScannerDialog } from "@/components/ScannerDialog"
+import { ScannerDialog } from "@/components/dialogs/ScannerDialog"
 import React, { useState } from "react"
 
 export const ScanButton : React.FC = () => {

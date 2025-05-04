@@ -10,6 +10,7 @@ export interface User {
     region: SupportedRegion,
     isKycVerified: boolean;
     isEmailVerified: boolean;
+    walletAddress?: string;
 }
 
 export interface WalletBalance {

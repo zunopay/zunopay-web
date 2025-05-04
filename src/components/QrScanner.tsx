@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Scanner from "../../public/Icons/Scanner.svg";
 import { cn } from "@/lib/utils";
 import { fetchReceiver } from "@/lib/api/payment/queries";
-import { TransferDialog } from "./TransferDialog";
+import { TransferDialog } from "./dialogs/TransferDialog";
 import { Receiver } from "@/models/payment";
 import { toast } from "./ui/toast";
 import { Text } from "./ui";
