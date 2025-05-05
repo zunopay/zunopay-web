@@ -61,13 +61,10 @@ export const DashboardLayout: React.FC<Props> = ({
           >
             {isMobile ? (
               <CustomisableLogo className="text-white w-10 h-10" />
-            ) : 
-            
-            isDashboardHome ? (
+            ) : isDashboardHome ? (
               <Text as="h1" styleVariant="secondary-heading">
                 Welcome, {user.username}
               </Text>
-              
             ) : null}
 
             <div className="flex gap-3 items-center">
@@ -84,7 +81,11 @@ export const DashboardLayout: React.FC<Props> = ({
             {children}
           </div>
 
-          {isMobile && <MobileNav />}
+          {isMobile && (
+            <div className="mt-20">
+              <MobileNav />
+            </div>
+          )}
         </main>
       </div>
     </SidebarProvider>
