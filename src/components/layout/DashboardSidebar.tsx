@@ -44,23 +44,33 @@ export function DashboardSidebar({ me, activePath }: Props) {
         {/* <SidebarTrigger className="absolute top-0 -right-6 shadow-none bg-grey-500 rounded-l-none" /> */}
 
         <SidebarMenu>
-          <SidebarMenuItem  className={ activePath === RoutePath.Dashboard ? '' : "opacity-50"}>
+          <SidebarMenuItem
+            className={activePath === RoutePath.Dashboard ? "" : "opacity-50"}
+          >
             <SidebarMenuLink
               isActive={activePath === RoutePath.Dashboard}
               href={RoutePath.Dashboard}
               title="Home"
               Icon={HomeIcon}
-              />
+            />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.TransferHistory ? '' : 'opacity-50'}`}>
+          <SidebarMenuItem
+            className={`flex  ${
+              activePath === RoutePath.TransferHistory ? "" : "opacity-50"
+            }`}
+          >
             <SidebarMenuLink
               isActive={activePath === RoutePath.TransferHistory}
               href={RoutePath.TransferHistory}
               title="Transfer History"
               Icon={TransactionIcon}
-              />
+            />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.MyProducts ? '' : 'opacity-50'}`}>
+          <SidebarMenuItem
+            className={`flex  ${
+              activePath === RoutePath.MyProducts ? "" : "opacity-50"
+            }`}
+          >
             <SidebarMenuLink
               isActive={activePath === RoutePath.MyProducts}
               href={RoutePath.MyProducts}
@@ -70,7 +80,11 @@ export function DashboardSidebar({ me, activePath }: Props) {
             />
             <SoonChip />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.WithdrawFund ? '' : 'opacity-50'}`}>
+          <SidebarMenuItem
+            className={`flex  ${
+              activePath === RoutePath.WithdrawFund ? "" : "opacity-50"
+            }`}
+          >
             <SidebarMenuLink
               isActive={activePath === RoutePath.WithdrawFund}
               href={RoutePath.WithdrawFund}
@@ -80,7 +94,23 @@ export function DashboardSidebar({ me, activePath }: Props) {
             />
             <SoonChip />
           </SidebarMenuItem>
-          <SidebarMenuItem className={ `flex  ${activePath === RoutePath.ConnectBank ? '' : 'opacity-50'} ${me.isKycVerified ? 'hidden' : ''}`}>
+          <SidebarMenuItem
+            className={`flex  ${
+              activePath === RoutePath.Merchants ? "" : "opacity-50"
+            }`}
+          >
+            <SidebarMenuLink
+              isActive={activePath === RoutePath.Merchants}
+              href={RoutePath.Merchants}
+              title="Discover"
+              Icon={HomeIcon}
+            />
+          </SidebarMenuItem>
+          <SidebarMenuItem
+            className={`flex  ${
+              activePath === RoutePath.ConnectBank ? "" : "opacity-50"
+            } ${me.isKycVerified ? "hidden" : ""}`}
+          >
             <SidebarMenuLink
               isActive={activePath === RoutePath.ConnectBank}
               href={RoutePath.ConnectBank}
@@ -88,43 +118,37 @@ export function DashboardSidebar({ me, activePath }: Props) {
               Icon={WithdrawIcon}
             />
           </SidebarMenuItem>
-          <SidebarMenuItem  className={ `flex  ${activePath === RoutePath.Merchants ? '' : 'opacity-50'}`}>
-            <SidebarMenuLink
-              isActive={activePath === RoutePath.Merchants}
-              href={RoutePath.Merchants}
-              title="Merchants"
-              Icon={HomeIcon}
-              disabled={true}
-            />
-          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
 
       <SidebarFooter className="mt-auto">
         <SidebarMenu>
-        <SidebarMenuItem className={ false ? '' : "opacity-50"}>
-          <SidebarMenuLink
-            isActive={false}
-            href={RoutePath.Home}
-            title="Help Center"
-            Icon={HelpCenterIcon}
-          />
-        </SidebarMenuItem>
+          <SidebarMenuItem className={false ? "" : "opacity-50"}>
+            <SidebarMenuLink
+              isActive={false}
+              href={RoutePath.Home}
+              title="Help Center"
+              Icon={HelpCenterIcon}
+            />
+          </SidebarMenuItem>
 
-        <SidebarMenuItem className={ false ? '': "opacity-50"}>
-          <SidebarMenuLink
-            isActive={false}
-            href={RoutePath.Home}
-            title="Settings"
-            Icon={SettingIcon}
-          />
-        </SidebarMenuItem>
+          <SidebarMenuItem className={false ? "" : "opacity-50"}>
+            <SidebarMenuLink
+              isActive={false}
+              href={RoutePath.Home}
+              title="Settings"
+              Icon={SettingIcon}
+            />
+          </SidebarMenuItem>
         </SidebarMenu>
 
         <Divider className="my-4 opacity-25" />
-        <Link className="flex gap-3 text-grey-100 opacity-50" href={addTwitter("ZunoPay")}>
-          <XIcon className="size-6"/>
-          <Text as='p' styleVariant='body-normal'>
+        <Link
+          className="flex gap-3 text-grey-100 opacity-50"
+          href={addTwitter("ZunoPay")}
+        >
+          <XIcon className="size-6" />
+          <Text as="p" styleVariant="body-normal">
             @ZunoPay
           </Text>
         </Link>
