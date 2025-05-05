@@ -1,8 +1,9 @@
-import { fetchBalance, fetchMe, fetchRewardPoints } from '@/lib/api/user/queries'
-import { useQuery } from '@tanstack/react-query'
+import { connectVpa, fetchBalance, fetchConnectedVpa, fetchMe, fetchRewardPoints } from '@/lib/api/user/queries'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { userKeys } from './userKeys'
-import { fetchReceiver } from '@/lib/api/payment/queries'
-import { GetReceiverParams } from '@/models/payment/params'
+import { ConnectBank } from '@/models/user'
+import { toast } from '@/components/ui/toast'
+import { useRouter } from 'next/navigation'
 
 export const useFetchBalance = () => {
   return useQuery({
@@ -28,10 +29,28 @@ export const useFetchMe = () => {
   })
 }
 
-export const useFetchReceiver = (params: GetReceiverParams) => {
+export const useFetchConnectedVpa = () => {
   return useQuery({
-    queryFn: () => fetchReceiver(params),
-    queryKey: userKeys.getReceiver(),
-    staleTime: 1000 * 5
+    queryFn: () => fetchConnectedVpa(),
+    queryKey: userKeys.getConnectedVpa(),
+    staleTime: 5*1000
+  })
+}
+
+
+export const useConnectVpa = () => {
+  const { refresh } = useRouter()
+
+  return useMutation({
+    mutationFn: (body: ConnectBank) => connectVpa(body),
+    onSuccess: ({ errorMessage }) => {
+      toast({
+        description: errorMessage,
+        variant: !!errorMessage ? 'error' : 'success',
+      })
+      if (!errorMessage) {
+        refresh()
+      }
+    },
   })
 }

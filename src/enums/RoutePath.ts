@@ -8,6 +8,7 @@ export const RoutePath = Object.freeze({
     CreateMerchantProfile: '/register/create-merchant-profile',
     VerifyEmail: '/register/verify-email',
     TransferHistory: '/dashboard/transfer-history',
+    ConnectBank: '/dashboard/connect-bank',
     MyProducts: '/dashboard/my-products',
     WithdrawFund: '/dashboard/withdraw-fund',
     Dashboard: '/dashboard',

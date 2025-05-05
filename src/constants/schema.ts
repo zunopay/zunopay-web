@@ -53,6 +53,6 @@ export const registerSchema = z.object({
     referralCode: zString
 })
 
-export const startKycSchema = z.object({
+export const connectBankSchema = z.object({
   vpa: zVpa
 })

@@ -17,3 +17,12 @@ export interface WalletBalance {
     balance: string,
     currency: Currency
 }
+
+export interface ConnectedVpa {
+    vpa: string,
+    verification: boolean
+}
+
+export interface ConnectBank {
+    vpa: string
+}

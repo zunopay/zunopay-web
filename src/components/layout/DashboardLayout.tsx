@@ -11,6 +11,8 @@ import { RewardPointSection } from "../shared/RewardPointSection";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MobileNav } from "../nav/MobileNav";
 import { CustomisableLogo } from "../icons/platform/CustomisableLogo";
+import { usePathname } from "next/navigation";
+import { RoutePath } from "@/enums/RoutePath";
 
 type Props = React.PropsWithChildren & {
   user: User;
@@ -27,6 +29,10 @@ export const DashboardLayout: React.FC<Props> = ({
 }) => {
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
+  const pathname = usePathname();
+
+  const isDashboardHome = pathname == RoutePath.Dashboard;
+  const isItemsEnd = !isMobile && !isDashboardHome;
 
   return (
     <SidebarProvider defaultOpen={!isMobile}>
@@ -48,18 +54,22 @@ export const DashboardLayout: React.FC<Props> = ({
         >
           <header
             className={cn(
-              "flex items-center justify-between p-4",
-              isMobile &&
-                "sticky top-0 z-10 opacity-90 bg-zinc-950"
+              "flex items-center p-4 justify-between",
+              isMobile && "sticky top-0 z-10 opacity-90 bg-zinc-950",
+              isItemsEnd && "justify-end"
             )}
           >
             {isMobile ? (
               <CustomisableLogo className="text-white w-10 h-10" />
-            ) : (
+            ) : 
+            
+            isDashboardHome ? (
               <Text as="h1" styleVariant="secondary-heading">
                 Welcome, {user.username}
               </Text>
-            )}
+              
+            ) : null}
+
             <div className="flex gap-3 items-center">
               <RewardPointSection />
               <LogoutButton />

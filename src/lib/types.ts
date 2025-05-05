@@ -1,21 +1,23 @@
-export type ComicCardType = 'large' | 'default'
+export type ComicCardType = "large" | "default";
 
 export type SlugParamsProps = {
-  params: Promise<{ slug: string }>
-}
+  params: Promise<{ slug: string }>;
+};
 
 export type FileUploadRef = {
-  reset: () => void
-}
+  reset: () => void;
+};
 
-export type SvgIconProps = { className?: React.SVGProps<SVGSVGElement>['className'] }
-export type VariantSvgIconProps = { solid?: boolean } & SvgIconProps
+export type SvgIconProps = {
+  className?: React.SVGProps<SVGSVGElement>["className"];
+};
+export type VariantSvgIconProps = { solid?: boolean } & SvgIconProps;
 
 export type ReturnResponse<T> = {
-  data: T | null
-  errorMessage?: string
-  status: number
-}
+  data: T | null;
+  errorMessage?: string;
+  status: number;
+};
 
 export enum Currency {
   USD = "USD",
@@ -24,15 +26,20 @@ export enum Currency {
 }
 
 export enum Role {
-  Individual = 'Individual',
-  Merchant = 'Merchant'
+  Individual = "Individual",
+  Merchant = "Merchant",
 }
 
 export enum SupportedRegion {
-  EU = 'EU',
-  IN = 'IN',
-  BR = 'BR',
-  SG = 'SG'
+  EU = "EU",
+  IN = "IN",
+  BR = "BR",
+  SG = "SG",
 }
 
-export type CommonDialogProps = { open: boolean; toggleDialog: () => void }
+export type CommonDialogProps = { open: boolean; toggleDialog: () => void };
+
+export interface VpaDetails {
+  type: string;
+  placeholder: string;
+}

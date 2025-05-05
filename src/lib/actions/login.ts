@@ -6,15 +6,11 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 import { accessTokenKey, jwtCookieProps } from '@/constants/general'
-import { loginSchema, registerSchema, startKycSchema } from '@/constants/schema'
+import { loginSchema, registerSchema } from '@/constants/schema'
 import { AUTH_QUERY_KEYS } from '@/lib/api/auth/authKeys'
 import { apiClient } from '../axios'
-import { Role } from '../types'
-import { getServerHttp } from '@/lib/api/http'
-import { toast } from '@/components/ui/toast'
-import { debugApiClient } from '../utils'
 
-const { AUTH, LOGIN, REGISTER, USER, START_KYC } = AUTH_QUERY_KEYS
+const { AUTH, LOGIN, REGISTER, USER } = AUTH_QUERY_KEYS
 
 export const loginAction = async (
   redirectTo: string | null,
@@ -128,38 +124,3 @@ export const registerAction = async (
   redirect(RoutePath.VerifyEmail, RedirectType.replace)
 }
 
-
-export async function startKycAction(_: AuthFormState | null, formData: FormData) {
-  const parsed = startKycSchema.safeParse({
-    vpa: formData.get('vpa') ?? ''
-  });
-
-
- if (!parsed.success) {
-    return {
-      error: `Please provide valid data`,
-      success: false,
-    }
-  }
-
-  try {
-    const http = await getServerHttp();
-    const response = await http.post(`/${USER}/${START_KYC}`, parsed.data)
-    if (!response) {
-      return {
-        error: 'Missing data',
-        success: false,
-      }
-    }
-
-    revalidatePath(RoutePath.Dashboard)
-  } catch (e) {
-    debugApiClient(e)
-    return {
-      error: `Failed to kyc process`,
-      success: false,
-    }
-  }
-
-  redirect(RoutePath.Dashboard, RedirectType.replace)
-}

@@ -80,11 +80,11 @@ export function DashboardSidebar({ me, activePath }: Props) {
             />
             <SoonChip />
           </SidebarMenuItem>
-          <SidebarMenuItem className={ `flex  ${activePath === RoutePath.StartKyc ? '' : 'opacity-50'} ${me.isKycVerified ? 'hidden' : ''}`}>
+          <SidebarMenuItem className={ `flex  ${activePath === RoutePath.ConnectBank ? '' : 'opacity-50'} ${me.isKycVerified ? 'hidden' : ''}`}>
             <SidebarMenuLink
-              isActive={activePath === RoutePath.StartKyc}
-              href={RoutePath.StartKyc}
-              title="Connect Account"
+              isActive={activePath === RoutePath.ConnectBank}
+              href={RoutePath.ConnectBank}
+              title="Connect Bank"
               Icon={WithdrawIcon}
             />
           </SidebarMenuItem>
