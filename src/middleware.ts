@@ -21,9 +21,10 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (requestUrlPath.includes(RoutePath.Login) && isAuthenticatedUser) {
+
+  if ((requestUrlPath.includes(RoutePath.Login) || requestUrlPath.includes(RoutePath.Register)) && isAuthenticatedUser) {
     const redirectTo = request.nextUrl.searchParams.get(REDIRECT_TO_KEY)
-    return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Home, request.url))
+    return NextResponse.redirect(new URL(redirectTo ?? RoutePath.Dashboard, request.url))
   }
 
   // Handle preflighted requests
@@ -47,7 +48,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/register',
+    '/verify-email/:path*',
     '/register/:path*',
     '/dashboard/:path*',
     '/api/:path*',
@@ -55,7 +56,8 @@ export const config = {
   ],
 }
 
-const authRoutesRegex = /^(\/(dashboard|profile|settings)(\/.*)?|\/register\/verify-email)$/
+const authRoutesRegex = /^(\/dashboard(\/.*)?|\/verify-email)$/
+const RegisterLoginRegex = /^\/(register|login)$/;
 
 const handleUnauthorized = async ({ path, url }: { path: string; url: string }) => {
   const updatedUrl = new URL(RoutePath.Login, url)

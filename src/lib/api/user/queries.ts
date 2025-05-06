@@ -17,6 +17,7 @@ export async function fetchMe(): Promise<ReturnResponse<User>> {
     accessToken,
     revalidateCacheInSeconds: 5,
   });
+
   return response;
 }
 

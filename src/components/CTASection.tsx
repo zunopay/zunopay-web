@@ -27,7 +27,7 @@ export function CTASection() {
             href={RoutePath.Register} 
             className="bg-white text-blue-700 hover:bg-grey-100 px-8 py-4"
           >
-            Register
+            Launch App
           </ButtonLink>
           <ButtonLink 
             href={EARLY_USER_FORM}

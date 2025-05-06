@@ -1,11 +1,15 @@
-'use client'
+"use client";
 
-import { useRouter, usePathname } from 'next/navigation';
-import { useEffect } from 'react';
-import { useFetchMe } from '@/api/user/queries';
-import { RoutePath } from '@/enums/RoutePath';
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useFetchMe } from "@/api/user/queries";
+import { RoutePath } from "@/enums/RoutePath";
 
-export const AuthenticationCheckWrapper = ({ children }: { children: React.ReactNode }) => {
+export const AuthenticationCheckWrapper = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const { data: user } = useFetchMe();
@@ -17,10 +21,5 @@ export const AuthenticationCheckWrapper = ({ children }: { children: React.React
     }
   }, [pathname, me, router]);
 
-  return (
-    <>
-        {children}
-       
-    </>
-  );
+  return <>{children}</>;
 };
