@@ -11,6 +11,7 @@ import { useFetchMe } from "@/api/user/queries";
 import { useFetchMerchants } from "@/api/merchant/queries";
 import { Merchant, MerchantCategory } from "@/models/merchant";
 import { isEmpty } from "lodash";
+import Image from "next/image";
 
 export default function MerchantsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -105,7 +106,7 @@ function MerchantCard({ merchant }: { merchant: Merchant }) {
     <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:border-zinc-700">
       <div className="p-4 flex gap-4">
         <div className="h-16 w-16 rounded-lg bg-white p-1 flex items-center justify-center overflow-hidden flex-shrink-0">
-          <img
+          <Image
             src={merchant.logo}
             alt={`${merchant.displayName} logo`}
             className="max-h-full max-w-full object-contain"

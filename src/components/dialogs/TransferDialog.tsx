@@ -14,11 +14,11 @@ import { getConnection } from '@/lib/connection';
 import { useSendTransaction } from '@privy-io/react-auth/solana';
 
 
-type Props = {receiver: Receiver } & CommonDialogProps;
+type Props = {receiver: Receiver, transferAmount?: number } & CommonDialogProps;
 
-export const TransferDialog: React.FC<Props> = ({ receiver ,open, toggleDialog }) => {
+export const TransferDialog: React.FC<Props> = ({ transferAmount ,receiver ,open, toggleDialog }) => {
   const { ready } = usePrivy();
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(transferAmount ? transferAmount.toString() : '');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const queryClient = useQueryClient();

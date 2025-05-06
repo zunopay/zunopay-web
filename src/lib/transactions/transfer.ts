@@ -19,24 +19,26 @@ export async function transfer({
     sendTransaction: ReturnType<typeof useSendTransaction>['sendTransaction'];
     queryClient: ReturnType<typeof useQueryClient>;
     connection: ReturnType<typeof getConnection>;
-  }) {
+  }) : Promise<{errorMessage?: string}> {
     if (amount < MIN_TRANSFER_AMOUNT_LIMIT) {
       toast({ description: 'Input amount is very small' });
-      return;
+      return {}
     }
   
-    const { data: encodedTransaction } = await fetchDigitalTransferTransaction({
+    const { data: encodedTransaction, errorMessage } = await fetchDigitalTransferTransaction({
       vpa,
       amount: amount * 1_000_000
     });
 
   
-    if (!encodedTransaction) return;
+    if (!encodedTransaction) return {errorMessage};
   
     const transaction = versionedTransactionFromBs64(encodedTransaction);
     const receipt = await sendTransaction({ transaction, connection });
   
     queryClient.invalidateQueries({ queryKey: userKeys.getBalance() });
     toast({ description: `Successfully transferred ${amount} $`, variant: 'success' });
+    
+    return {}
   }
   
