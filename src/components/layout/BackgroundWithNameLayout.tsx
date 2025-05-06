@@ -33,7 +33,7 @@ export const BackgroundWithNameLayout: React.FC<Props> = ({
 
 export const FooterWithTwitter: React.FC = () => {
   return (
-    <Link className="flex gap-3 justify-center items-center" href={addTwitter("ZunoPay")}>
+    <Link className="flex gap-3 justify-center items-center mt-10" href={addTwitter("ZunoPay")}>
         <XIcon className="size-8" />
         <Text as="h5" styleVariant="body-small">
           @ZunoPay
