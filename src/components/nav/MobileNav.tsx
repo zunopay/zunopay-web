@@ -5,33 +5,38 @@ import { RoutePath } from "@/enums/RoutePath";
 import { HomeIcon } from "../icons/sidebar/HomeIcon";
 import { TransactionIcon } from "../icons/sidebar/TransactionIcon";
 import { usePathname } from "next/navigation";
+import { SearchIcon } from "../icons/sidebar/SearchIcon";
 
 export const MobileNav: React.FC = () => {
   const pathname = usePathname();
 
+  const navItemClass =
+    "flex flex-col items-center justify-center text-xs gap-1 flex-1";
+
+  const getIconClass = (route: string) =>
+    pathname === route ? "text-white" : "text-zinc-400";
+
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-zinc-900 shadow-lg p-2 flex justify-around items-center z-10 border-t border-zinc-800">
-      <a
-        href={RoutePath.Dashboard}
-        className="flex flex-col items-center p-2"
-      >
-        <HomeIcon className={`${pathname == RoutePath.Dashboard ? 'text-white' : 'text-grey-300'}`}/>
-        <span className="text-xs mt-1">Home</span>
+    <nav className="fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800 p-2 flex justify-between items-center z-10">
+      <a href={RoutePath.Dashboard} className={navItemClass}>
+        <HomeIcon className={`h-5 w-5 ${getIconClass(RoutePath.Dashboard)}`} />
+        <span>Home</span>
       </a>
-      <ScanButton />
-      <a
-        href={RoutePath.TransferHistory}
-        className="flex flex-col items-center p-2"
-      >
-        <TransactionIcon className={`${pathname == RoutePath.TransferHistory ? 'text-white' : 'text-grey-300'}`}/>
-        <span className="text-xs mt-1">History</span>
+
+      <a href={RoutePath.Merchants} className={navItemClass}>
+        <SearchIcon className={`h-5 w-5 ${getIconClass(RoutePath.Merchants)}`} />
+        <span>Discover</span>
       </a>
-      <a
-        href={RoutePath.Merchants}
-        className="flex flex-col items-center p-2"
-      >
-        <HomeIcon className={`${pathname == RoutePath.Merchants ? 'text-white' : 'text-grey-300'}`} />
-        <span className="text-xs mt-1">Discover</span>
+
+      <div className="flex-1 flex justify-center">
+        <ScanButton />
+      </div>
+
+      <a href={RoutePath.TransferHistory} className={navItemClass}>
+        <TransactionIcon
+          className={`h-5 w-5 ${getIconClass(RoutePath.TransferHistory)}`}
+        />
+        <span>History</span>
       </a>
     </nav>
   );
