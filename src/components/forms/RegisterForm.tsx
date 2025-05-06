@@ -17,14 +17,13 @@ const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
   return (
     <Button
-      Icon={pending ? LoaderIcon : undefined}
       size='lg'
       className='w-full max-sm:h-[42px]'
       type='submit'
       aria-disabled={pending}
       variant='active'
     >
-      {pending ? '' : 'Register'}
+      {pending ? <LoaderIcon className='h-5 w-5'/> : 'Register'}
     </Button>
   )
 }

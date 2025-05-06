@@ -18,12 +18,13 @@ export async function connectBankAction(_: AuthFormState | null, formData: FormD
     });
   
   
-   if (!parsed.success) {
+    if (!parsed.success) {
       return {
-        error: `Please provide valid data`,
+        error: parsed.error.errors[0]?.message || undefined,
         success: false,
       }
     }
+  
   
     try {
       const http = await getServerHttp();

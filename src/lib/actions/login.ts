@@ -24,10 +24,11 @@ export const loginAction = async (
 
   if (!parsed.success) {
     return {
-      error: `Please provide valid data`,
+      error: parsed.error.errors[0]?.message || undefined,
       success: false,
     }
   }
+
 
   try {
     const response = await apiClient.patch<Authorization>(`/${AUTH}/${LOGIN}`, parsed.data)
@@ -90,7 +91,7 @@ export const registerAction = async (
 
   if (!parsed.success) {
     return {
-      error: `Please provide valid data`,
+      error: parsed.error.errors[0]?.message || undefined,
       success: false,
     }
   }
