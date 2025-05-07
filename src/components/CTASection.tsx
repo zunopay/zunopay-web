@@ -10,17 +10,10 @@ export function CTASection() {
       <div className="container mx-auto px-6 text-center">
         <Text
           as="h1"
-          styleVariant="primary-heading"
+          styleVariant="secondary-heading"
           className="text-white mb-6 max-w-2xl mx-auto"
         >
-          Wanna expand your business to crypto users ?
-        </Text>
-        <Text
-          as="p"
-          styleVariant="body-large"
-          className="text-grey-100 mb-8 max-w-2xl mx-auto"
-        >
-          Join the revolution, become part of network of merchants offering stablecoin payments 
+          Introducing Stablecoins in your next-door shop.
         </Text>
         <div className="flex flex-wrap justify-center gap-4">
           <ButtonLink 

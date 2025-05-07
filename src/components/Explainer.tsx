@@ -68,15 +68,14 @@ export function SolutionSection() {
               styleVariant="secondary-heading"
               className="text-blue-900 text-3xl md:text-4xl font-extrabold mb-6 tracking-tight leading-tight"
             >
-              Accept <span className="text-blue-600">Stablecoin Payments</span> at
-              Your Shop
+              Get your business discovered by millions of crypto users.
             </Text>
             <Text
               as="p"
               styleVariant="body-large"
               className="text-gray-600 text-base md:text-lg mb-6 leading-relaxed"
             >
-              ZunoPay process stablecoin payments for your business directly in your regional payment interface and provide access to global crypto users
+              ZunoPay process stablecoin payments for your business instantly and provide settlement to fiat.
             </Text>
 
             <ul className="space-y-5 mb-8">
