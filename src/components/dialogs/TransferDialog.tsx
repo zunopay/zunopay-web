@@ -27,25 +27,36 @@ export const TransferDialog: React.FC<Props> = ({ transferAmount ,receiver ,open
   const {sendTransaction} = useSendTransaction();
   const connection = getConnection();
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await handleTransfer();
+  };
+
+
   const handleTransfer = async () => {
-    const parsedAmount = parseFloat(amount);
+    const parsedAmount = +amount;
 
-
-    if (!parsedAmount || !receiver) return alert('Check details');
+    if (!parsedAmount) return alert("Check details");
 
     try {
       setIsLoading(true);
-      const { errorMessage } = await transfer({vpa: receiver.vpa, amount: parsedAmount, sendTransaction, queryClient, connection});
+      const { errorMessage } = await transfer({
+        vpa: receiver.walletAddress,
+        amount: parsedAmount,
+        sendTransaction,
+        queryClient,
+        connection,
+      });
 
-      if(errorMessage){
-        toast({description: errorMessage, variant:'error'})
+      if (errorMessage) {
+        toast({ description: errorMessage, variant: "error" });
         return;
       }
 
       setShowSuccess(true);
     } catch (err) {
       console.error(err);
-      alert('Transfer failed. Try again.');
+      toast({description: "failed to transfer", variant: 'error'});
     } finally {
       setIsLoading(false);
     }
@@ -78,7 +89,7 @@ export const TransferDialog: React.FC<Props> = ({ transferAmount ,receiver ,open
             </Button>
           </div>
         ) : (
-          <>
+          <form onSubmit={handleSubmit}>
             <Text as='p' styleVariant='body-normal'>Sending to</Text>
             <div className="p-3 rounded-lg bg-muted border">
               <Text as='p' styleVariant='body-normal' className='text-bold'>{receiver?.vpa}</Text>
@@ -101,11 +112,11 @@ export const TransferDialog: React.FC<Props> = ({ transferAmount ,receiver ,open
               Icon={isLoading ? LoaderIcon : undefined}
               disabled={isLoading}
               variant="primary"
-              onClick={handleTransfer}
+              type='submit'
             >
               Send
             </Button>
-          </>
+          </form>
         )}
       </DialogContent>
     </Dialog>

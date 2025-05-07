@@ -45,7 +45,6 @@ export const EnhancedQrScanner: React.FC<EnhancedQrScannerProps> = ({
 
     setReceiver(receiver);
     toggleTransferDialog(true);
-    onClose();
   };
 
   const handleScan = async(decodedText: string) => {
@@ -75,8 +74,8 @@ export const EnhancedQrScanner: React.FC<EnhancedQrScannerProps> = ({
         );
 
         scanner.render(
-          (decodedText) => {
-            handleScan(decodedText);
+          async(decodedText) => {
+            await handleScan(decodedText);
             scanner.clear();
           },
           (errorMessage) => {
@@ -165,7 +164,10 @@ export const EnhancedQrScanner: React.FC<EnhancedQrScannerProps> = ({
         <TransferDialog
           receiver={receiver}
           open={showTransferDialog}
-          toggleDialog={() => toggleTransferDialog(!showTransferDialog)}
+          toggleDialog={() => {
+            toggleTransferDialog(!showTransferDialog)
+            onClose()
+          }}
         />
       )}
     </>
