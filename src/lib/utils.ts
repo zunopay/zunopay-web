@@ -89,3 +89,7 @@ export function debugApiClient(error: unknown) {
     console.log("❌ Unknown Error:", error);
   }
 }
+
+export const getLogoUrl = (key: string) => {
+  return `${process.env.NEXT_PUBLIC_SITE_URL}/${key}`
+}
