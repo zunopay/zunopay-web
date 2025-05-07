@@ -22,6 +22,8 @@ import { XIcon } from "@/components/icons/platform/XIcon";
 import { Text } from "../ui";
 import { User } from "@/models/user";
 import { SoonChip } from "../shared/SoonChip";
+import { SearchIcon } from "../icons/sidebar/SearchIcon";
+import { ChangeIcon } from "../icons/sidebar/ChangeIcon";
 
 type Props = {
   me: User;
@@ -103,7 +105,7 @@ export function DashboardSidebar({ me, activePath }: Props) {
               isActive={activePath === RoutePath.Merchants}
               href={RoutePath.Merchants}
               title="Discover"
-              Icon={HomeIcon}
+              Icon={SearchIcon}
             />
           </SidebarMenuItem>
           <SidebarMenuItem
@@ -115,7 +117,7 @@ export function DashboardSidebar({ me, activePath }: Props) {
               isActive={activePath === RoutePath.ConnectBank}
               href={RoutePath.ConnectBank}
               title="Connect Bank"
-              Icon={WithdrawIcon}
+              Icon={ChangeIcon}
             />
           </SidebarMenuItem>
         </SidebarMenu>
