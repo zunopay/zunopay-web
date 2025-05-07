@@ -9,6 +9,7 @@ import { loginAction } from '@/lib/actions/login'
 import { FormErrorMessage } from '@/components/forms/FormErrorMessage'
 import { onSubmitPreventFormListener } from '@/lib/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
+import { toast } from '../ui/toast'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
@@ -33,13 +34,11 @@ const Form: React.FC = () => {
 
   useEffect(() => {
     if (state?.error) {
-      console.log(state.error);
-      //TODO:
-      // toast({
-      //   title: 'Error',
-      //   description: state.error,
-      //   variant: 'error',
-      // })
+      toast({
+        title: 'Error',
+        description: state.error,
+        variant: 'error',
+      })
     }
   }, [state?.error])
 

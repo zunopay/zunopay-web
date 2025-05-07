@@ -111,7 +111,7 @@ export function DashboardSidebar({ me, activePath }: Props) {
           <SidebarMenuItem
             className={`flex  ${
               activePath === RoutePath.ConnectBank ? "" : "opacity-50"
-            } ${me.isKycVerified ? "hidden" : ""}`}
+            }`}
           >
             <SidebarMenuLink
               isActive={activePath === RoutePath.ConnectBank}

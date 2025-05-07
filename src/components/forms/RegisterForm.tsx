@@ -12,6 +12,7 @@ import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
 import { Select, SelectItem } from '../ui/Select'
 import { Role } from '@/lib/types'
 import { ToggleGroup, ToggleGroupItem } from '../ui/ToggleGroup'
+import { toast } from '../ui/toast'
 
 const SubmitButton: React.FC = () => {
   const { pending } = useFormStatus()
@@ -44,8 +45,11 @@ const Form: React.FC = () => {
 
   useEffect(() => {
     if (state?.error) {
-      console.log(state.error)
-      // TODO: Add toast here
+      toast({
+        title: 'Error',
+        description: state.error,
+        variant: 'error',
+      })
     }
   }, [state?.error])
 
