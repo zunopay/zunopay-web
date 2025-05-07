@@ -1,9 +1,8 @@
 'use client'
 
-import { Merchant } from "@/models/merchant";
+import { Merchant, MerchantStatus } from "@/models/merchant";
 import Image from "next/image";
 import { Text } from "../ui";
-import { getLogoUrl } from "@/lib/utils";
 
 export function MerchantCard({ merchant }: { merchant: Merchant }) {
   
@@ -62,8 +61,7 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
             {merchant.address}
           </Text>
           <div className="flex justify-between items-center">
-            {/* TODO: Change this to show currently accepting and other to show soon */}
-            {true ? (
+            {merchant.status == MerchantStatus.Active ? (
               <div className="bg-green-900/30 text-green-400 text-xs px-2 py-1 rounded-full flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +78,7 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
                 Accepts ZunoPay
               </div>
             ) : (
-              <div className="bg-zinc-800 text-gray-400 text-xs px-2 py-1 rounded-full">
+              <div className="text-black text-xs px-2 py-1 rounded-full bg-important-color">
                 Coming soon
               </div>
             )}
