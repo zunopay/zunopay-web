@@ -77,7 +77,7 @@ export const TransferHistoryTable: React.FC<Props> = ({ transfers }) => {
                 </TableCell>
                 <TableCell>
                   {transfer.signature ? (
-                    <>
+                    <div className="flex items-center font-medium gap-2">
                       <Text as="p" styleVariant="body-normal">
                         {shortenString(transfer.signature)}
                       </Text>
@@ -85,7 +85,7 @@ export const TransferHistoryTable: React.FC<Props> = ({ transfers }) => {
                         variant="active"
                         clipboard={transfer.signature}
                       />
-                    </>
+                    </div>
                   ) : (
                     ""
                   )}

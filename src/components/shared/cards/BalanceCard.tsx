@@ -62,7 +62,7 @@ export const BalanceCard = () => {
                 styleVariant="secondary-heading"
                 className="text-3xl font-bold text-black"
               >
-                ${fetchedBalance?.data?.balance}
+                ${fetchedBalance?.data?.balance || 0}
               </Text>
               {/* <Text
                 as="span"

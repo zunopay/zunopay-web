@@ -113,6 +113,7 @@ export const TransferDialog: React.FC<Props> = ({ transferAmount ,receiver ,open
               disabled={isLoading}
               variant="primary"
               type='submit'
+              className='mt-2'
             >
               Send
             </Button>
