@@ -140,9 +140,6 @@ export const BalanceCard = () => {
           onClose={() => setShowQrScanner(false)}
           title="Withdraw via QR"
           description="Scan a merchant or friend's QR code to make a payment"
-          onScanSuccess={(result) => {
-            console.log("QR Scan result:", result);
-          }}
         />
       )}
       <TransferFormDialog

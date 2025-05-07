@@ -12,6 +12,8 @@ import { cleanWalletAddress } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { getConnection } from '@/lib/connection';
 import { useSendTransaction } from '@privy-io/react-auth/solana';
+import { toast } from '../ui/toast';
+import { isEmpty } from 'lodash';
 
 
 type Props = {receiver: Receiver, transferAmount?: number } & CommonDialogProps;
@@ -33,7 +35,13 @@ export const TransferDialog: React.FC<Props> = ({ transferAmount ,receiver ,open
 
     try {
       setIsLoading(true);
-      await transfer({vpa: receiver.vpa, amount: parsedAmount, sendTransaction, queryClient, connection});
+      const { errorMessage } = await transfer({vpa: receiver.vpa, amount: parsedAmount, sendTransaction, queryClient, connection});
+
+      if(errorMessage){
+        toast({description: errorMessage, variant:'error'})
+        return;
+      }
+
       setShowSuccess(true);
     } catch (err) {
       console.error(err);
@@ -60,7 +68,7 @@ export const TransferDialog: React.FC<Props> = ({ transferAmount ,receiver ,open
           <div className="space-y-3 text-center">
             <Text as="h3" styleVariant='primary-heading'>🎉 Transfer successful</Text>
             <Text as="h5" styleVariant='secondary-heading'>
-              You&apos;ve sent {amount} {receiver?.currency} to {receiver?.vpa}.
+              You&apos;ve sent {amount} {receiver?.currency} to {isEmpty(receiver?.vpa) ? cleanWalletAddress(receiver.walletAddress) : receiver?.vpa}.
             </Text>
             <Button variant="primary" onClick={() => {
               setShowSuccess(false);

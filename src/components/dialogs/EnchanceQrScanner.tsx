@@ -19,7 +19,6 @@ import { toast } from "../ui/toast";
 interface EnhancedQrScannerProps {
   open: boolean;
   onClose: () => void;
-  onScanSuccess?: (result: string) => void;
   title?: string;
   description?: string;
 }
@@ -46,12 +45,12 @@ export const EnhancedQrScanner: React.FC<EnhancedQrScannerProps> = ({
 
     setReceiver(receiver);
     toggleTransferDialog(true);
+    onClose();
   };
 
-  const handleScan = (decodedText: string) => {
+  const handleScan = async(decodedText: string) => {
     setScanning(false);
-    handleScannedData(decodedText);
-    onClose();
+    await handleScannedData(decodedText);
   };
 
   useEffect(() => {
