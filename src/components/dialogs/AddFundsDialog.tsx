@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import QRCode from 'react-qr-code';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/Dialog';
 import { Text } from '@/components/ui/Text';
 import { cn } from '@/lib/utils';
@@ -63,9 +64,15 @@ export const AddFundsDialog: React.FC<AddFundsDialogProps> = ({ open, toggleDial
                 </Text>
                 <Text as="p" styleVariant="body-small" className="mt-1">
                   We currently only accept <span className="font-bold">USDC</span> deposits on Solana for the Beta version. 
-                  Other tokens sent to this address would not be account for the balance 
+                  Other tokens sent to this address would not be accounted for.
                 </Text>
               </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center py-2">
+            <div className="bg-white p-4 rounded-md shadow-md">
+              <QRCode value={walletAddress} size={160} />
             </div>
           </div>
           
