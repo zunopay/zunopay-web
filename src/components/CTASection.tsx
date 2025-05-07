@@ -24,7 +24,7 @@ export function CTASection() {
         </Text>
         <div className="flex flex-wrap justify-center gap-4">
           <ButtonLink 
-            href={RoutePath.Register} 
+            href={RoutePath.Login} 
             className="bg-white text-blue-700 hover:bg-grey-100 px-8 py-4"
           >
             Launch App

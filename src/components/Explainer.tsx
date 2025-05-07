@@ -51,7 +51,7 @@ export function SolutionSection() {
         <div className="flex flex-col md:flex-row items-center gap-16">
           <div className={`w-full md:w-1/2 animate-fade-in ${imageOrder}`}>
             <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100">
-              <Image
+              <img
                 src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&h=800"
                 alt="ZunoPay mobile application"
                 className="w-full h-auto object-cover"
