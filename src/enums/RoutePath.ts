@@ -1,11 +1,9 @@
 export const RoutePath = Object.freeze({
-    Home: '/',
-    Welcome: '/welcome',
+    Overview: '/',
     FAQ: '/faq',
     Login: '/login',
     Register: '/register',
     Merchants: '/dashboard/merchants',
-    CreateMerchantProfile: '/register/create-merchant-profile',
     VerifyEmail: '/verify-email',
     TransferHistory: '/dashboard/transfer-history',
     ConnectBank: '/dashboard/connect-bank',
@@ -14,6 +12,5 @@ export const RoutePath = Object.freeze({
     Dashboard: '/dashboard',
     TermsOfService: '/terms-of-service',
     PrivacyPolicy: '/privacy-policy',
-    StartKyc: '/dashboard/start-kyc'
   })
   

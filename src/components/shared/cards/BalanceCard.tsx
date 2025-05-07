@@ -64,13 +64,13 @@ export const BalanceCard = () => {
               >
                 ${fetchedBalance?.data?.balance}
               </Text>
-              <Text
+              {/* <Text
                 as="span"
                 styleVariant="secondary-heading"
                 className="ml-2 text-sm font-medium text-green-500"
               >
                 +2.5%
-              </Text>
+              </Text> */}
             </div>
             <div className="mt-1 flex items-center">
               <Text as="span" styleVariant="body-small" className="text-black">

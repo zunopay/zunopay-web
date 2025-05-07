@@ -128,7 +128,7 @@ export function DashboardSidebar({ me, activePath }: Props) {
           <SidebarMenuItem className={false ? "" : "opacity-50"}>
             <SidebarMenuLink
               isActive={false}
-              href={RoutePath.Home}
+              href={RoutePath.Overview}
               title="Help Center"
               Icon={HelpCenterIcon}
             />
@@ -137,7 +137,7 @@ export function DashboardSidebar({ me, activePath }: Props) {
           <SidebarMenuItem className={false ? "" : "opacity-50"}>
             <SidebarMenuLink
               isActive={false}
-              href={RoutePath.Home}
+              href={RoutePath.Overview}
               title="Settings"
               Icon={SettingIcon}
             />
