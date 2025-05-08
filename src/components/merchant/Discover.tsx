@@ -9,6 +9,7 @@ import { useFetchMerchants } from "@/api/merchant/queries";
 import { MerchantCategory } from "@/models/merchant";
 import { isEmpty } from "lodash";
 import { MerchantCard } from "./MerchantCard";
+import { UPCOMING_MERCHANTS } from "@/constants/merchants";
 
 type Props = {
     className? : string
@@ -20,8 +21,9 @@ export const MerchantDiscover : React.FC<Props> = ({className}) => {
   const isMobile = useIsMobile();
 
   const { data: merchants } = useFetchMerchants();
+  const merchant_list = UPCOMING_MERCHANTS.concat(merchants?.data || []);
 
-  const filteredMerchants = merchants?.data?.filter((merchant) => {
+  const filteredMerchants = merchant_list.filter((merchant) => {
     const matchesSearch = isEmpty(searchTerm)
       ? true
       : merchant.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
