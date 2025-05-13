@@ -23,6 +23,7 @@ const config = {
     extend: {
       backgroundImage: {
         'active-gradient': "linear-gradient(180deg, rgba(236, 236, 240, 0.04) 0%, rgba(236, 236, 240, 0.00) 100%, rgba(236, 236, 240, 0.02))",
+        'light-gradient': 'linear-gradient(180deg, #4B63F3, #2231B2)'
       },
       size: {
         '3.5': '0.875rem',
