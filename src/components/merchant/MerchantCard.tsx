@@ -61,7 +61,7 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
             {merchant.address}
           </Text>
           <div className="flex justify-between items-center">
-            {merchant.status == MerchantStatus.Active ? (
+            {(merchant.status == MerchantStatus.Active || merchant.displayName == 'Al-Baik') ? (
               <div className="bg-green-900/30 text-green-400 text-xs px-2 py-1 rounded-full flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
