@@ -40,7 +40,7 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
                 </svg>
               </div>
               <Text as="span" styleVariant="body-small" className="text-gray-300">
-                4.5
+                {merchant.ratings || 4.5}
               </Text>
               <Text
                 as="span"

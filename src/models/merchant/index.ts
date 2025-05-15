@@ -11,6 +11,7 @@ export enum MerchantStatus {
 
 export interface Merchant {
   id: number;
+  ratings: number;
   displayName: string;
   logo: string;
   address: string;
