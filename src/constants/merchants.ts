@@ -2,7 +2,7 @@ import { Merchant, MerchantCategory, MerchantStatus } from "@/models/merchant";
 
 export const UPCOMING_MERCHANTS : Merchant[] = [
     {
-        id: 1,
+        id: 2,
         displayName: "Sushi&Wine Transformart Bar",
         address: "Svetog Save 8, Beograd 11000, Serbia",
         logo: "transform_art_bar.png",
@@ -11,7 +11,7 @@ export const UPCOMING_MERCHANTS : Merchant[] = [
         category: MerchantCategory.Restraunt,
     },
     {
-        id: 2,
+        id: 3,
         displayName: "6 Slice Pizza",
         address: "L 49B, Jamia Nagar New Delhi, India",
         logo: "6_slice.png",
@@ -20,7 +20,7 @@ export const UPCOMING_MERCHANTS : Merchant[] = [
         ratings: 4
     },
     {
-        id: 3,
+        id: 4,
         displayName: "Chozen",
         address: "Remetinec 48e, Zagreb,Proizvodnja kakao, čokoladnih i bombonskih proizvoda",
         logo: "chozen.png",
@@ -29,7 +29,7 @@ export const UPCOMING_MERCHANTS : Merchant[] = [
         ratings: 4.5
     },
     {
-        id: 4,
+        id: 5,
         displayName: "Nel Fruits",
         address: "Remote",
         ratings: 4,
@@ -38,7 +38,7 @@ export const UPCOMING_MERCHANTS : Merchant[] = [
         category: MerchantCategory.Groceries
     },
     {
-        id: 5,
+        id: 6,
         displayName: "High Castle Books",
         address: "Bišćanov put 6, Zagreb",
         ratings: 4,
@@ -47,7 +47,7 @@ export const UPCOMING_MERCHANTS : Merchant[] = [
         category: MerchantCategory.Groceries
     },
     {
-        id: 6,
+        id: 7,
         displayName: "If I Can",
         address: "Bišćanov put 6, Zagreb",
         ratings: 4,
@@ -56,7 +56,7 @@ export const UPCOMING_MERCHANTS : Merchant[] = [
         category: MerchantCategory.Restraunt
     },
     {
-        id: 7,
+        id: 8,
         displayName: "Vape Shop",
         address: "Bišćanov put 6, Zagreb",
         ratings: 4,
