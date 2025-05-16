@@ -68,7 +68,7 @@ export const TransferDialog: React.FC<Props> = ({
         return;
       }
 
-      setShowSuccess(true);
+      togglePointsDialog(true);
     } catch (err) {
       console.error(err);
       toast({ description: "failed to transfer", variant: "error" });
