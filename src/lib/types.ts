@@ -28,6 +28,8 @@ export enum Currency {
 export enum Role {
   Individual = "Individual",
   Merchant = "Merchant",
+  KycVerifier = "KycVerifier",
+  Admin = "Admin"
 }
 
 export enum SupportedRegion {

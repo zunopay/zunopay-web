@@ -24,6 +24,7 @@ import { User } from "@/models/user";
 import { SoonChip } from "../shared/SoonChip";
 import { SearchIcon } from "../icons/sidebar/SearchIcon";
 import { ChangeIcon } from "../icons/sidebar/ChangeIcon";
+import { CircleDollarSignIcon } from "lucide-react";
 
 type Props = {
   me: User;
@@ -70,6 +71,40 @@ export function DashboardSidebar({ me, activePath }: Props) {
           </SidebarMenuItem>
           <SidebarMenuItem
             className={`flex  ${
+              activePath === RoutePath.Merchants ? "" : "opacity-50"
+            }`}
+          >
+            <SidebarMenuLink
+              isActive={activePath === RoutePath.Merchants}
+              href={RoutePath.Merchants}
+              title="Discover"
+              Icon={SearchIcon}
+            />
+          </SidebarMenuItem>
+          <SidebarMenuItem
+            className={`flex  ${
+              activePath === RoutePath.ConnectBank ? "" : "opacity-50"
+            }`}
+          >
+            <SidebarMenuLink
+              isActive={activePath === RoutePath.ConnectBank}
+              href={RoutePath.ConnectBank}
+              title="Connect Bank"
+              Icon={ChangeIcon}
+            />
+          </SidebarMenuItem>
+          <SidebarMenuItem
+            className={`flex  ${activePath === RoutePath.StoreFees ? "" : "opacity-50"}`}
+          >
+            <SidebarMenuLink
+              isActive={activePath === RoutePath.StoreFees}
+              href={RoutePath.StoreFees}
+              title="Referral Earnings"
+              Icon={CircleDollarSignIcon}
+            />
+          </SidebarMenuItem>
+          <SidebarMenuItem
+            className={`flex  ${
               activePath === RoutePath.MyProducts ? "" : "opacity-50"
             }`}
           >
@@ -95,30 +130,6 @@ export function DashboardSidebar({ me, activePath }: Props) {
               disabled={true}
             />
             <SoonChip />
-          </SidebarMenuItem>
-          <SidebarMenuItem
-            className={`flex  ${
-              activePath === RoutePath.Merchants ? "" : "opacity-50"
-            }`}
-          >
-            <SidebarMenuLink
-              isActive={activePath === RoutePath.Merchants}
-              href={RoutePath.Merchants}
-              title="Discover"
-              Icon={SearchIcon}
-            />
-          </SidebarMenuItem>
-          <SidebarMenuItem
-            className={`flex  ${
-              activePath === RoutePath.ConnectBank ? "" : "opacity-50"
-            }`}
-          >
-            <SidebarMenuLink
-              isActive={activePath === RoutePath.ConnectBank}
-              href={RoutePath.ConnectBank}
-              title="Connect Bank"
-              Icon={ChangeIcon}
-            />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>

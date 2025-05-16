@@ -24,4 +24,5 @@ export const ASPECT_RATIO = Object.freeze({
 // Transfer
 export const MIN_TRANSFER_AMOUNT_LIMIT = 0.001;
 
-export const EARLY_USER_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSfdp-XOdKHmSmsAVjFbr6sobLVj_QQDWd_29ScopAl5cBztPA/viewform?usp=header"
+export const EARLY_USER_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSfdp-XOdKHmSmsAVjFbr6sobLVj_QQDWd_29ScopAl5cBztPA/viewform"
+export const MEMBERSHIP_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSdQrS4CDhJnNY9EhlvEXPsEIu6N1dV7ZKxyz4bAJcBSP-78mQ/viewform"

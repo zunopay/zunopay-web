@@ -18,3 +18,11 @@ export interface Merchant {
   category: MerchantCategory;
   status: MerchantStatus;
 }
+
+export interface StoreWithFees {
+  id: number;
+  displayName: string;
+  logo: string;
+  address: string;
+  totalFees: number;
+}

@@ -1,56 +1,62 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-import { startTransition } from 'react'
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import { startTransition } from "react";
 import { jwtDecode } from "jwt-decode";
-import { VersionedTransaction } from '@solana/web3.js'
-import { SupportedRegion } from './types';
-import axios from 'axios';
+import { VersionedTransaction } from "@solana/web3.js";
+import { SupportedRegion } from "./types";
+import axios from "axios";
+import { StoreWithFees } from "@/models/merchant";
+import { UPCOMING_MERCHANTS } from "@/constants/merchants";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
-export function onSubmitPreventFormListener(action: (payload: FormData) => void) {
+export function onSubmitPreventFormListener(
+  action: (payload: FormData) => void
+) {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
     startTransition(() => {
-      action(new FormData(event.currentTarget))
-    })
-  }
+      action(new FormData(event.currentTarget));
+    });
+  };
 
-  return onSubmit
+  return onSubmit;
 }
 
 export function isTokenValid(token: string): boolean {
   try {
-    const decoded = jwtDecode(token)
-    const currentTime = Date.now() / 1000
-    return !!decoded.exp && decoded.exp >= currentTime
-  }catch (_) {
-    return false
+    const decoded = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    return !!decoded.exp && decoded.exp >= currentTime;
+  } catch (_) {
+    return false;
   }
 }
 
 export const addTwitter = (twitterHandle: string) => {
-  return `https://x.com/${twitterHandle}`
-}
-
+  return `https://x.com/${twitterHandle}`;
+};
 
 export function decodeBs64(encodedString: string) {
-  return Buffer.from(encodedString, 'base64')
+  return Buffer.from(encodedString, "base64");
 }
 
 export function versionedTransactionFromBs64(encodedString: string) {
-  return VersionedTransaction.deserialize(decodeBs64(encodedString))
+  return VersionedTransaction.deserialize(decodeBs64(encodedString));
 }
 
-
 export function getVpaTypeFromRegion(region: SupportedRegion) {
-  switch(region){
-    case SupportedRegion.EU : return {type: "IBAN", placeholder: 'HB809******08'};
-    case SupportedRegion.IN : return {type: "UPI", placeholder: '887**@ibl'};
-    case SupportedRegion.BR : return {type: "PIX", placeholder: 'nubank@thalesog.com'};
-    case SupportedRegion.SG : return {type: "SGQR", placeholder: ''};
+  switch (region) {
+    case SupportedRegion.EU:
+      return { type: "IBAN", placeholder: "HB809******08" };
+    case SupportedRegion.IN:
+      return { type: "UPI", placeholder: "887**@ibl" };
+    case SupportedRegion.BR:
+      return { type: "PIX", placeholder: "nubank@thalesog.com" };
+    case SupportedRegion.SG:
+      return { type: "SGQR", placeholder: "" };
   }
 }
 
@@ -60,18 +66,18 @@ export function getVpaTypeFromRegion(region: SupportedRegion) {
  * @returns short version of the string in a format '[slice]...[slice]'
  */
 export const shortenString = (string: string, slice = 4): string => {
-  if (string.length < slice * 2 + 3) return string
-  return `${string.slice(0, slice)}...${string.slice(-slice)}`
-}
+  if (string.length < slice * 2 + 3) return string;
+  return `${string.slice(0, slice)}...${string.slice(-slice)}`;
+};
 
 export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export function cleanWalletAddress(walletAddress?: string) {
-  if(!walletAddress)return "";
-  
-  const start = walletAddress.slice(0,4);
+  if (!walletAddress) return "";
+
+  const start = walletAddress.slice(0, 4);
   const end = walletAddress.slice(-4);
   return `${start}...${end}`;
 }
@@ -91,5 +97,13 @@ export function debugApiClient(error: unknown) {
 }
 
 export const getLogoUrl = (key: string) => {
-  return `${process.env.NEXT_PUBLIC_SITE_URL}/${key}`
-}
+  return `${process.env.NEXT_PUBLIC_SITE_URL}/${key}`;
+};
+
+export const fetchStoreWithFees = () => {
+  const data: StoreWithFees[] = UPCOMING_MERCHANTS.filter(
+    (merchant) => merchant.id == 2 || merchant.id == 3
+  ).map((merchant, index) => ({ ...merchant, totalFees: index ? 1 : 12 }));
+
+  return data;
+};
