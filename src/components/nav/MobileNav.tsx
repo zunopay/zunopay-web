@@ -23,8 +23,8 @@ export const MobileNav: React.FC = () => {
         <span>Home</span>
       </a>
 
-      <a href={RoutePath.Merchants} className={navItemClass}>
-        <SearchIcon className={`h-5 w-5 ${getIconClass(RoutePath.Merchants)}`} />
+      <a href={RoutePath.Discover} className={navItemClass}>
+        <SearchIcon className={`h-5 w-5 ${getIconClass(RoutePath.Discover)}`} />
         <span>Discover</span>
       </a>
 

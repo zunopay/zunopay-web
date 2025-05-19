@@ -6,13 +6,13 @@ import ReferredStoreFees from "@/components/table/ReferredStoreFees";
 import { Role } from "@/lib/types";
 import { BecomeMemberCard } from "@/components/shared/cards/BecomeMemeberCard";
 
-export default async function MerchantsPage() {
+export default async function ReferralFeePage() {
   const { data: me } = await fetchMe();
 
   if (!me) return null;
 
   return (
-    <DashboardLayout user={me} activePath={RoutePath.StoreFees}>
+    <DashboardLayout user={me} activePath={RoutePath.ReferralFees}>
       {me.role == Role.KycVerifier || me.role == Role.Admin ? (
         <ReferredStoreFees />
       ) : (

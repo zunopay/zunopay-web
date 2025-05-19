@@ -18,18 +18,19 @@ import {
 import { Avatar } from "@/components/ui/avatar";
 import { Search } from "lucide-react";
 import { Input, Skeleton } from "../ui";
-import { fetchStoreWithFees } from "@/lib/utils";
+import { fetchShopsWithFees } from "@/lib/utils";
+import Image from "next/image";
 
 export default function ReferredStoreFees() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const storesWithFees = fetchStoreWithFees();
+  const shopsWithFees = fetchShopsWithFees();
 
-  const filteredStores = storesWithFees.filter(
-    (store) =>
-      store.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      store.address.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredShops = shopsWithFees.filter(
+    (shop) =>
+      shop.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      shop.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const formatDollar = (amount: number) => {
@@ -39,7 +40,7 @@ export default function ReferredStoreFees() {
     }).format(amount);
   };
 
-  const sortedStores = [...filteredStores].sort(
+  const sortedShops = [...filteredShops].sort(
     (a, b) => b.totalFees - a.totalFees
   );
 
@@ -62,10 +63,7 @@ export default function ReferredStoreFees() {
             ) : (
               <div className="text-2xl font-bold">
                 {formatDollar(
-                  storesWithFees.reduce(
-                    (sum, store) => sum + store.totalFees,
-                    0
-                  )
+                  shopsWithFees.reduce((sum, store) => sum + store.totalFees, 0)
                 )}
               </div>
             )}
@@ -84,11 +82,11 @@ export default function ReferredStoreFees() {
             ) : (
               <div className="text-2xl font-bold">
                 {formatDollar(
-                  storesWithFees.length > 0
-                    ? storesWithFees.reduce(
+                  shopsWithFees.length > 0
+                    ? shopsWithFees.reduce(
                         (sum, store) => sum + store.totalFees,
                         0
-                      ) / storesWithFees.length
+                      ) / shopsWithFees.length
                     : 0
                 )}
               </div>
@@ -106,7 +104,7 @@ export default function ReferredStoreFees() {
             {isLoading ? (
               <Skeleton />
             ) : (
-              <div className="text-2xl font-bold">{storesWithFees.length}</div>
+              <div className="text-2xl font-bold">{shopsWithFees.length}</div>
             )}
           </CardContent>
         </Card>
@@ -122,7 +120,7 @@ export default function ReferredStoreFees() {
               <Skeleton />
             ) : (
               <div className="text-2xl font-bold">
-                {sortedStores.length > 0 ? sortedStores[0].displayName : "N/A"}
+                {sortedShops.length > 0 ? sortedShops[0].displayName : "N/A"}
               </div>
             )}
           </CardContent>
@@ -168,38 +166,38 @@ export default function ReferredStoreFees() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredStores.length === 0 ? (
+                  {filteredShops.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={3} className="h-24 text-center">
                         No results found.
                       </TableCell>
                     </TableRow>
                   ) : (
-                    sortedStores.map((store) => (
-                      <TableRow key={store.id}>
+                    sortedShops.map((shop) => (
+                      <TableRow key={shop.id}>
                         <TableCell>
                           <div className="flex items-center gap-3">
                             <Avatar className="h-9 w-9">
-                              {store.logo ? (
-                                <img
-                                  src={`/Images/merchants/${store.logo}`}
-                                  alt={store.displayName}
+                              {shop.logo ? (
+                                <Image
+                                  src={`/Images/shops/${shop.logo}`}
+                                  alt={shop.displayName}
                                   className="object-contain"
                                 />
                               ) : (
                                 <div className="flex h-full w-full items-center justify-center bg-muted text-lg font-medium uppercase">
-                                  {store.displayName.charAt(0)}
+                                  {shop.displayName.charAt(0)}
                                 </div>
                               )}
                             </Avatar>
                             <div className="font-medium">
-                              {store.displayName}
+                              {shop.displayName}
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell>{store.address}</TableCell>
+                        <TableCell>{shop.address}</TableCell>
                         <TableCell className="text-right font-medium">
-                          {formatDollar(store.totalFees)}
+                          {formatDollar(shop.totalFees)}
                         </TableCell>
                       </TableRow>
                     ))

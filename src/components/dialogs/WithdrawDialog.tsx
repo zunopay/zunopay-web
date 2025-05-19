@@ -85,7 +85,7 @@ export const WithdrawDialog: React.FC<WithdrawDialogProps> = ({
                   styleVariant="body-small"
                   className="mt-1 text-gray-400"
                 >
-                  Scan a QR code to pay directly to a merchant or another user.
+                  Scan a QR code to pay directly at a shop or another user.
                 </Text>
               </div>
               <div className="text-gray-400 group-hover:text-blue-zunopay transition-colors">

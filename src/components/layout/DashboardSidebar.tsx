@@ -71,34 +71,22 @@ export function DashboardSidebar({ me, activePath }: Props) {
           </SidebarMenuItem>
           <SidebarMenuItem
             className={`flex  ${
-              activePath === RoutePath.Merchants ? "" : "opacity-50"
+              activePath === RoutePath.Discover ? "" : "opacity-50"
             }`}
           >
             <SidebarMenuLink
-              isActive={activePath === RoutePath.Merchants}
-              href={RoutePath.Merchants}
+              isActive={activePath === RoutePath.Discover}
+              href={RoutePath.Discover}
               title="Discover"
               Icon={SearchIcon}
             />
           </SidebarMenuItem>
           <SidebarMenuItem
-            className={`flex  ${
-              activePath === RoutePath.ConnectBank ? "" : "opacity-50"
-            }`}
+            className={`flex  ${activePath === RoutePath.ReferralFees ? "" : "opacity-50"}`}
           >
             <SidebarMenuLink
-              isActive={activePath === RoutePath.ConnectBank}
-              href={RoutePath.ConnectBank}
-              title="Connect Bank"
-              Icon={ChangeIcon}
-            />
-          </SidebarMenuItem>
-          <SidebarMenuItem
-            className={`flex  ${activePath === RoutePath.StoreFees ? "" : "opacity-50"}`}
-          >
-            <SidebarMenuLink
-              isActive={activePath === RoutePath.StoreFees}
-              href={RoutePath.StoreFees}
+              isActive={activePath === RoutePath.ReferralFees}
+              href={RoutePath.ReferralFees}
               title="Referral Earnings"
               Icon={CircleDollarSignIcon}
             />

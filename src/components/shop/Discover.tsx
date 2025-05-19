@@ -5,40 +5,40 @@ import { Text } from "@/components/ui/Text";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Input } from "@/components/ui/Input";
 import { cn } from "@/lib/utils";
-import { useFetchMerchants } from "@/api/merchant/queries";
-import { MerchantCategory } from "@/models/merchant";
 import { isEmpty } from "lodash";
-import { MerchantCard } from "./MerchantCard";
-import { UPCOMING_MERCHANTS } from "@/constants/merchants";
+import { ShopCard } from "./ShopCard";
+import { UPCOMING_SHOPS } from "@/constants/shops";
+import { useFetchShops } from "@/api/shops/queries";
+import { ShopCategory } from "@/models/shop";
 
 type Props = {
     className? : string
 }
 
-export const MerchantDiscover : React.FC<Props> = ({className}) => {
+export const ShopDiscover : React.FC<Props> = ({className}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const isMobile = useIsMobile();
 
-  const { data: merchants } = useFetchMerchants();
-  const merchant_list = UPCOMING_MERCHANTS.concat(merchants?.data || []);
+  const { data: shops } = useFetchShops();
+  const shop_list = UPCOMING_SHOPS.concat(shops?.data || []);
 
-  const filteredMerchants = merchant_list.filter((merchant) => {
+  const filteredShops = shop_list.filter((shop) => {
     const matchesSearch = isEmpty(searchTerm)
       ? true
-      : merchant.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        merchant.address.toLowerCase().includes(searchTerm.toLowerCase());
+      : shop.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      shop.address.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesCategory = selectedCategory
-      ? selectedCategory == "All" || merchant.category === selectedCategory
+      ? selectedCategory == "All" || shop.category === selectedCategory
       : true;
     return matchesSearch && matchesCategory;
   });
 
   const categories = [
     "All",
-    MerchantCategory.Restraunt,
-    MerchantCategory.Groceries,
+    ShopCategory.Restraunt,
+    ShopCategory.Groceries,
   ];
 
   return (
@@ -49,17 +49,17 @@ export const MerchantDiscover : React.FC<Props> = ({className}) => {
           styleVariant={isMobile ? "secondary-heading" : "primary-heading"}
           className="text-white mb-2"
         >
-          Merchants
+          Shops
         </Text>
         <Text as="p" styleVariant="body-normal" className="text-gray-400">
-          Discover nearby merchants that accept ZunoPay
+          Discover nearby shops that accept ZunoPay
         </Text>
       </div>
 
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         <div className="w-full md:w-1/2">
           <Input
-            placeholder="Search merchants or addresses..."
+            placeholder="Search shops or addresses..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="bg-zinc-800 border-zinc-700 text-white"
@@ -84,14 +84,14 @@ export const MerchantDiscover : React.FC<Props> = ({className}) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredMerchants?.map((merchant) => (
-          <MerchantCard key={merchant.id} merchant={merchant} />
+        {filteredShops?.map((shop) => (
+          <ShopCard key={shop.id} shop={shop} />
         ))}
 
-        {filteredMerchants?.length === 0 && (
+        {filteredShops?.length === 0 && (
           <div className="col-span-full text-center py-16">
             <Text as="p" styleVariant="body-large" className="text-gray-400">
-              No merchants found matching your criteria.
+              No shops found matching your criteria.
             </Text>
           </div>
         )}

@@ -1,10 +1,10 @@
 "use client";
 
-import { Merchant, MerchantStatus } from "@/models/merchant";
 import Image from "next/image";
 import { Text } from "../ui";
+import { Shop, ShopStatus } from "@/models/shop";
 
-export function MerchantCard({ merchant }: { merchant: Merchant }) {
+export function ShopCard({ shop }: { shop: Shop }) {
   function openInGoogleMaps(address: string) {
     const encodedAddress = encodeURIComponent(address);
     const url = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
@@ -14,13 +14,13 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
   return (
     <div
       className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:border-zinc-700 cursor-pointer"
-      onClick={() => openInGoogleMaps(`${merchant.displayName} ${merchant.address}`)}
+      onClick={() => openInGoogleMaps(`${shop.displayName} ${shop.address}`)}
     >
       <div className="p-4 flex gap-4">
         <div className="h-16 w-16 rounded-lg bg-white p-1 flex items-center justify-center overflow-hidden flex-shrink-0">
           <Image
-            src={`/Images/merchants/${merchant.logo}`}
-            alt={`${merchant.displayName} logo`}
+            src={`/Images/shops/${shop.logo}`}
+            alt={`${shop.displayName} logo`}
             className="max-h-full max-w-full object-contain"
             width={100}
             height={100}
@@ -33,7 +33,7 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
               styleVariant="secondary-heading"
               className="text-white truncate"
             >
-              {merchant.displayName}
+              {shop.displayName}
             </Text>
           </div>
           <div className="flex items-center gap-1 mt-1">
@@ -48,7 +48,7 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
               </svg>
             </div>
             <Text as="span" styleVariant="body-small" className="text-gray-300">
-              {merchant.ratings || 4.5}
+              {shop.ratings || 4.5}
             </Text>
             <Text
               as="span"
@@ -58,18 +58,18 @@ export function MerchantCard({ merchant }: { merchant: Merchant }) {
               •
             </Text>
             <Text as="span" styleVariant="body-small" className="text-gray-400">
-              {merchant.category.charAt(0).toUpperCase() +
-                merchant.category.slice(1)}
+              {shop.category.charAt(0).toUpperCase() +
+                shop.category.slice(1)}
             </Text>
           </div>
         </div>
       </div>
       <div className="px-4 pb-4">
         <Text as="p" styleVariant="body-small" className="text-gray-400 mb-3">
-          {merchant.address}
+          {shop.address}
         </Text>
         <div className="flex justify-between items-center">
-          {merchant.status == MerchantStatus.Active ? (
+          {shop.status == ShopStatus.Active ? (
             <div className="bg-green-900/30 text-green-400 text-xs px-2 py-1 rounded-full flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

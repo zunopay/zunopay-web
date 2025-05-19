@@ -5,8 +5,8 @@ import { jwtDecode } from "jwt-decode";
 import { VersionedTransaction } from "@solana/web3.js";
 import { SupportedRegion } from "./types";
 import axios from "axios";
-import { StoreWithFees } from "@/models/merchant";
-import { UPCOMING_MERCHANTS } from "@/constants/merchants";
+import { ShopWithFees } from "@/models/shop";
+import { UPCOMING_SHOPS } from "@/constants/shops";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -100,10 +100,10 @@ export const getLogoUrl = (key: string) => {
   return `${process.env.NEXT_PUBLIC_SITE_URL}/${key}`;
 };
 
-export const fetchStoreWithFees = () => {
-  const data: StoreWithFees[] = UPCOMING_MERCHANTS.filter(
-    (merchant) => merchant.id == 2 || merchant.id == 3
-  ).map((merchant, index) => ({ ...merchant, totalFees: index ? 1 : 12 }));
+export const fetchShopsWithFees = () => {
+  const data: ShopWithFees[] = UPCOMING_SHOPS.filter(
+    (shop) => shop.id == 2 || shop.id == 3
+  ).map((shop, index) => ({ ...shop, totalFees: index ? 1 : 12 }));
 
   return data;
 };

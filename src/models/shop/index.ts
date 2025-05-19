@@ -1,25 +1,25 @@
-export enum MerchantCategory {
+export enum ShopCategory {
   Restraunt = "Restraunt",
   Groceries = "Groceries",
 }
 
-export enum MerchantStatus {
+export enum ShopStatus {
   Active = "Active",
   Upcoming = "Upcoming",
   InActive = "InActive",
 }
 
-export interface Merchant {
+export interface Shop {
   id: number;
   ratings: number;
   displayName: string;
   logo: string;
   address: string;
-  category: MerchantCategory;
-  status: MerchantStatus;
+  category: ShopCategory;
+  status: ShopStatus;
 }
 
-export interface StoreWithFees {
+export interface ShopWithFees {
   id: number;
   displayName: string;
   logo: string;

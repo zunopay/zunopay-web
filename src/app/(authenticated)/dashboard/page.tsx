@@ -4,7 +4,7 @@ import { RoutePath } from "@/enums/RoutePath";
 import React from "react";
 import WalletCard from "@/components/wallet/WalletCard";
 import { PrivyAuthWrapper } from "@/components/PrivyAuthWrapper";
-import { MerchantDiscover } from "@/components/merchant/Discover";
+import { ShopDiscover } from "@/components/shop/Discover";
 
 export default async function DashboardPage() {
   const {data: user} = await fetchMe();
@@ -16,7 +16,7 @@ export default async function DashboardPage() {
       <PrivyAuthWrapper>
           <WalletCard/>
       </PrivyAuthWrapper>
-      <MerchantDiscover className="max-sm:hidden mt-10"/>
+      <ShopDiscover className="max-sm:hidden mt-10"/>
     </DashboardLayout>
   );
 }

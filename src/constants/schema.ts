@@ -18,19 +18,7 @@ const zDisplayName = z
 .min(2, generateMinLengthErrorMessage('Display name', 2))
 .max(40, generateMaxLengthErrorMessage('Display name', 40))
 
-// TODO: add more checks
-const zVpa = z
-  .string();
-
-  //TODO: Use only supported regions
-const zRegion = z
-  .string();
-
 const zString = z.string();
-
-const zRole = z
-  .enum(['Individual', 'Merchant']);
-
 const zEmail = z.string().email()
 const zPassword = z
   .string()
@@ -48,11 +36,5 @@ export const registerSchema = z.object({
     username: zUsername,
     email: zEmail,
     password: zPassword,
-    region: zRegion,
-    role: zRole,
     referralCode: zString
-})
-
-export const connectBankSchema = z.object({
-  vpa: zVpa
 })
