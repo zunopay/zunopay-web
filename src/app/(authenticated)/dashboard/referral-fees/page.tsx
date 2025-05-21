@@ -13,7 +13,7 @@ export default async function ReferralFeePage() {
 
   return (
     <DashboardLayout user={me} activePath={RoutePath.ReferralFees}>
-      {me.role == Role.KycVerifier || me.role == Role.Admin ? (
+      {me.role == Role.Member || me.role == Role.Admin ? (
         <ReferredStoreFees />
       ) : (
         <BecomeMemberCard />

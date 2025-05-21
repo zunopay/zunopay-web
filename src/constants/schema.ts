@@ -1,3 +1,4 @@
+import { ShopCategory } from '@/models/shop'
 import { generateMaxLengthErrorMessage, generateMinLengthErrorMessage } from './error'
 import { z } from 'zod'
 
@@ -18,7 +19,15 @@ const zDisplayName = z
 .min(2, generateMinLengthErrorMessage('Display name', 2))
 .max(40, generateMaxLengthErrorMessage('Display name', 40))
 
+const zImage = z
+  .any()
+  .optional()
+  .refine((file) => file === undefined || (file !== null && file !== ''), {
+    message: 'Invalid image',
+  });
+
 const zString = z.string();
+const zCategory = z.enum([ShopCategory.Groceries, ShopCategory.Restraunt])
 const zEmail = z.string().email()
 const zPassword = z
   .string()
@@ -37,4 +46,13 @@ export const registerSchema = z.object({
     email: zEmail,
     password: zPassword,
     referralCode: zString
+})
+
+export const shopRegisterSchema = z.object({
+  displayName: zDisplayName,
+  address: zString,
+  taxNumber: zString,
+  category: zCategory,
+  logo: zImage,
+  shopFront: zImage
 })

@@ -26,3 +26,12 @@ export interface ShopWithFees {
   address: string;
   totalFees: number;
 }
+
+export type RegisterShopBody = {
+  displayName: string;
+  address: string;
+  taxNumber: string;
+  category: ShopCategory;
+  shopFront?: File | null;
+  logo?: File;
+}

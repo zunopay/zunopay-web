@@ -28,7 +28,7 @@ export enum Currency {
 export enum Role {
   Individual = "Individual",
   Merchant = "Merchant",
-  KycVerifier = "KycVerifier",
+  Member = "Member",
   Admin = "Admin"
 }
 
