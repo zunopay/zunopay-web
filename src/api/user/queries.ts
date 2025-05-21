@@ -37,20 +37,3 @@ export const useFetchConnectedVpa = () => {
   })
 }
 
-
-export const useConnectVpa = () => {
-  const { refresh } = useRouter()
-
-  return useMutation({
-    mutationFn: (body: ConnectBank) => connectVpa(body),
-    onSuccess: ({ errorMessage }) => {
-      toast({
-        description: errorMessage,
-        variant: !!errorMessage ? 'error' : 'success',
-      })
-      if (!errorMessage) {
-        refresh()
-      }
-    },
-  })
-}

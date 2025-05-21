@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
@@ -15,13 +15,11 @@ import {
   TooltipTrigger 
 } from "@/components/ui/Tooltip";
 import { ScrollArea } from "@/components/ui/ScrollArea";
-import { Badge } from "@/components/ui/badge";
 import { LoaderIcon } from "@/components/icons/theme/LoaderIcon";
 import { FormErrorMessage } from "@/components/forms/FormErrorMessage";
 import { FileUpload } from "@/components/ui/FileUpload";
 import { ShopCategory, RegisterShopBody } from "@/models/shop";
-import { cn, onSubmitPreventFormListener } from "@/lib/utils";
-import { shopRegisterAction } from "@/lib/actions/register";
+import { cn } from "@/lib/utils";
 import { toast } from "@/components/ui/toast/index";
 import { 
   AlertCircle, 
@@ -33,6 +31,8 @@ import {
   FileCheck, 
 } from "lucide-react";
 import { Text } from "../ui";
+import { useRegisterShop } from "@/api/shops/queries";
+import { shopRegisterSchema } from "@/constants/schema";
 
 type StepType = "info" | "location" | "review";
 
@@ -48,6 +48,44 @@ export function ShopRegisterForm() {
     category: ShopCategory.Restraunt,
     shopFront: null as File | null
   });
+
+  const { mutateAsync: registerShop } = useRegisterShop();
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    setIsSubmitting(true)
+    const parsed = shopRegisterSchema.safeParse({
+      displayName: formData.displayName,
+      address: formData.address,
+      taxNumber: formData.taxNumber,
+      category: formData.category,
+      shopFront: formData.shopFront,
+      logo: formData.logo,
+    });
+  
+    if (!parsed.success) {
+      toast({ description: parsed.error.errors[0]?.message, variant: 'error' })
+      setIsSubmitting(false)
+      return;
+    }
+
+    const {errorMessage} = await registerShop(formData)
+    if (errorMessage) {
+      toast({
+        title: 'Error',
+        description: errorMessage,
+        variant: 'error',
+      })
+    }else{
+        setIsComplete(true);
+        toast({
+          title: "Registration Complete",
+          description: "Your shop has been successfully registered!",
+          variant: "success"
+        });
+    }
+    setIsSubmitting(false)
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -99,7 +137,9 @@ export function ShopRegisterForm() {
     return true;
   };
 
-  const nextStep = () => {
+  const nextStep = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+
     const stepMap: Record<StepType, StepType> = {
       "info": "location",
       "location": "review",
@@ -111,7 +151,9 @@ export function ShopRegisterForm() {
     }
   };
 
-  const prevStep = () => {
+  const prevStep = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+
     const stepMap: Record<StepType, StepType> = {
       "info": "info",
       "location": "info",
@@ -120,28 +162,6 @@ export function ShopRegisterForm() {
     
     setCurrentStep(stepMap[currentStep]);
   };
-
-  const [state, action] = useActionState(shopRegisterAction.bind(null), null)
-  useEffect(() => {
-    if (state?.error) {
-      toast({
-        title: 'Error',
-        description: state.error,
-        variant: 'error',
-      })
-    }
-
-    if(state?.success){
-      setIsComplete(true);
-        toast({
-          title: "Registration Complete",
-          description: "Your shop has been successfully registered!",
-          variant: "success"
-        });
-    }
-    
-  }, [state?.error])
-
 
   const isStepCompleted = (step: StepType): boolean => {
     if (step === "info") {
@@ -224,7 +244,7 @@ export function ShopRegisterForm() {
   }
 
   return (
-    <form action={action} onSubmit={onSubmitPreventFormListener(action)}>
+    <form onSubmit={handleSubmit}>
       <div className="w-full max-w-7xl h-full">
         <div className="p-6 pb-4">
           <Text as='p' styleVariant='body-normal' className="text-primary-700">
@@ -383,10 +403,10 @@ export function ShopRegisterForm() {
 
                   <FileUpload
                     name="shopFront"
-                    label="Storefront Image"
+                    label="ShopFront Image"
                     required
                     tooltip="A photo of your physical store location"
-                    description="Add a clear image of your storefront to build customer trust"
+                    description="Add a clear image of your shop front to build customer trust"
                     previewType="landscape"
                     onChange={handleFileChange("shopFront")}
                   />
@@ -498,9 +518,8 @@ export function ShopRegisterForm() {
               </Button>
             ) : (
               <Button 
-                type="button"
                 variant='active'
-                onClick={nextStep}
+                onClick={(nextStep)}
                 className="flex items-center gap-2"
               >
                 Continue
