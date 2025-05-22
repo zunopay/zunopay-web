@@ -13,9 +13,6 @@ export const useFetchShops = () => {
 
 export const useRegisterShop = () => {
   return useMutation({
-    mutationFn: (body: RegisterShopBody) => registerShop(body),
-    onSuccess: ({ errorMessage }) => {
-
-    },
+    mutationFn: (formData: FormData) => registerShop(formData),
   })
 }

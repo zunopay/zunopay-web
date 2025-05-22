@@ -41,7 +41,7 @@ export function ShopRegisterForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isComplete, setIsComplete] = useState(false);
-  const [formData, setFormData] = useState<RegisterShopBody>({
+  const [shopData, setShopData] = useState<RegisterShopBody>({
     displayName: "",
     address: "",
     taxNumber: "",
@@ -54,19 +54,36 @@ export function ShopRegisterForm() {
     e.preventDefault()
 
     setIsSubmitting(true)
+
+    if(!shopData.shopFront){
+      toast({description:'Missing shopFront image', variant: 'error'});
+      return;
+    }
+
     const parsed = shopRegisterSchema.safeParse({
-      displayName: formData.displayName,
-      address: formData.address,
-      taxNumber: formData.taxNumber,
-      category: formData.category,
-      shopFront: formData.shopFront,
-      logo: formData.logo,
+      displayName: shopData.displayName,
+      address: shopData.address,
+      taxNumber: shopData.taxNumber,
+      category: shopData.category,
+      shopFront: shopData.shopFront,
+      logo: shopData.logo,
     });
   
     if (!parsed.success) {
       toast({ description: parsed.error.errors[0]?.message, variant: 'error' })
       setIsSubmitting(false)
       return;
+    }
+
+    const formData = new FormData();
+    formData.append('displayName', shopData.displayName);
+    formData.append('address', shopData.address);
+    formData.append('category', shopData.category);
+    formData.append('taxNumber', shopData.taxNumber);
+    formData.append('shopFront', shopData.shopFront as Blob);
+
+    if(shopData.logo){
+      formData.append('logo', shopData.logo as Blob);
     }
 
     const {errorMessage} = await registerShop(formData)
@@ -89,21 +106,21 @@ export function ShopRegisterForm() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setShopData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
   const handleCategoryChange = (value: string) => {
-    setFormData(prev => ({
+    setShopData(prev => ({
       ...prev,
       category: value as ShopCategory
     }));
   };
 
   const handleFileChange = (name: string) => (file: File | null) => {
-    setFormData(prev => ({
+    setShopData(prev => ({
       ...prev,
       [name]: file
     }));
@@ -113,22 +130,22 @@ export function ShopRegisterForm() {
     setError(null);
     
     if (currentStep === "info") {
-      if (!formData.displayName || formData.displayName.length < 3) {
+      if (!shopData.displayName || shopData.displayName.length < 3) {
         setError("Display name must be at least 3 characters");
         return false;
       }
     }
     
     if (currentStep === "location") {
-      if (!formData.address || formData.address.length < 5) {
+      if (!shopData.address || shopData.address.length < 5) {
         setError("Please enter a valid address (at least 5 characters)");
         return false;
       }
-      if (!formData.taxNumber || formData.taxNumber.length < 3) {
+      if (!shopData.taxNumber || shopData.taxNumber.length < 3) {
         setError("Please enter a valid tax number (at least 3 characters)");
         return false;
       }
-      if (!formData.shopFront) {
+      if (!shopData.shopFront) {
         setError("Please upload a storefront image");
         return false;
       }
@@ -165,10 +182,10 @@ export function ShopRegisterForm() {
 
   const isStepCompleted = (step: StepType): boolean => {
     if (step === "info") {
-      return formData.displayName.length >= 3 && !!formData.logo;
+      return shopData.displayName.length >= 3 && !!shopData.logo;
     }
     if (step === "location") {
-      return formData.address.length >= 5 && formData.taxNumber.length >= 3 && !!formData.shopFront;
+      return shopData.address.length >= 5 && shopData.taxNumber.length >= 3 && !!shopData.shopFront;
     }
     return false;
   };
@@ -299,11 +316,11 @@ export function ShopRegisterForm() {
                           id="displayName"
                           name="displayName"
                           placeholder="e.g. John's Bakery"
-                          value={formData.displayName}
+                          value={shopData.displayName}
                           onChange={handleInputChange}
                           className="w-full pr-10"
                         />
-                        {formData.displayName.length >= 3 && (
+                        {shopData.displayName.length >= 3 && (
                           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-success-500">
                             <CheckCircle2 className="h-4 w-4" />
                           </div>
@@ -318,7 +335,7 @@ export function ShopRegisterForm() {
                       </Label>
                       <Select 
                         name="category"
-                        defaultValue={formData.category}
+                        defaultValue={shopData.category}
                         onValueChange={handleCategoryChange}
                       >
                           {[ShopCategory.Groceries, ShopCategory.Restraunt].map((category) => (
@@ -366,11 +383,11 @@ export function ShopRegisterForm() {
                         id="taxNumber"
                         name="taxNumber"
                         placeholder="EWSPY09834"
-                        value={formData.taxNumber}
+                        value={shopData.taxNumber}
                         onChange={handleInputChange}
                         className="w-full pr-10"
                       />
-                      {formData.taxNumber.length >= 3 && (
+                      {shopData.taxNumber.length >= 3 && (
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-success-500">
                           <CheckCircle2 className="h-4 w-4" />
                         </div>
@@ -388,11 +405,11 @@ export function ShopRegisterForm() {
                         id="address"
                         name="address"
                         placeholder="12, Street 46, New York City"
-                        value={formData.address}
+                        value={shopData.address}
                         onChange={handleInputChange}
                         className="w-full pr-10"
                       />
-                      {formData.address.length >= 5 && (
+                      {shopData.address.length >= 5 && (
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-success-500">
                           <CheckCircle2 className="h-4 w-4" />
                         </div>
@@ -433,18 +450,18 @@ export function ShopRegisterForm() {
                       <div className="space-y-4">
                         <div>
                           <Text as='h6' styleVariant='body-normal' className="font-semibold text-neutral-800">Display Name</Text>
-                          <p className="text-sm font-medium text-neutral-800">{formData.displayName}</p>
+                          <p className="text-sm font-medium text-neutral-800">{shopData.displayName}</p>
                         </div>
                         <div>
                           <Text as='h6' styleVariant='body-normal' className="font-semibold text-neutral-800">Category</Text>
-                          <p className="text-sm font-medium text-neutral-800">{formData.category}</p>
+                          <p className="text-sm font-medium text-neutral-800">{shopData.category}</p>
                         </div>
-                        {formData.logo && (
+                        {shopData.logo && (
                           <div>
                             <Text as='h6' styleVariant='body-normal' className="font-semibold text-neutral-800">Shop Logo</Text>
                             <div className="w-16 h-16 bg-white rounded-md flex items-center justify-center border border-neutral-200 overflow-hidden">
                               <img 
-                                src={URL.createObjectURL(formData.logo)} 
+                                src={URL.createObjectURL(shopData.logo)} 
                                 alt="Shop Logo" 
                                 className="object-cover w-full h-full" 
                               />
@@ -462,18 +479,18 @@ export function ShopRegisterForm() {
                       <div className="space-y-4">
                         <div>
                         <Text as='h6' styleVariant='body-normal' className="font-semibold text-neutral-800">Address</Text>
-                          <p className="text-sm font-medium text-neutral-800">{formData.address}</p>
+                          <p className="text-sm font-medium text-neutral-800">{shopData.address}</p>
                         </div>
                         <div>
                         <Text as='h6' styleVariant='body-normal' className="font-semibold text-neutral-800">Tax ID Number</Text>
-                          <p className="text-sm font-medium text-neutral-800">{formData.taxNumber}</p>
+                          <p className="text-sm font-medium text-neutral-800">{shopData.taxNumber}</p>
                         </div>
-                        {formData.shopFront && (
+                        {shopData.shopFront && (
                           <div>
                             <Text as='h6' styleVariant='body-normal' className="font-semibold text-neutral-800">Storefront</Text>
                             <div className="w-full max-w-xs h-24 bg-white rounded-md flex items-center justify-center border border-neutral-200 overflow-hidden">
                               <img 
-                                src={URL.createObjectURL(formData.shopFront)} 
+                                src={URL.createObjectURL(shopData.shopFront)} 
                                 alt="Storefront" 
                                 className="object-cover w-full h-full" 
                               />

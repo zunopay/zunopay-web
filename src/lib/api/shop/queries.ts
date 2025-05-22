@@ -22,15 +22,15 @@ export async function fetchShops(): Promise<ReturnResponse<Shop[]>> {
 }
 
 export async function registerShop(
-  body: RegisterShopBody
+  formData: FormData
 ): Promise<ReturnResponse<Shop>> {
-  if(!body.shopFront){
-    return {errorMessage: 'Missing shopFront image', status: 400, data: null}
-  }
+  const accessToken = await getAccessToken();
+
   const response = await fetchWrapper<Shop>({
     method: "POST",
     path: `${SHOP}/${REGISTER}`,
-    body,
+    formData,
+    accessToken,
   });
 
   return response;
