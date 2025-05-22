@@ -33,6 +33,8 @@ import {
 import { Text } from "../ui";
 import { useRegisterShop } from "@/api/shops/queries";
 import { shopRegisterSchema } from "@/constants/schema";
+import { ButtonLink } from "../ui/ButtonLink";
+import { RoutePath } from "@/enums/RoutePath";
 
 type StepType = "info" | "location" | "review";
 
@@ -235,24 +237,16 @@ export function ShopRegisterForm() {
             </div>
             <h1 className="text-2xl font-semibold text-primary-900 mb-2">Registration Complete!</h1>
             <p className="text-primary-700 max-w-md mx-auto mb-6">
-              Your shop has been successfully registered. You can now start setting up your inventory and begin selling.
+              Your shop has been successfully registered and will get verified in 1-2 days.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
+              <ButtonLink
                 size="lg"
                 className="shadow-md"
-                onClick={() => window.location.href = "/dashboard"}
+                href={RoutePath.Dashboard}
               >
                 Go to Dashboard
-              </Button>
-              <Button 
-                variant="ghost"
-                size="lg"
-                className="border border-white"
-                onClick={() => window.location.href = "/shop-settings"}
-              >
-                Manage Shop Settings
-              </Button>
+              </ButtonLink>
             </div>
           </div>
         </div>
