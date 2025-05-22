@@ -3,7 +3,7 @@
 import { getAccessToken } from "../http";
 import { fetchWrapper } from "@/lib/fetchWrapper";
 import { ReturnResponse } from "@/lib/types";
-import { Shop } from "@/models/shop";
+import { Shop, UserShop } from "@/models/shop";
 import { SHOP_QUERY_KEYS } from "./keys";
 
 const { SHOP, GET, REGISTER, UPDATE, GET_USER } = SHOP_QUERY_KEYS;
@@ -33,10 +33,10 @@ export async function fetchShop(slug: string): Promise<ReturnResponse<Shop>> {
   return response;
 }
 
-export async function fetchUserShop(): Promise<ReturnResponse<Shop>> {
+export async function fetchUserShop(): Promise<ReturnResponse<UserShop>> {
   const accessToken = await getAccessToken();
 
-  const response = await fetchWrapper<Shop>({
+  const response = await fetchWrapper<UserShop>({
     method: "GET",
     path: `${SHOP}/${GET_USER}`,
     accessToken,
