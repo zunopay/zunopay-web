@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { fetchShops, registerShop } from "@/lib/api/shop/queries"
+import { fetchShops, registerShop, updateShop } from "@/lib/api/shop/queries"
 import { shopKeys } from "./shopKeys"
-import { RegisterShopBody } from "@/models/shop"
 
 export const useFetchShops = () => {
     return useQuery({
@@ -14,5 +13,11 @@ export const useFetchShops = () => {
 export const useRegisterShop = () => {
   return useMutation({
     mutationFn: (formData: FormData) => registerShop(formData),
+  })
+}
+
+export const useUpdateShop = () => {
+  return useMutation({
+    mutationFn: (formData: FormData) => updateShop(formData),
   })
 }

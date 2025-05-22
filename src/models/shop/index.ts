@@ -35,3 +35,5 @@ export type RegisterShopBody = {
   shopFront?: File | null;
   logo?: File;
 }
+
+export type UpdateShopBody = Partial<RegisterShopBody>;

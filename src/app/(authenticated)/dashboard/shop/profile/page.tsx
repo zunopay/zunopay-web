@@ -4,6 +4,8 @@ import { RoutePath } from "@/enums/RoutePath";
 import { fetchMe } from "@/lib/api/user/queries";
 import { Text } from "@/components/ui";
 import { ShopRegisterForm } from "@/components/forms/ShopRegisterForm";
+import { ShopProfileForm } from "@/components/forms/ShopUpdateForm";
+import { Role } from "@/lib/types";
 
 export default async function ShopProfilePage() {
   const { data: me } = await fetchMe();
@@ -12,8 +14,10 @@ export default async function ShopProfilePage() {
 
   return (
     <DashboardLayout user={me} activePath={RoutePath.ReferralFees}>
-      <Text as='h1' styleVariant='secondary-heading'>Shop Profile</Text>
-      <ShopRegisterForm />
+      <Text as="h1" styleVariant="secondary-heading">
+        Shop Profile
+      </Text>
+      {me.role == Role.Merchant ? <ShopProfileForm /> : <ShopRegisterForm />}
     </DashboardLayout>
   );
 }
