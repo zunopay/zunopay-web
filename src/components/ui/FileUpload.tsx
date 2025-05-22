@@ -13,6 +13,7 @@ interface FileUploadProps {
   tooltip?: string;
   accept?: string;
   previewType?: "square" | "landscape";
+  previewUrl?: string
   className?: string;
   onChange?: (file: File | null) => void;
 }
@@ -26,10 +27,11 @@ export function FileUpload({
   accept = "image/*",
   previewType = "square",
   className,
+  previewUrl,
   onChange
 }: FileUploadProps) {
   const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(previewUrl || null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null;

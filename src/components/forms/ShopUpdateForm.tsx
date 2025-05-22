@@ -11,7 +11,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/Tooltip";
-import { ScrollArea } from "@/components/ui/ScrollArea";
 import { LoaderIcon } from "@/components/icons/theme/LoaderIcon";
 import { FormErrorMessage } from "@/components/forms/FormErrorMessage";
 import { FileUpload } from "@/components/ui/FileUpload";
@@ -19,38 +18,34 @@ import { ShopCategory, UpdateShopBody } from "@/models/shop";
 import { toast } from "@/components/ui/toast/index";
 import { AlertCircle, CheckCircle2, Save } from "lucide-react";
 import { Text } from "../ui";
-import { useUpdateShop } from "@/api/shops/queries";
+import { useFetchUserShop, useUpdateShop } from "@/api/shops/queries";
 
-export function ShopProfileForm() {
-  const [isLoading, setIsLoading] = useState(true);
+export const ShopProfileForm: React.FC = () => {
+
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [shopData, setShopData] = useState<UpdateShopBody>({});
 
   const {mutateAsync: updateShop} = useUpdateShop()
+  const {data: userShop, isLoading } = useFetchUserShop()
+  const shop = userShop?.data;
 
   useEffect(() => {
-    const fetchShopData = async () => {
+    if(shop){
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
         setShopData({
-          displayName: "My Amazing Shop",
-          address: "123 Market Street, New York, NY 10001",
-          taxNumber: "TAX12345678",
-          category: ShopCategory.Restraunt,
-          shopFront: null,
+          displayName: shop?.displayName,
+          address: shop?.address,
+          taxNumber: shop?.taxNumber,
+          category: shop?.category,
         });
 
-        setIsLoading(false);
       } catch (err) {
         setError("Failed to load shop profile. Please try again later.");
-        setIsLoading(false);
       }
-    };
+    }
 
-    fetchShopData();
-  }, []);
+  }, [shop]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -117,9 +112,7 @@ export function ShopProfileForm() {
 
   if (isLoading) {
     return (
-      <div className="w-full max-w-4xl mx-auto rounded-xl shadow-lg overflow-hidden border-0 bg-grey-500">
-        <LoaderIcon />
-      </div>
+        <LoaderIcon className="h-5 w-5 m-auto" />
     );
   }
 
@@ -250,6 +243,7 @@ export function ShopProfileForm() {
                     description="Upload a high-quality logo for better visibility"
                     previewType="square"
                     onChange={handleFileChange("logo")}
+                    previewUrl={shop?.logo}
                   />
                 </div>
               </div>
@@ -337,6 +331,7 @@ export function ShopProfileForm() {
                   description="Update your storefront image to show recent changes or improvements"
                   previewType="landscape"
                   onChange={handleFileChange("shopFront")}
+                  previewUrl={shop?.logo}
                 />
               </div>
             </div>

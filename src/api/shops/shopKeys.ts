@@ -5,5 +5,9 @@ export const shopKeys = Object.freeze({
       SHOP_QUERY_KEYS.SHOP,
       SHOP_QUERY_KEYS.GET,
     ],
+    getUserShop: () => [
+      SHOP_QUERY_KEYS.SHOP,
+      SHOP_QUERY_KEYS.GET_USER,
+    ],
   })
   

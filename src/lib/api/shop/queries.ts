@@ -6,7 +6,7 @@ import { ReturnResponse } from "@/lib/types";
 import { Shop } from "@/models/shop";
 import { SHOP_QUERY_KEYS } from "./keys";
 
-const { SHOP, GET, REGISTER, UPDATE } = SHOP_QUERY_KEYS;
+const { SHOP, GET, REGISTER, UPDATE, GET_USER } = SHOP_QUERY_KEYS;
 
 
 export async function fetchShops(): Promise<ReturnResponse<Shop[]>> {
@@ -15,6 +15,30 @@ export async function fetchShops(): Promise<ReturnResponse<Shop[]>> {
   const response = await fetchWrapper<Shop[]>({
     method: "GET",
     path: `${SHOP}/${GET}`,
+    accessToken,
+  });
+
+  return response;
+}
+
+export async function fetchShop(slug: string): Promise<ReturnResponse<Shop>> {
+  const accessToken = await getAccessToken();
+
+  const response = await fetchWrapper<Shop>({
+    method: "GET",
+    path: `${SHOP}/${GET}/${slug}`,
+    accessToken,
+  });
+
+  return response;
+}
+
+export async function fetchUserShop(): Promise<ReturnResponse<Shop>> {
+  const accessToken = await getAccessToken();
+
+  const response = await fetchWrapper<Shop>({
+    method: "GET",
+    path: `${SHOP}/${GET_USER}`,
     accessToken,
   });
 

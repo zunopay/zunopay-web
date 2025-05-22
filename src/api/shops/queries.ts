@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { fetchShops, registerShop, updateShop } from "@/lib/api/shop/queries"
+import { fetchShops, fetchUserShop, registerShop, updateShop } from "@/lib/api/shop/queries"
 import { shopKeys } from "./shopKeys"
 
 export const useFetchShops = () => {
@@ -21,3 +21,14 @@ export const useUpdateShop = () => {
     mutationFn: (formData: FormData) => updateShop(formData),
   })
 }
+
+export const useFetchUserShop = () => {
+  return useQuery({
+    queryKey: shopKeys.getUserShop(),
+    queryFn: () => fetchUserShop(),
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchInterval: false
+  });
+};

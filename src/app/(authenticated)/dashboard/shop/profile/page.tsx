@@ -6,18 +6,21 @@ import { Text } from "@/components/ui";
 import { ShopRegisterForm } from "@/components/forms/ShopRegisterForm";
 import { ShopProfileForm } from "@/components/forms/ShopUpdateForm";
 import { Role } from "@/lib/types";
+import { Shop } from "@/models/shop";
 
 export default async function ShopProfilePage() {
   const { data: me } = await fetchMe();
 
   if (!me) return null;
 
+  const isMerchant = me.role == Role.Merchant;
+
   return (
-    <DashboardLayout user={me} activePath={RoutePath.ReferralFees}>
+    <DashboardLayout user={me} activePath={RoutePath.ShopProfile}>
       <Text as="h1" styleVariant="secondary-heading">
         Shop Profile
       </Text>
-      {me.role == Role.Merchant ? <ShopProfileForm /> : <ShopRegisterForm />}
+      {isMerchant ? <ShopProfileForm /> : <ShopRegisterForm />}
     </DashboardLayout>
   );
 }

@@ -24,7 +24,7 @@ import { User } from "@/models/user";
 import { SoonChip } from "../shared/SoonChip";
 import { SearchIcon } from "../icons/sidebar/SearchIcon";
 import { ChangeIcon } from "../icons/sidebar/ChangeIcon";
-import { CircleDollarSignIcon } from "lucide-react";
+import { CircleDollarSignIcon, ShoppingBagIcon } from "lucide-react";
 
 type Props = {
   me: User;
@@ -89,6 +89,16 @@ export function DashboardSidebar({ me, activePath }: Props) {
               href={RoutePath.ReferralFees}
               title="Referral Earnings"
               Icon={CircleDollarSignIcon}
+            />
+          </SidebarMenuItem>
+          <SidebarMenuItem
+            className={activePath === RoutePath.ShopProfile ? "" : "opacity-50"}
+          >
+            <SidebarMenuLink
+              isActive={activePath === RoutePath.ShopProfile}
+              href={RoutePath.ShopProfile}
+              title="Shop"
+              Icon={ShoppingBagIcon}
             />
           </SidebarMenuItem>
           <SidebarMenuItem

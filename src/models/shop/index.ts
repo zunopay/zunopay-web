@@ -14,6 +14,8 @@ export interface Shop {
   ratings: number;
   displayName: string;
   logo: string;
+  shopFront: string;
+  taxNumber: string;
   address: string;
   category: ShopCategory;
   status: ShopStatus;
