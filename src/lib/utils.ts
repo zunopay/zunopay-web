@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { startTransition } from "react";
 import { jwtDecode } from "jwt-decode";
-import { VersionedTransaction } from "@solana/web3.js";
+import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { SupportedRegion } from "./types";
 import axios from "axios";
 import { ShopWithFees } from "@/models/shop";
@@ -107,3 +107,11 @@ export const fetchShopsWithFees = () => {
 
   return data;
 };
+
+export function isSolanaAddress(value: unknown): boolean {
+  try {
+    return typeof value === 'string' && PublicKey.isOnCurve(value);
+  } catch {
+    return false;
+  }
+}

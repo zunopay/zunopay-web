@@ -4,6 +4,6 @@ export type GetReceiverParams = {
 }
 
 export type TransferDigitalParams = {
-    vpa: string;
+    id: string;
     amount: number;
 }

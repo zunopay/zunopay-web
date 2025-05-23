@@ -57,7 +57,7 @@ export const TransferFormDialog: React.FC<Props> = ({
     try {
       setIsLoading(true);
       const { errorMessage } = await transfer({
-        vpa: formData.recipient,
+        id: formData.recipient,
         amount: parsedAmount,
         sendTransaction,
         queryClient,

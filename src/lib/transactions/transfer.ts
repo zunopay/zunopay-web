@@ -8,13 +8,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { getConnection } from "../connection";
 
 export async function transfer({
-    vpa,
+    id,
     amount,
     sendTransaction,
     queryClient,
     connection
   }: {
-    vpa: string;
+    id: string;
     amount: number;
     sendTransaction: ReturnType<typeof useSendTransaction>['sendTransaction'];
     queryClient: ReturnType<typeof useQueryClient>;
@@ -25,7 +25,7 @@ export async function transfer({
     }
   
     const { data: encodedTransaction, errorMessage } = await fetchDigitalTransferTransaction({
-      vpa,
+      id,
       amount: amount * 1_000_000
     });
 

@@ -13,7 +13,7 @@ import { CommonDialogProps } from "@/lib/types";
 import { usePrivy } from "@privy-io/react-auth";
 import { transfer } from "@/lib/transactions/transfer";
 import { Receiver } from "@/models/payment";
-import { cleanWalletAddress } from "@/lib/utils";
+import { cleanWalletAddress, isSolanaAddress } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { getConnection } from "@/lib/connection";
 import { useSendTransaction } from "@privy-io/react-auth/solana";
@@ -56,7 +56,7 @@ export const TransferDialog: React.FC<Props> = ({
     try {
       setIsLoading(true);
       const { errorMessage } = await transfer({
-        vpa: receiver.walletAddress,
+        id: receiver.id,
         amount: parsedAmount,
         sendTransaction,
         queryClient,
@@ -98,9 +98,9 @@ export const TransferDialog: React.FC<Props> = ({
               </Text>
               <Text as="h5" styleVariant="secondary-heading">
                 You&apos;ve sent {amount} {receiver?.currency} to{" "}
-                {isEmpty(receiver?.vpa)
-                  ? cleanWalletAddress(receiver.walletAddress)
-                  : receiver?.vpa}
+                {isSolanaAddress(receiver?.id)
+                  ? cleanWalletAddress(receiver.id)
+                  : receiver?.id}
                 .
               </Text>
               <Button
@@ -120,10 +120,9 @@ export const TransferDialog: React.FC<Props> = ({
               </Text>
               <div className="p-3 rounded-lg bg-muted border">
                 <Text as="p" styleVariant="body-normal" className="text-bold">
-                  {receiver?.vpa}
-                </Text>
-                <Text as="p" styleVariant="body-small">
-                  ({cleanWalletAddress(receiver?.walletAddress)})
+                  {isSolanaAddress(receiver?.id)
+                    ? cleanWalletAddress(receiver.id)
+                    : receiver?.id}
                 </Text>
               </div>
 

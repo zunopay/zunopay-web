@@ -1,9 +1,7 @@
 import { Currency } from "@/lib/types";
 export interface Receiver {
-    name: string;
-    vpa: string; // encoded Iban or upi id (depends on qr provider)
-    walletAddress: string;
-    currency: Currency;
+    id: string // username or wallet address
+    currency: TokenType
 }
 
 export enum TransferStatus {
