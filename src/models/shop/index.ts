@@ -16,6 +16,7 @@ export interface UserShop {
   shopFront: string;
   taxNumber: string;
   address: string;
+  isVerified: boolean;
   category: ShopCategory;
   status: ShopStatus;
 }

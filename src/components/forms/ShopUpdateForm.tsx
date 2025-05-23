@@ -14,24 +14,23 @@ import {
 import { LoaderIcon } from "@/components/icons/theme/LoaderIcon";
 import { FormErrorMessage } from "@/components/forms/FormErrorMessage";
 import { FileUpload } from "@/components/ui/FileUpload";
-import { ShopCategory, UpdateShopBody } from "@/models/shop";
+import { ShopCategory, ShopStatus, UpdateShopBody } from "@/models/shop";
 import { toast } from "@/components/ui/toast/index";
-import { AlertCircle, CheckCircle2, Save } from "lucide-react";
+import { AlertCircle, Check, CheckCircle2, Save } from "lucide-react";
 import { Text } from "../ui";
 import { useFetchUserShop, useUpdateShop } from "@/api/shops/queries";
 
 export const ShopProfileForm: React.FC = () => {
-
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [shopData, setShopData] = useState<UpdateShopBody>({});
 
-  const {mutateAsync: updateShop} = useUpdateShop()
-  const {data: userShop, isLoading } = useFetchUserShop()
+  const { mutateAsync: updateShop } = useUpdateShop();
+  const { data: userShop, isLoading } = useFetchUserShop();
   const shop = userShop?.data;
 
   useEffect(() => {
-    if(shop){
+    if (shop) {
       try {
         setShopData({
           displayName: shop?.displayName,
@@ -39,12 +38,10 @@ export const ShopProfileForm: React.FC = () => {
           taxNumber: shop?.taxNumber,
           category: shop?.category,
         });
-
       } catch (err) {
         setError("Failed to load shop profile. Please try again later.");
       }
     }
-
   }, [shop]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,27 +73,32 @@ export const ShopProfileForm: React.FC = () => {
     setError(null);
 
     const formData = new FormData();
-    if(shopData.displayName){
-        formData.append('displayName', shopData.displayName);
+    if (shopData.displayName) {
+      formData.append("displayName", shopData.displayName);
     }
-    if(shopData.address){
-        formData.append('address', shopData.address);
+    if (shopData.address) {
+      formData.append("address", shopData.address);
     }
-    if(shopData.category){
-        formData.append('category', shopData.category);
+    if (shopData.category) {
+      formData.append("category", shopData.category);
     }
-    if(shopData.taxNumber){
-        formData.append('taxNumber', shopData.taxNumber);
+    if (shopData.taxNumber) {
+      formData.append("taxNumber", shopData.taxNumber);
     }
-    if(shopData.shopFront){
-        formData.append('shopFront', shopData.shopFront as Blob);
+    if (shopData.shopFront) {
+      formData.append("shopFront", shopData.shopFront as Blob);
     }
-    if(shopData.logo){
-        formData.append('logo', shopData.logo as Blob);
+    if (shopData.logo) {
+      formData.append("logo", shopData.logo as Blob);
     }
 
     try {
-      await updateShop(formData)
+      const { errorMessage } = await updateShop(formData);
+
+      if (errorMessage) {
+        toast({ description: errorMessage, variant: "error" });
+        return;
+      }
 
       toast({
         title: "Changes Saved",
@@ -111,9 +113,7 @@ export const ShopProfileForm: React.FC = () => {
   };
 
   if (isLoading) {
-    return (
-        <LoaderIcon className="h-5 w-5 m-auto" />
-    );
+    return <LoaderIcon className="h-5 w-5 m-auto" />;
   }
 
   return (
@@ -121,7 +121,7 @@ export const ShopProfileForm: React.FC = () => {
       <div className="w-full max-w-7xl h-full">
         <div className="p-6 pb-4">
           <div className="flex items-center justify-between">
-            <div>
+            <div className="flex gap-4">
               <Text
                 as="p"
                 styleVariant="body-normal"
@@ -129,6 +129,16 @@ export const ShopProfileForm: React.FC = () => {
               >
                 Update your shop information
               </Text>
+              {shop?.isVerified ? (
+                <div className="flex gap-1 bg-green-900/30 text-green-400 text-xs px-2 py-1 rounded-full items-center">
+                  <Check className="w-3 h-3"/>
+                  Verified
+                </div>
+              ) : (
+                <div className="bg-green-900/30 text-important-color text-xs px-2 py-1 rounded-full flex items-center w-fit">
+                  Verification Pending
+                </div>
+              )}
             </div>
             <Button
               type="submit"
@@ -342,4 +352,4 @@ export const ShopProfileForm: React.FC = () => {
       </div>
     </form>
   );
-}
+};
