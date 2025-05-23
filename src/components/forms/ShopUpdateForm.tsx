@@ -130,13 +130,13 @@ export const ShopProfileForm: React.FC = () => {
                 Update your shop information
               </Text>
               {shop?.isVerified ? (
-                <div className="flex gap-1 bg-green-900/30 text-green-400 text-xs px-2 py-1 rounded-full items-center">
+                <div className="flex gap-1 bg-green-900/30 text-green-400 text-xs px-2 rounded-xl items-center">
                   <Check className="w-3 h-3"/>
                   Verified
                 </div>
               ) : (
-                <div className="bg-green-900/30 text-important-color text-xs px-2 py-1 rounded-full flex items-center w-fit">
-                  Verification Pending
+                <div className="bg-green-900/30 text-important-color text-xs px-2 rounded-xl flex items-center w-fit">
+                  Pending
                 </div>
               )}
             </div>

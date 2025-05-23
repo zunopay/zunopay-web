@@ -23,7 +23,6 @@ import { Text } from "../ui";
 import { User } from "@/models/user";
 import { SoonChip } from "../shared/SoonChip";
 import { SearchIcon } from "../icons/sidebar/SearchIcon";
-import { ChangeIcon } from "../icons/sidebar/ChangeIcon";
 import { CircleDollarSignIcon, ShoppingBagIcon } from "lucide-react";
 
 type Props = {
@@ -32,9 +31,9 @@ type Props = {
 };
 
 export function DashboardSidebar({ me, activePath }: Props) {
-  return (
+  return (    
     <Sidebar
-      variant="inset"
+      variant='inset'
       className="bg-[linear-gradient(151deg,_#0A0B24_-20%,_#2A3DBF_205%)] px-8 py-10"
     >
       <SidebarHeader className="w-full h-auto self-center">
@@ -44,8 +43,6 @@ export function DashboardSidebar({ me, activePath }: Props) {
       <Divider className="my-8 opacity-25" />
 
       <SidebarContent>
-        {/* <SidebarTrigger className="absolute top-0 -right-6 shadow-none bg-grey-500 rounded-l-none" /> */}
-
         <SidebarMenu>
           <SidebarMenuItem
             className={activePath === RoutePath.Dashboard ? "" : "opacity-50"}
