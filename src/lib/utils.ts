@@ -5,8 +5,6 @@ import { jwtDecode } from "jwt-decode";
 import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { SupportedRegion } from "./types";
 import axios from "axios";
-import { ShopWithFees } from "@/models/shop";
-import { UPCOMING_SHOPS } from "@/constants/shops";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -98,14 +96,6 @@ export function debugApiClient(error: unknown) {
 
 export const getLogoUrl = (key: string) => {
   return `${process.env.NEXT_PUBLIC_SITE_URL}/${key}`;
-};
-
-export const fetchShopsWithFees = () => {
-  const data: ShopWithFees[] = UPCOMING_SHOPS.filter(
-    (shop) => shop.id == 2 || shop.id == 3
-  ).map((shop, index) => ({ ...shop, totalFees: index ? 1 : 12 }));
-
-  return data;
 };
 
 export function isSolanaAddress(value: unknown): boolean {

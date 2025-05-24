@@ -5,6 +5,5 @@ export const USER_QUERY_KEYS = Object.freeze({
     VERIFY_EMAIL:'verify-email',
     BALANCE: 'balance',
     REWARD_POINTS: 'reward-points',
-    CONNECT_BANK: 'connect-bank',
-    VPA: 'vpa'
+    ROYALTY_EARNED: 'royalty-earned',
 })

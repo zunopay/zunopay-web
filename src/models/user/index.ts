@@ -1,4 +1,5 @@
 import { Currency, Role, SupportedRegion } from "@/lib/types";
+import { Shop } from "../shop";
 
 // TODO: Fix region types
 export interface User {
@@ -18,11 +19,7 @@ export interface WalletBalance {
     currency: Currency
 }
 
-export interface ConnectedVpa {
-    vpa: string,
-    verification: boolean
-}
-
-export interface ConnectBank {
-    vpa: string
+export interface RoyaltyEarned {
+    fee: number;
+    shop: Shop
 }

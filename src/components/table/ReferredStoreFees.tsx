@@ -18,20 +18,34 @@ import {
 import { Avatar } from "@/components/ui/avatar";
 import { Search } from "lucide-react";
 import { Input, Skeleton } from "../ui";
-import { fetchShopsWithFees } from "@/lib/utils";
 import Image from "next/image";
+import { useFetchRoyaltyEarned } from "@/api/user/queries";
 
 export default function ReferredStoreFees() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const shopsWithFees = fetchShopsWithFees();
+  const { data: shopsWithRoyalties } = useFetchRoyaltyEarned();
 
-  const filteredShops = shopsWithFees.filter(
-    (shop) =>
-      shop.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      shop.address.toLowerCase().includes(searchTerm.toLowerCase())
+  if (!shopsWithRoyalties?.data) {
+    return (
+      <div>
+        You don&apos;t have any referred shops, refer your local store and start
+        earning
+      </div>
+    );
+  }
+
+  const filteredShops = shopsWithRoyalties?.data?.filter(
+    (royalty) =>
+      royalty.shop.displayName
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      royalty.shop.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  let totalRoyalties = 0;
+  shopsWithRoyalties.data.forEach((shop) => (totalRoyalties += shop.fee));
 
   const formatDollar = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -40,21 +54,19 @@ export default function ReferredStoreFees() {
     }).format(amount);
   };
 
-  const sortedShops = [...filteredShops].sort(
-    (a, b) => b.totalFees - a.totalFees
-  );
+  const royalties = filteredShops?.sort((a, b) => b.fee - a.fee);
 
   return (
     <div className="container mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-        Store Fee Dashboard
+        Shop Royalty Dashboard
       </h1>
 
       <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total Fees
+              Total Royalties
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -62,33 +74,7 @@ export default function ReferredStoreFees() {
               <Skeleton />
             ) : (
               <div className="text-2xl font-bold">
-                {formatDollar(
-                  shopsWithFees.reduce((sum, store) => sum + store.totalFees, 0)
-                )}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Average Fee Per Store
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <Skeleton />
-            ) : (
-              <div className="text-2xl font-bold">
-                {formatDollar(
-                  shopsWithFees.length > 0
-                    ? shopsWithFees.reduce(
-                        (sum, store) => sum + store.totalFees,
-                        0
-                      ) / shopsWithFees.length
-                    : 0
-                )}
+                {totalRoyalties}
               </div>
             )}
           </CardContent>
@@ -104,23 +90,8 @@ export default function ReferredStoreFees() {
             {isLoading ? (
               <Skeleton />
             ) : (
-              <div className="text-2xl font-bold">{shopsWithFees.length}</div>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Highest Earning Store
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <Skeleton />
-            ) : (
               <div className="text-2xl font-bold">
-                {sortedShops.length > 0 ? sortedShops[0].displayName : "N/A"}
+                {shopsWithRoyalties.data.length}
               </div>
             )}
           </CardContent>
@@ -131,9 +102,9 @@ export default function ReferredStoreFees() {
         <CardHeader>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <CardTitle>Store Fee Details</CardTitle>
+              <CardTitle>Shop Fee Details</CardTitle>
               <CardDescription>
-                Detailed breakdown of fees earned from each store
+                Detailed breakdown of fees earned from each shop
               </CardDescription>
             </div>
             <div className="relative w-full md:w-72">
@@ -160,7 +131,7 @@ export default function ReferredStoreFees() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Store</TableHead>
+                    <TableHead>Shop</TableHead>
                     <TableHead>Location</TableHead>
                     <TableHead className="text-right">Total Fees</TableHead>
                   </TableRow>
@@ -173,7 +144,7 @@ export default function ReferredStoreFees() {
                       </TableCell>
                     </TableRow>
                   ) : (
-                    sortedShops.map((shop) => (
+                    royalties.map(({ shop, fee }) => (
                       <TableRow key={shop.id}>
                         <TableCell>
                           <div className="flex items-center gap-3">
@@ -197,7 +168,7 @@ export default function ReferredStoreFees() {
                         </TableCell>
                         <TableCell>{shop.address}</TableCell>
                         <TableCell className="text-right font-medium">
-                          {formatDollar(shop.totalFees)}
+                          {formatDollar(fee)}
                         </TableCell>
                       </TableRow>
                     ))

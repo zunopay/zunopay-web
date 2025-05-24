@@ -16,10 +16,10 @@ export const userKeys = Object.freeze({
       USER_QUERY_KEYS.GET,
       USER_QUERY_KEYS.ME,
     ],
-    getConnectedVpa: () => [
+    getRoyaltyEarned: () => [
       USER_QUERY_KEYS.USER,
       USER_QUERY_KEYS.GET,
-      USER_QUERY_KEYS.VPA,
+      USER_QUERY_KEYS.ROYALTY_EARNED,
     ],
   })
   

@@ -1,12 +1,12 @@
 "use server";
 
-import { ConnectBank, ConnectedVpa, User, WalletBalance } from "@/models/user";
+import { RoyaltyEarned, User, WalletBalance } from "@/models/user";
 import { getAccessToken } from "../http";
 import { USER_QUERY_KEYS } from "./keys";
 import { fetchWrapper } from "@/lib/fetchWrapper";
 import { ReturnResponse } from "@/lib/types";
 
-const { USER, ME, GET, VERIFY_EMAIL, BALANCE, REWARD_POINTS, VPA, CONNECT_BANK } = USER_QUERY_KEYS;
+const { USER, ME, GET, VERIFY_EMAIL, BALANCE, REWARD_POINTS, ROYALTY_EARNED } = USER_QUERY_KEYS;
 
 export async function fetchMe(): Promise<ReturnResponse<User>> {
   const accessToken = await getAccessToken();
@@ -50,6 +50,17 @@ export async function fetchRewardPoints(): Promise<ReturnResponse<number>> {
     path: `${USER}/${GET}/${REWARD_POINTS}`,
     accessToken,
     isTextResponse: true
+  });
+
+  return response;
+}
+
+export async function fetchRoyaltyEarned(): Promise<ReturnResponse<RoyaltyEarned[]>> {
+  const accessToken = await getAccessToken();
+  const response = await fetchWrapper<RoyaltyEarned[]>({
+    method: "GET",
+    path: `${USER}/${GET}/${ROYALTY_EARNED}`,
+    accessToken,
   });
 
   return response;
