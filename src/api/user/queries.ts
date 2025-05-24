@@ -1,9 +1,6 @@
-import { connectVpa, fetchBalance, fetchConnectedVpa, fetchMe, fetchRewardPoints } from '@/lib/api/user/queries'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { fetchBalance, fetchMe, fetchRewardPoints } from '@/lib/api/user/queries'
+import { useQuery } from '@tanstack/react-query'
 import { userKeys } from './userKeys'
-import { ConnectBank } from '@/models/user'
-import { toast } from '@/components/ui/toast'
-import { useRouter } from 'next/navigation'
 
 export const useFetchBalance = () => {
   return useQuery({
@@ -28,12 +25,3 @@ export const useFetchMe = () => {
     staleTime: 1000 * 5
   })
 }
-
-export const useFetchConnectedVpa = () => {
-  return useQuery({
-    queryFn: () => fetchConnectedVpa(),
-    queryKey: userKeys.getConnectedVpa(),
-    staleTime: 5*1000
-  })
-}
-

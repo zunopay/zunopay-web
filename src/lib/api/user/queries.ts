@@ -54,28 +54,3 @@ export async function fetchRewardPoints(): Promise<ReturnResponse<number>> {
 
   return response;
 }
-
-
-export async function fetchConnectedVpa(): Promise<ReturnResponse<ConnectedVpa>> {
-  const accessToken = await getAccessToken();
-  const response = await fetchWrapper<ConnectedVpa>({
-    method: "GET",
-    path: `${USER}/${GET}/${VPA}`,
-    accessToken
-  });
-
-  return response;
-}
-
-export async function connectVpa(body: ConnectBank): Promise<ReturnResponse<ConnectedVpa>> {
-  const accessToken = await getAccessToken();
-  const response = await fetchWrapper<ConnectedVpa>({
-    method: "PATCH",
-    path: `${USER}/${CONNECT_BANK}`,
-    accessToken,
-    body
-  });
-
-  return response;
-}
-
