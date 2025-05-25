@@ -1,6 +1,5 @@
-import { Currency } from "@/lib/types";
 export interface Receiver {
-    id: string // username or wallet address
+    id: string; // wallet address or username
     currency: TokenType
 }
 

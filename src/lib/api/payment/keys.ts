@@ -3,6 +3,7 @@ export const PAYMENT_QUERY_KEYS = Object.freeze({
 	GET: 'get',
     RECEIVER: 'receiver',
 	TRANSFER: 'transfer',
+	WITHDRAW: 'withdraw',
 	TRANSFER_HISTORY: 'transfer-history',
 	RECEIVE_REQUEST: 'receive-request'
 })

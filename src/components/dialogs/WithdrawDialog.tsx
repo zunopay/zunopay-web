@@ -78,14 +78,7 @@ export const WithdrawDialog: React.FC<WithdrawDialogProps> = ({
                   styleVariant="body-large"
                   className="font-medium text-white group-hover:text-blue-zunopay transition-colors"
                 >
-                  Scan QR Code
-                </Text>
-                <Text
-                  as="p"
-                  styleVariant="body-small"
-                  className="mt-1 text-gray-400"
-                >
-                  Scan a QR code to pay directly at a shop or another user.
+                  Scan solana wallet QR code
                 </Text>
               </div>
               <div className="text-gray-400 group-hover:text-blue-zunopay transition-colors">
@@ -142,8 +135,7 @@ export const WithdrawDialog: React.FC<WithdrawDialogProps> = ({
                   styleVariant="body-small"
                   className="mt-1 text-gray-400"
                 >
-                  Transfer funds directly to another wallet address or bank
-                  account.
+                  Transfer funds directly to another wallet address
                 </Text>
               </div>
               <div className="text-gray-400 group-hover:text-blue-zunopay transition-colors">

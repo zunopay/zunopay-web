@@ -31,7 +31,7 @@ export const TransferFormDialog: React.FC<Props> = ({
   balance,
 }) => {
   const isMobile = useIsMobile();
-  const [formData, setFormData] = useState({ recipient: "", amount: "" });
+  const [formData, setFormData] = useState({ username: "", amount: "" });
   const { ready } = usePrivy();
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -57,7 +57,7 @@ export const TransferFormDialog: React.FC<Props> = ({
     try {
       setIsLoading(true);
       const { errorMessage } = await transfer({
-        id: formData.recipient,
+        id: formData.username,
         amount: parsedAmount,
         sendTransaction,
         queryClient,
@@ -105,7 +105,7 @@ export const TransferFormDialog: React.FC<Props> = ({
               🎉 Transfer successful
             </Text>
             <Text as="h5" styleVariant="secondary-heading">
-              You&apos;ve sent {formData.amount} USDC to {cleanWalletAddress(formData.recipient)}.
+              You&apos;ve sent {formData.amount} USDC to {formData.username}.
             </Text>
             <Button
               variant="primary"
@@ -144,9 +144,9 @@ export const TransferFormDialog: React.FC<Props> = ({
                   id="recipient"
                   name="recipient"
                   type="text"
-                  placeholder="Vpa (Solana address, Upi Id, Iban)"
+                  placeholder="Username or Wallet Address"
                   required
-                  value={formData.recipient}
+                  value={formData.username}
                   onChange={handleChange}
                   className="w-full bg-zinc-800 border-zinc-700 text-white"
                 />

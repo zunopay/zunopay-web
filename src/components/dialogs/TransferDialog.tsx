@@ -98,10 +98,7 @@ export const TransferDialog: React.FC<Props> = ({
               </Text>
               <Text as="h5" styleVariant="secondary-heading">
                 You&apos;ve sent {amount} {receiver?.currency} to{" "}
-                {isSolanaAddress(receiver?.id)
-                  ? cleanWalletAddress(receiver.id)
-                  : receiver?.id}
-                .
+                {receiver?.id}
               </Text>
               <Button
                 variant="primary"
@@ -120,9 +117,7 @@ export const TransferDialog: React.FC<Props> = ({
               </Text>
               <div className="p-3 rounded-lg bg-muted border">
                 <Text as="p" styleVariant="body-normal" className="text-bold">
-                  {isSolanaAddress(receiver?.id)
-                    ? cleanWalletAddress(receiver.id)
-                    : receiver?.id}
+                  {receiver?.id}
                 </Text>
               </div>
 
