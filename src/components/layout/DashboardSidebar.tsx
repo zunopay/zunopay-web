@@ -23,7 +23,12 @@ import { Text } from "../ui";
 import { User } from "@/models/user";
 import { SoonChip } from "../shared/SoonChip";
 import { SearchIcon } from "../icons/sidebar/SearchIcon";
-import { CircleDollarSignIcon, ShoppingBagIcon } from "lucide-react";
+import {
+  CircleDollarSignIcon,
+  NotebookPen,
+  ShoppingBagIcon,
+} from "lucide-react";
+import { Role } from "@/lib/types";
 
 type Props = {
   me: User;
@@ -31,9 +36,9 @@ type Props = {
 };
 
 export function DashboardSidebar({ me, activePath }: Props) {
-  return (    
+  return (
     <Sidebar
-      variant='inset'
+      variant="inset"
       className="bg-[linear-gradient(151deg,_#0A0B24_-20%,_#2A3DBF_205%)] px-8 py-10"
     >
       <SidebarHeader className="w-full h-auto self-center">
@@ -79,7 +84,9 @@ export function DashboardSidebar({ me, activePath }: Props) {
             />
           </SidebarMenuItem>
           <SidebarMenuItem
-            className={`flex  ${activePath === RoutePath.ReferralFees ? "" : "opacity-50"}`}
+            className={`flex  ${
+              activePath === RoutePath.ReferralFees ? "" : "opacity-50"
+            }`}
           >
             <SidebarMenuLink
               isActive={activePath === RoutePath.ReferralFees}
@@ -88,16 +95,33 @@ export function DashboardSidebar({ me, activePath }: Props) {
               Icon={CircleDollarSignIcon}
             />
           </SidebarMenuItem>
-          <SidebarMenuItem
-            className={activePath === RoutePath.ShopProfile ? "" : "opacity-50"}
-          >
-            <SidebarMenuLink
-              isActive={activePath === RoutePath.ShopProfile}
-              href={RoutePath.ShopProfile}
-              title="Shop"
-              Icon={ShoppingBagIcon}
-            />
-          </SidebarMenuItem>
+          {me.role == Role.Member ? (
+            <SidebarMenuItem
+              className={
+                activePath === RoutePath.ShopProfile ? "" : "opacity-50"
+              }
+            >
+              <SidebarMenuLink
+                isActive={activePath === RoutePath.ShopOnboarding}
+                href={RoutePath.ShopOnboarding}
+                title="Shop Onboarding"
+                Icon={NotebookPen}
+              />
+            </SidebarMenuItem>
+          ) : (
+            <SidebarMenuItem
+              className={
+                activePath === RoutePath.ShopProfile ? "" : "opacity-50"
+              }
+            >
+              <SidebarMenuLink
+                isActive={activePath === RoutePath.ShopProfile}
+                href={RoutePath.ShopProfile}
+                title="Shop"
+                Icon={ShoppingBagIcon}
+              />
+            </SidebarMenuItem>
+          )}
           <SidebarMenuItem
             className={`flex  ${
               activePath === RoutePath.MyProducts ? "" : "opacity-50"

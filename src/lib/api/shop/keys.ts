@@ -3,5 +3,6 @@ export const SHOP_QUERY_KEYS = Object.freeze({
     GET: 'get',
     GET_USER: 'get-user',
     REGISTER: 'register',
+    ONBOARD: 'onboard',
     UPDATE: 'update',
 })

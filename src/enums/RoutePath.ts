@@ -7,6 +7,7 @@ export const RoutePath = Object.freeze({
     TransferHistory: '/dashboard/transfer-history',
     Discover: '/dashboard/discover',
     ShopProfile: '/dashboard/shop/profile',
+    ShopOnboarding: '/dashboard/shop/onboarding',
     MyProducts: '/dashboard/my-products',
     WithdrawFund: '/dashboard/withdraw-fund',
     ReferralFees: '/dashboard/referral-fees',

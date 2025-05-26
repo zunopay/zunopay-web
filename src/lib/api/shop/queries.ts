@@ -6,7 +6,7 @@ import { ReturnResponse } from "@/lib/types";
 import { Shop, UserShop } from "@/models/shop";
 import { SHOP_QUERY_KEYS } from "./keys";
 
-const { SHOP, GET, REGISTER, UPDATE, GET_USER } = SHOP_QUERY_KEYS;
+const { SHOP, GET, REGISTER, UPDATE, GET_USER, ONBOARD } = SHOP_QUERY_KEYS;
 
 
 export async function fetchShops(): Promise<ReturnResponse<Shop[]>> {
@@ -53,6 +53,22 @@ export async function registerShop(
   const response = await fetchWrapper<Shop>({
     method: "POST",
     path: `${SHOP}/${REGISTER}`,
+    formData,
+    accessToken,
+  });
+
+  return response;
+}
+
+export async function onboardShop(
+  username: string,
+  formData: FormData
+): Promise<ReturnResponse<Shop>> {
+  const accessToken = await getAccessToken();
+
+  const response = await fetchWrapper<Shop>({
+    method: "POST",
+    path: `${SHOP}/${ONBOARD}/${username}`,
     formData,
     accessToken,
   });

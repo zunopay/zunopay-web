@@ -48,4 +48,14 @@ export type RegisterShopBody = {
   logo?: File;
 }
 
+export type OnboardShopBody = {
+  displayName: string;
+  address: string;
+  taxNumber: string;
+  category: ShopCategory;
+  shopFront?: File | null;
+  logo?: File;
+}
+
+
 export type UpdateShopBody = Partial<RegisterShopBody>;
