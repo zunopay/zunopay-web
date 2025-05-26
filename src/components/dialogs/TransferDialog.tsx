@@ -13,12 +13,11 @@ import { CommonDialogProps } from "@/lib/types";
 import { usePrivy } from "@privy-io/react-auth";
 import { transfer } from "@/lib/transactions/transfer";
 import { Receiver } from "@/models/payment";
-import { cleanWalletAddress, isSolanaAddress } from "@/lib/utils";
+import { calculateShoppingPoints } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { getConnection } from "@/lib/connection";
 import { useSendTransaction } from "@privy-io/react-auth/solana";
 import { toast } from "../ui/toast";
-import { isEmpty } from "lodash";
 import { PointsDialog } from "./PointsDialog";
 
 type Props = {
@@ -147,7 +146,7 @@ export const TransferDialog: React.FC<Props> = ({
       <PointsDialog
         open={showPoints}
         toggleDialog={() => togglePointsDialog(!showPoints)}
-        points={7}
+        points={calculateShoppingPoints(+amount)}
       />
     </>
   );

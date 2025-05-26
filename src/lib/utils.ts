@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { SupportedRegion } from "./types";
 import axios from "axios";
+import { MAX_SHOPPING_POINTS, USDC_DECIMALS } from "@/constants/general";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -104,4 +105,14 @@ export function isSolanaAddress(value: unknown): boolean {
   } catch {
     return false;
   }
+}
+
+export function calculateShoppingPoints(amount: number){
+  const BASE_USDC = Math.pow(10, USDC_DECIMALS);
+  const points =
+    amount >= 50 * BASE_USDC
+      ? MAX_SHOPPING_POINTS
+      : Math.floor((amount * MAX_SHOPPING_POINTS) / (50 * BASE_USDC));
+
+  return points ?? 1;
 }
