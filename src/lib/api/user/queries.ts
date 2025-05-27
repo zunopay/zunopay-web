@@ -15,7 +15,6 @@ export async function fetchMe(): Promise<ReturnResponse<User>> {
     method: "GET",
     path: `${USER}/${GET}/${ME}`,
     accessToken,
-    revalidateCacheInSeconds: 5,
   });
 
   return response;
@@ -25,7 +24,7 @@ export async function verifyEmail() {
   const accessToken = await getAccessToken();
   const response = await fetchWrapper<void>({
     method: "PATCH",
-    path: `/${USER}/${VERIFY_EMAIL}`,
+    path: `${USER}/${VERIFY_EMAIL}`,
     accessToken,
   });
   return response;
