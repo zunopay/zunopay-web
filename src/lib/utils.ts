@@ -6,6 +6,13 @@ import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { SupportedRegion } from "./types";
 import axios from "axios";
 import { MAX_SHOPPING_POINTS, USDC_DECIMALS } from "@/constants/general";
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
+import { clusterApiUrl } from '@solana/web3.js'
+
+// RPC Node Endpoint
+export const endpoint = (process.env.SOLANA_RPC_NODE_ENDPOINT as string) || clusterApiUrl('devnet')
+export const network = (process.env.NEXT_PUBLIC_SOLANA_CLUSTER as WalletAdapterNetwork) || WalletAdapterNetwork.Devnet
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

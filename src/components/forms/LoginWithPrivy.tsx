@@ -79,7 +79,7 @@ export const LoginWithPrivy: React.FC<Props> = ({ me, accessToken }) => {
         value={code}
         placeholder="Input OTP"
       />
-      <Button variant="active" onClick={submitOtp}>
+      <Button variant='active' onClick={submitOtp}>
         {isLoading ? <LoaderIcon className="w-4 h-4"/> : "Submit"}
       </Button>
       <Text as="p" styleVariant="body-small" className="text-wrap">
