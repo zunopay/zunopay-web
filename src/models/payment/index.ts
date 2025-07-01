@@ -28,3 +28,17 @@ export type TransferHistory = {
     tokenType: TokenType
     type: TransferType;
 }
+
+export enum PaymentCategory {
+    OneTime = "OneTime"
+}
+
+export type Payment = {
+    id: number,
+    title: string,
+    publicId: string,
+    description: string,
+    category: PaymentCategory.OneTime,
+    createdAt: Date,
+    amount: number
+}

@@ -5,5 +5,7 @@ export const PAYMENT_QUERY_KEYS = Object.freeze({
 	TRANSFER: 'transfer',
 	WITHDRAW: 'withdraw',
 	TRANSFER_HISTORY: 'transfer-history',
-	RECEIVE_REQUEST: 'receive-request'
+	RECEIVE_REQUEST: 'receive-request',
+	CREATE_TRANSFER: 'create-transfer',
+	SUBMIT_TRANSFER: 'submit-transfer',
 })

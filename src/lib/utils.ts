@@ -6,13 +6,15 @@ import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { SupportedRegion } from "./types";
 import axios from "axios";
 import { MAX_SHOPPING_POINTS, USDC_DECIMALS } from "@/constants/general";
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
-import { clusterApiUrl } from '@solana/web3.js'
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { clusterApiUrl } from "@solana/web3.js";
 
 // RPC Node Endpoint
-export const endpoint = (process.env.SOLANA_RPC_NODE_ENDPOINT as string) || clusterApiUrl('devnet')
-export const network = (process.env.NEXT_PUBLIC_SOLANA_CLUSTER as WalletAdapterNetwork) || WalletAdapterNetwork.Devnet
-
+export const endpoint =
+  (process.env.SOLANA_RPC_NODE_ENDPOINT as string) || clusterApiUrl("devnet");
+export const network =
+  (process.env.NEXT_PUBLIC_SOLANA_CLUSTER as WalletAdapterNetwork) ||
+  WalletAdapterNetwork.Devnet;
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -51,6 +53,14 @@ export function decodeBs64(encodedString: string) {
 
 export function versionedTransactionFromBs64(encodedString: string) {
   return VersionedTransaction.deserialize(decodeBs64(encodedString));
+}
+
+export function encodeTransaction(transaction: VersionedTransaction) {
+  const serializedTransaction = transaction.serialize();
+  const encodedTransaction = Buffer.from(serializedTransaction).toString(
+    "base64"
+  );
+  return encodedTransaction;
 }
 
 export function getVpaTypeFromRegion(region: SupportedRegion) {
@@ -108,13 +118,13 @@ export const getLogoUrl = (key: string) => {
 
 export function isSolanaAddress(value: unknown): boolean {
   try {
-    return typeof value === 'string' && PublicKey.isOnCurve(value);
+    return typeof value === "string" && PublicKey.isOnCurve(value);
   } catch {
     return false;
   }
 }
 
-export function calculateShoppingPoints(amount: number){
+export function calculateShoppingPoints(amount: number) {
   const BASE_USDC = Math.pow(10, USDC_DECIMALS);
   const points =
     amount >= 50 * BASE_USDC
