@@ -8,11 +8,11 @@ import { RoutePath } from "@/enums/RoutePath";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { User } from "@/models/user";
 import { setClientAuthToken } from "@/lib/clientHttp";
-import { useVerifyEmail } from "@/api/user/queries";
 import { toast } from "../ui/toast";
 import { useQueryClient } from "@tanstack/react-query";
-import { userKeys } from "@/api/user/userKeys";
+import { userKeys } from "@/api/user/keys";
 import { LoaderIcon } from "../icons/theme/LoaderIcon";
+import { useVerifyEmail } from "@/api/user/mutations";
 
 type Props = { me: User; accessToken: string };
 

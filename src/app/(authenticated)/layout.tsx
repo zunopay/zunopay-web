@@ -1,9 +1,8 @@
 import { redirect } from "next/navigation";
 import { RoutePath } from "@/enums/RoutePath";
-import { fetchMe } from "@/lib/api/user/queries";
 import { PrivyContextProvider } from "@/providers/PrivyContextProvider";
 import WalletProviderWrapper from "@/components/WalletProviderWrapper";
-import { AuthenticationCheckWrapper } from "@/providers/AuthenticationCheckWrapper";
+import { fetchMe } from "@/api/user";
 
 export default async function AuthenticatedLayout({
   children,
@@ -18,9 +17,7 @@ export default async function AuthenticatedLayout({
 
   return (
     <PrivyContextProvider appId={process.env.PRIVY_APPLICATION_ID ?? ""}>
-      <AuthenticationCheckWrapper>
         <WalletProviderWrapper>{children}</WalletProviderWrapper>
-      </AuthenticationCheckWrapper>
     </PrivyContextProvider>
   );
 }

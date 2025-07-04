@@ -1,41 +1,19 @@
 "use server";
 
-import { Payment, Receiver, TransferHistory } from "@/models/payment";
-import {
-  CreateTransferTransactionBody,
-  GetReceiverParams,
-  SubmitTransferBody,
-  WithdrawTransactionParams,
-} from "@/models/payment/params";
-import { PAYMENT_QUERY_KEYS } from "./keys";
+import { CreateTransferTransactionBody, Payment, SubmitTransferBody, TransferHistory } from "@/models/payment";
 import { fetchWrapper } from "@/lib/fetchWrapper";
 import { ReturnResponse } from "@/lib/types";
 import { getAccessToken } from "../http";
+import { PAYMENT_QUERY_KEYS } from "./keys";
 
 const {
   PAYMENT,
   GET,
-  RECEIVER,
   SUBMIT_TRANSFER,
   TRANSFER_HISTORY,
-  RECEIVE_REQUEST,
-  WITHDRAW,
   CREATE_TRANSFER
 } = PAYMENT_QUERY_KEYS;
 
-export const fetchReceiver = async (
-  params: GetReceiverParams
-): Promise<ReturnResponse<Receiver>> => {
-  const accessToken = await getAccessToken();
-
-  const response = await fetchWrapper<Receiver>({
-    method: "GET",
-    path: `${PAYMENT}/${GET}/${RECEIVER}`,
-    params,
-    accessToken,
-  });
-  return response;
-};
 
 export const fetchPayment = async (
   id: string
@@ -47,7 +25,6 @@ export const fetchPayment = async (
 
   return response;
 };
-
 
 export const createTransferTransaction = async (
   body: CreateTransferTransactionBody
@@ -72,21 +49,6 @@ export const submitTransferTransaction = async (
   return response;
 };
 
-export const fetchWithdrawTransaction = async (
-  params: WithdrawTransactionParams
-): Promise<ReturnResponse<string>> => {
-  const accessToken = await getAccessToken();
-
-  const response = await fetchWrapper<string>({
-    method: "GET",
-    path: `${PAYMENT}/${GET}/${WITHDRAW}`,
-    params,
-    accessToken,
-    isTextResponse: true,
-  });
-  return response;
-};
-
 export const fetchTransferHistory = async (): Promise<
   ReturnResponse<TransferHistory[]>
 > => {
@@ -95,20 +57,6 @@ export const fetchTransferHistory = async (): Promise<
   const response = await fetchWrapper<TransferHistory[]>({
     method: "GET",
     path: `${PAYMENT}/${GET}/${TRANSFER_HISTORY}`,
-    accessToken,
-  });
-  return response;
-};
-
-export const fetchReceivePaymentRequest = async (): Promise<
-  ReturnResponse<string>
-> => {
-  const accessToken = await getAccessToken();
-
-  const response = await fetchWrapper<string>({
-    method: "GET",
-    path: `${PAYMENT}/${GET}/${RECEIVE_REQUEST}`,
-    isTextResponse: true,
     accessToken,
   });
   return response;

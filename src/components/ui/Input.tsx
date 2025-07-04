@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, forwardRef } from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 import { Text } from './Text'
 
 const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(({ className, ...props }, ref) => (

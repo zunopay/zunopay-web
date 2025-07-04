@@ -1,10 +1,10 @@
 import React from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { RoutePath } from "@/enums/RoutePath";
-import { fetchMe } from "@/lib/api/user/queries";
-import ReferredStoreFees from "@/components/table/ReferredStoreFees";
+import ReferredMerchantFees from "@/components/table/ReferredMerchantFees";
 import { Role } from "@/lib/types";
 import { BecomeMemberCard } from "@/components/shared/cards/BecomeMemeberCard";
+import { fetchMe } from "@/api/user";
 
 export default async function ReferralFeePage() {
   const { data: me } = await fetchMe();
@@ -14,7 +14,7 @@ export default async function ReferralFeePage() {
   return (
     <DashboardLayout user={me} activePath={RoutePath.ReferralFees}>
       {me.role == Role.Member || me.role == Role.Admin ? (
-        <ReferredStoreFees />
+        <ReferredMerchantFees />
       ) : (
         <BecomeMemberCard />
       )}

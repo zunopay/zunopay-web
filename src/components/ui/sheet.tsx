@@ -5,7 +5,7 @@ import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { CloseIcon } from '@/components/icons/theme/CloseIcon'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 
 const Sheet = SheetPrimitive.Root
 

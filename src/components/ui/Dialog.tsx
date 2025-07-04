@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { CloseIcon } from '@/components/icons/theme/CloseIcon'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 import { Button, ButtonProps } from './Button'
 
 const Dialog = DialogPrimitive.Root

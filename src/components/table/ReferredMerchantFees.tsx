@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
+} from "@/components/ui/Card";
 import {
   Table,
   TableBody,
@@ -21,31 +21,29 @@ import { Input, Skeleton } from "../ui";
 import Image from "next/image";
 import { useFetchRoyaltyEarned } from "@/api/user/queries";
 
-export default function ReferredStoreFees() {
+export default function ReferredMerchantFees() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { data: shopsWithRoyalties } = useFetchRoyaltyEarned();
-
-  if (!shopsWithRoyalties?.data) {
+  const { data: merchantWithRoyalties } = useFetchRoyaltyEarned();
+  if (!merchantWithRoyalties?.data) {
     return (
       <div>
-        You don&apos;t have any referred shops, refer your local store and start
-        earning
+        You don&apos;t have any referred merchants, refer and start earning
       </div>
     );
   }
 
-  const filteredShops = shopsWithRoyalties?.data?.filter(
+  const filteredMerchants = merchantWithRoyalties?.data?.filter(
     (royalty) =>
-      royalty.shop.displayName
+      royalty.merchant.displayName
         .toLowerCase()
         .includes(searchTerm.toLowerCase()) ||
-      royalty.shop.address.toLowerCase().includes(searchTerm.toLowerCase())
+      royalty.merchant.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   let totalRoyalties = 0;
-  shopsWithRoyalties.data.forEach((shop) => (totalRoyalties += shop.fee));
+  filteredMerchants.forEach((merchant) => (totalRoyalties += merchant.fee));
 
   const formatDollar = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -54,7 +52,7 @@ export default function ReferredStoreFees() {
     }).format(amount);
   };
 
-  const royalties = filteredShops?.sort((a, b) => b.fee - a.fee);
+  const royalties = filteredMerchants?.sort((a, b) => b.fee - a.fee);
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -73,9 +71,7 @@ export default function ReferredStoreFees() {
             {isLoading ? (
               <Skeleton />
             ) : (
-              <div className="text-2xl font-bold">
-                {totalRoyalties}
-              </div>
+              <div className="text-2xl font-bold">{totalRoyalties}</div>
             )}
           </CardContent>
         </Card>
@@ -91,7 +87,7 @@ export default function ReferredStoreFees() {
               <Skeleton />
             ) : (
               <div className="text-2xl font-bold">
-                {shopsWithRoyalties.data.length}
+                {filteredMerchants.length}
               </div>
             )}
           </CardContent>
@@ -137,36 +133,36 @@ export default function ReferredStoreFees() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredShops.length === 0 ? (
+                  {filteredMerchants.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={3} className="h-24 text-center">
                         No results found.
                       </TableCell>
                     </TableRow>
                   ) : (
-                    royalties.map(({ shop, fee }) => (
-                      <TableRow key={shop.id}>
+                    royalties.map(({ merchant, fee }) => (
+                      <TableRow key={merchant.id}>
                         <TableCell>
                           <div className="flex items-center gap-3">
                             <Avatar className="h-9 w-9">
-                              {shop.logo ? (
+                              {merchant.cover ? (
                                 <Image
-                                  src={`/Images/shops/${shop.logo}`}
-                                  alt={shop.displayName}
+                                  src={merchant.cover}
+                                  alt={merchant.displayName}
                                   className="object-contain"
                                 />
                               ) : (
                                 <div className="flex h-full w-full items-center justify-center bg-muted text-lg font-medium uppercase">
-                                  {shop.displayName.charAt(0)}
+                                  {merchant.displayName.charAt(0)}
                                 </div>
                               )}
                             </Avatar>
                             <div className="font-medium">
-                              {shop.displayName}
+                              {merchant.displayName}
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell>{shop.address}</TableCell>
+                        <TableCell>{merchant.address}</TableCell>
                         <TableCell className="text-right font-medium">
                           {formatDollar(fee)}
                         </TableCell>

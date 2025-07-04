@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { ScanButton } from "../shared/buttons/ScanButton";
 import { RoutePath } from "@/enums/RoutePath";
 import { HomeIcon } from "../icons/sidebar/HomeIcon";
 import { TransactionIcon } from "../icons/sidebar/TransactionIcon";
@@ -27,11 +26,7 @@ export const MobileNav: React.FC = () => {
         <SearchIcon className={`h-5 w-5 ${getIconClass(RoutePath.Discover)}`} />
         <span>Discover</span>
       </a>
-
-      <div className="flex-1 flex justify-center">
-        <ScanButton />
-      </div>
-
+      
       <a href={RoutePath.TransferHistory} className={navItemClass}>
         <TransactionIcon
           className={`h-5 w-5 ${getIconClass(RoutePath.TransferHistory)}`}

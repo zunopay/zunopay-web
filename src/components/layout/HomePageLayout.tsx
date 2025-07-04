@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { Button, Text } from "../ui";
 import { CustomisableLogo } from "../icons/platform/CustomisableLogo";
 import { useRouter } from "next/navigation";

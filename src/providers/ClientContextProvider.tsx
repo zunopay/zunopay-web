@@ -4,8 +4,8 @@ import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { createContext, useContext } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useWalletAdapter } from '@/lib/useWalletAdapter'
-import { endpoint } from '@/lib/utils'
+import { endpoint } from '@/utils'
+import { useWalletAdapter } from '@/hooks/useWalletAdapter'
 
 export const ClientContext = createContext(null)
 

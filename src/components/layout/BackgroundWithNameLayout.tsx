@@ -1,5 +1,5 @@
 import React from "react";
-import { addTwitter, cn } from "@/lib/utils";
+import { addTwitter, cn } from "@/utils";
 import { Text } from "../ui";
 import { XIcon } from "components/icons/platform/XIcon";
 import Link from "next/link";

@@ -1,6 +1,6 @@
 import React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 import { VariantSvgIconProps } from '@/lib/types'
 
 const buttonVariants = cva(

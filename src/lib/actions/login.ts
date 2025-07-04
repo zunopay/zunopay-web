@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect, RedirectType } from "next/navigation";
 import { loginSchema } from "@/constants/schema";
 import { parseAndSetCookieAfterAuth } from "./common";
-import { login } from "../api/auth/queries";
+import { login } from "@/api/auth";
 
 export const loginAction = async (
   redirectTo: string | null,

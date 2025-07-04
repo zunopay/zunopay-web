@@ -1,15 +1,15 @@
 "use client";
 
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { ConnectWalletButton } from "../wallet/ConnectWalletButton";
+import { Card, CardContent, CardHeader } from "../ui/Card";
+import { ConnectWalletButton } from "../shared/buttons/ConnectWalletButton";
 import { Button } from "../ui";
 import { Payment } from "@/models/payment";
 import {
   useCreateTransferTransaction,
   useSubmitTransferTransaction,
 } from "@/api/payment/mutations";
-import { encodeTransaction, versionedTransactionFromBs64 } from "@/lib/utils";
+import { encodeTransaction, versionedTransactionFromBs64 } from "@/utils";
 import { toast } from "../ui/toast";
 import useToggle from "@/hooks/useToggle";
 import { LoaderIcon } from "../icons/theme/LoaderIcon";

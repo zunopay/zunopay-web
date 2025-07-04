@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import QRCode from 'react-qr-code';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/Dialog';
 import { Text } from '@/components/ui/Text';
-import { cn } from '@/lib/utils';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/utils';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { Button } from '@/components/ui/Button';
 import { toast } from '@/components/ui/toast';
 

@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { cn } from "@/utils";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/Sidebar";
 import DashboardSidebar from "./DashboardSidebar";
 import { Text } from "@/components/ui/Text";
 import { User } from "@/models/user";
 import { LogoutButton } from "../shared/buttons/LogoutButton";
 import { RewardPointSection } from "../shared/RewardPointSection";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { MobileNav } from "../nav/MobileNav";
 import { CustomisableLogo } from "../icons/platform/CustomisableLogo";
 import { usePathname } from "next/navigation";

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 import Link, { type LinkProps } from 'next/link'
 import { buttonVariants } from './Button'
 import { type VariantProps } from 'class-variance-authority'

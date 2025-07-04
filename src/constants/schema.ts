@@ -1,4 +1,4 @@
-import { ShopCategory } from '@/models/shop'
+import { MerchantCategory } from '@/models/user'
 import { generateMaxLengthErrorMessage, generateMinLengthErrorMessage } from './error'
 import { z } from 'zod'
 
@@ -27,7 +27,7 @@ const zImage = z
   });
 
 const zString = z.string();
-const zCategory = z.enum([ShopCategory.Groceries, ShopCategory.Restraunt])
+const zCategory = z.enum([MerchantCategory.Groceries, MerchantCategory.Restraunt])
 const zEmail = z.string().email()
 const zPassword = z
   .string()

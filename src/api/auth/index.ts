@@ -1,7 +1,7 @@
 import { fetchWrapper } from "@/lib/fetchWrapper";
 import { ReturnResponse } from "@/lib/types";
 import { Authorization, LoginBody, RegisterBody } from "@/models/auth";
-import { AUTH_QUERY_KEYS } from "./authKeys";
+import { AUTH_QUERY_KEYS } from "./keys";
 
 const { AUTH, LOGIN, REGISTER } = AUTH_QUERY_KEYS;
 

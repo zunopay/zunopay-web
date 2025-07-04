@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation'
 import { REDIRECT_TO_KEY } from '@/constants/general'
 import { loginAction } from '@/lib/actions/login'
 import { FormErrorMessage } from '@/components/forms/FormErrorMessage'
-import { onSubmitPreventFormListener } from '@/lib/utils'
+import { onSubmitPreventFormListener } from '@/utils'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
 import { toast } from '../ui/toast'
 

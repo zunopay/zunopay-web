@@ -1,12 +1,13 @@
 import {
   fetchBalance,
   fetchMe,
+  fetchMerchant,
+  fetchMerchants,
   fetchRewardPoints,
   fetchRoyaltyEarned,
-  verifyEmail,
-} from "@/lib/api/user/queries";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { userKeys } from "./userKeys";
+} from "./index";
+import { useQuery } from "@tanstack/react-query";
+import { userKeys } from "./keys";
 
 export const useFetchBalance = () => {
   return useQuery({
@@ -40,8 +41,18 @@ export const useFetchRoyaltyEarned = () => {
   });
 };
 
-export const useVerifyEmail = () => {
-  return useMutation({
-    mutationFn: () => verifyEmail(),
-  });
-};
+export const useFetchMerchants = () => {
+  return useQuery({
+    queryFn: () => fetchMerchants(),
+    queryKey: userKeys.getMerchants(),
+    staleTime: 1000 * 5
+  })
+}
+
+export const useFetchMerchant = (slug: string) => {
+  return useQuery({
+    queryFn: () => fetchMerchant(slug),
+    queryKey: userKeys.getMerchant(slug),
+    staleTime: 1000 * 5
+  })
+}

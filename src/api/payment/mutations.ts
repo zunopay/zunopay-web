@@ -1,6 +1,6 @@
-import { createTransferTransaction, submitTransferTransaction } from "@/lib/api/payment/queries";
-import { CreateTransferTransactionBody, SubmitTransferBody } from "@/models/payment/params";
+import { CreateTransferTransactionBody, SubmitTransferBody } from "@/models/payment";
 import { useMutation } from "@tanstack/react-query";
+import { createTransferTransaction, submitTransferTransaction } from ".";
 
 export const useCreateTransferTransaction = () => {
     return useMutation({

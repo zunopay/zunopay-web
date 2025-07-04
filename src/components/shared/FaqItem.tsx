@@ -6,9 +6,9 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "../ui/collapsible";
+} from "../ui/Collapsible";
 import { Text } from "@/components/ui/Text";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { MinusIcon, PlusIcon } from "lucide-react";
 
 export const FAQItem: React.FC<{ item: FAQItemType }> = ({ item }) => {

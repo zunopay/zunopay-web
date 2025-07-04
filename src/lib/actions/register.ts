@@ -1,15 +1,14 @@
 "use server";
 
-import { registerSchema, shopRegisterSchema } from "@/constants/schema";
+import { registerSchema } from "@/constants/schema";
 import { AuthFormState } from "@/models/auth";
-import { register } from "../api/auth/queries";
 import { parseAndSetCookieAfterAuth } from "./common";
 import { revalidatePath } from "next/cache";
 import { RoutePath } from "@/enums/RoutePath";
-import { debugApiClient } from "../utils";
+import { debugApiClient } from "../../utils";
 import { redirect, RedirectType } from "next/navigation";
 import { REDIRECT_TO_KEY } from "@/constants/general";
-import { registerShop } from "../api/shop/queries";
+import { register } from "@/api/auth";
 
 export const registerAction = async (
   redirectTo: string | null,

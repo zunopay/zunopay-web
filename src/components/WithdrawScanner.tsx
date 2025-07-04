@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { Text } from "./ui";
-import { EnhancedQrScanner } from "./dialogs/EnchanceQrScanner";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 
 export const ScanToPaySection: React.FC<{ className?: string }> = ({
@@ -14,7 +13,6 @@ export const ScanToPaySection: React.FC<{ className?: string }> = ({
   const isMobile = useIsMobile();
 
   return (
-    <>
       <div
         className={cn(
           "flex flex-col items-center gap-4 p-6 bg-zinc-900 rounded-2xl shadow-lg border border-zinc-800 transform transition-all duration-200 hover:shadow-xl",
@@ -53,12 +51,5 @@ export const ScanToPaySection: React.FC<{ className?: string }> = ({
           </div>
         </div>
       </div>
-      <EnhancedQrScanner
-        open={isScanOpen}
-        onClose={() => toggleScanner(!isScanOpen)}
-        title="Scan to Pay"
-        description="Scan a merchant or friend's QR code to make a quick payment"
-      />
-    </>
   );
 };

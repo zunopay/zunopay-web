@@ -1,6 +1,6 @@
 import { JSX, useCallback, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { cn, sleep } from '@/lib/utils'
+import { cn, sleep } from '@/utils'
 import { CloseIcon } from '@/components/icons/theme/CloseIcon'
 import { LoaderIcon } from '@/components/icons/theme/LoaderIcon'
 import { Input } from '@/components/ui/Input'

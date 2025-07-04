@@ -1,6 +1,6 @@
 import React from 'react'
 import Image, { ImageProps } from 'next/image'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 import { ASPECT_RATIO } from '@/constants/general'
 
 export type AvatarSize = 'small' | 'medium' | 'large'

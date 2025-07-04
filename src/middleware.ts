@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { RoutePath } from './enums/RoutePath'
 import { accessTokenKey, REDIRECT_TO_KEY } from './constants/general'
-import { isTokenValid } from './lib/utils'
+import { isTokenValid } from './utils'
 
 const corsOptions = {
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -48,7 +48,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/verify-email/:path*',
     '/register/:path*',
     '/dashboard/:path*',
     '/api/:path*',
@@ -57,8 +56,6 @@ export const config = {
 }
 
 const authRoutesRegex = /^(\/dashboard(\/.*)?|\/verify-email)$/
-const RegisterLoginRegex = /^\/(register|login)$/;
-
 const handleUnauthorized = async ({ path, url }: { path: string; url: string }) => {
   const updatedUrl = new URL(RoutePath.Login, url)
   updatedUrl.searchParams.append(REDIRECT_TO_KEY, path)

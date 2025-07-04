@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { startTransition } from "react";
 import { jwtDecode } from "jwt-decode";
 import { PublicKey, VersionedTransaction } from "@solana/web3.js";
-import { SupportedRegion } from "./types";
+import { SupportedRegion } from "./lib/types";
 import axios from "axios";
 import { MAX_SHOPPING_POINTS, USDC_DECIMALS } from "@/constants/general";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";

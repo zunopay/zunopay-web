@@ -1,8 +1,8 @@
 import React from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { RoutePath } from "@/enums/RoutePath";
-import { fetchMe } from "@/lib/api/user/queries";
-import { ShopDiscover } from "@/components/shop/Discover";
+import { fetchMe } from "@/api/user";
+import { MerchantDiscover } from "@/components/merchant/Discover";
 
 export default async function DiscoverPage() {
   const { data: me } = await fetchMe();
@@ -11,7 +11,7 @@ export default async function DiscoverPage() {
 
   return (
     <DashboardLayout user={me} activePath={RoutePath.Discover}>
-      <ShopDiscover />
+      <MerchantDiscover />
     </DashboardLayout>
   );
 }

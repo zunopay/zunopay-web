@@ -1,7 +1,7 @@
 'use client'
 
 import React, { RefObject, useState } from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 import { Text, TextProps, TextRef } from './Text'
 
 const createRefForVariant = (variant: TextProps['as']): RefObject<TextRef | null> => {

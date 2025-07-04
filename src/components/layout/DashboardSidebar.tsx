@@ -5,7 +5,7 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/Sidebar";
 import { Divider } from "../shared/Divider";
 import { SidebarMenuLink } from "./SidebarMenuLink";
 import { HelpCenterIcon } from "@/components/icons/sidebar/HelpCenterIcon";
@@ -17,7 +17,7 @@ import { SettingIcon } from "@/components/icons/sidebar/SettingIcon";
 import { RoutePath } from "@/enums/RoutePath";
 import { LogoWithText } from "../shared/logo/LogoWithText";
 import Link from "next/link";
-import { addTwitter } from "@/lib/utils";
+import { addTwitter } from "@/utils";
 import { XIcon } from "@/components/icons/platform/XIcon";
 import { Text } from "../ui";
 import { User } from "@/models/user";

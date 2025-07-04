@@ -1,12 +1,13 @@
+import { fetchPayment } from "@/api/payment";
 import { BackgroundWithNameLayout } from "@/components/layout/BackgroundWithNameLayout";
 import { PaymentCard } from "@/components/payment/PaymentCard";
-import { fetchPayment } from "@/lib/api/payment/queries";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export default async function PaymentCheckout({ params }: Props) {
+export default async function PaymentCheckout(props : Props) {
+  const params = await props.params;
   const { data: payment, errorMessage } = await fetchPayment(params.id);
 
   if (errorMessage) {

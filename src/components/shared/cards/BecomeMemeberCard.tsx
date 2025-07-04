@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/Card";
 import { ShieldCheck, ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { ButtonLink } from "@/components/ui/ButtonLink";

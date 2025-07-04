@@ -4,10 +4,10 @@ import { WalletName } from "@solana/wallet-adapter-base";
 import { useWalletMultiButton } from "@solana/wallet-adapter-base-ui";
 import { Wallet } from "@solana/wallet-adapter-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Button, ButtonProps } from "../ui/Button";
-import { WalletListItem } from "./WalletListItem";
-import { cn } from "@/lib/utils";
-import { Text } from "../ui/Text";
+import { Button, ButtonProps } from "../../ui/Button";
+import { WalletListItem } from "../../wallet/WalletListItem";
+import { cn } from "@/utils";
+import { Text } from "../../ui/Text";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import useToggle from "@/hooks/useToggle";
 

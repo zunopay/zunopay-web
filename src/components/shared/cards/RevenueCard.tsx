@@ -4,7 +4,7 @@ import React from 'react';
 import { Button } from '@/components/ui/Button';
 import { Text } from '@/components/ui/Text';
 import { SoonChip } from '@/components/shared/SoonChip';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils';
 
 interface RevenueCardProps {
   title: string;

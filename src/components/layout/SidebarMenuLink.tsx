@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { Text, Variant } from '../ui/Text'
-import { cn } from '@/lib/utils'
+import { cn } from '@/utils'
 import React from 'react'
-import { SidebarMenuButton } from '../ui/sidebar'
+import { SidebarMenuButton } from '../ui/Sidebar'
 import { VariantSvgIconProps } from '@/lib/types'
 
 export type NavigationLinkProps = {

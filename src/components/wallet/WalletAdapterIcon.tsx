@@ -8,5 +8,6 @@ export interface WalletIconProps extends DetailedHTMLProps<ImgHTMLAttributes<HTM
 
 export const WalletAdapterIcon: FC<WalletIconProps> = ({ adapter, ...props }) => {
   if (!adapter) return null
+  // eslint-disable-next-line
   return <img src={adapter.icon} alt={`${adapter.name} icon`} {...props} />
 }

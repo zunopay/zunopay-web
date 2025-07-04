@@ -1,10 +1,9 @@
-import { fetchMe } from "@/lib/api/user/queries";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { RoutePath } from "@/enums/RoutePath";
-import { getVpaTypeFromRegion } from "@/lib/utils";
 import { Text } from "@/components/ui";
-import TransferHistoryTable from "@/components/table/transfer-history-table";
-import { fetchTransferHistory } from "@/lib/api/payment/queries";
+import TransferHistoryTable from "@/components/table/TransferHistory";
+import { fetchMe } from "@/api/user";
+import { fetchTransferHistory } from "@/api/payment";
 
 export default async function TransferHistoryPage() {
   const { data: me } = await fetchMe();

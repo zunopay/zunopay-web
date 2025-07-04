@@ -1,6 +1,4 @@
 "use client";
-
-import { Button } from "@/components/ui/Button";
 import { Text } from "@/components/ui/Text";
 import {
   TableHeader,
@@ -15,7 +13,7 @@ import { formatDistanceToNow } from "date-fns";
 import { CopyButton } from "../shared/CopyButton";
 import { useTableSearch } from "@/hooks/useTableSearch";
 import { TransferHistory } from "@/models/payment";
-import { shortenString } from "@/lib/utils";
+import { shortenString } from "@/utils";
 import { useRerender } from "@/hooks/useRerender";
 
 type Props = { transfers: TransferHistory[] };

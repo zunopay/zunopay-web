@@ -1,6 +1,6 @@
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 import { useMemo } from 'react'
-import { network } from './utils'
+import { network } from '../utils'
 
 type WalletAdapterHook = () => (PhantomWalletAdapter | SolflareWalletAdapter )[]
 
